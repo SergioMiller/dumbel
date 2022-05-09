@@ -27717,6 +27717,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/admin.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/admin.scss ***!
+  \***********************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleParseError: Module parse failed: Unexpected character '\u0014' (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n(Source code omitted for this binary file)\n    at handleParseError (/Users/apple/work/dumbel/node_modules/webpack/lib/NormalModule.js:976:19)\n    at /Users/apple/work/dumbel/node_modules/webpack/lib/NormalModule.js:1095:5\n    at processResult (/Users/apple/work/dumbel/node_modules/webpack/lib/NormalModule.js:800:11)\n    at /Users/apple/work/dumbel/node_modules/webpack/lib/NormalModule.js:860:5\n    at /Users/apple/work/dumbel/node_modules/loader-runner/lib/LoaderRunner.js:407:3\n    at iterateNormalLoaders (/Users/apple/work/dumbel/node_modules/loader-runner/lib/LoaderRunner.js:233:10)\n    at /Users/apple/work/dumbel/node_modules/loader-runner/lib/LoaderRunner.js:224:4\n    at /Users/apple/work/dumbel/node_modules/webpack/lib/NormalModule.js:834:15\n    at Array.eval (eval at create (/Users/apple/work/dumbel/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:12:1)\n    at runCallbacks (/Users/apple/work/dumbel/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:27:15)\n    at /Users/apple/work/dumbel/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:200:4\n    at /Users/apple/work/dumbel/node_modules/graceful-fs/graceful-fs.js:123:16\n    at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:73:3)");
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -40362,7 +40372,8 @@ Vue.compile = compileToFunctions;
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/admin.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
