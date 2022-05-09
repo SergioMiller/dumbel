@@ -4,10 +4,6 @@
     {{ __('Dashboard') }}
 @endsection
 
-@section('subtitle')
-    {{ __('Subtitle') }}
-@endsection
-
 @section('breadcrumb')
     <li class="breadcrumb-item">
         <a href="#">{{ __('Dashboard') }}</a>
