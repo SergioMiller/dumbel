@@ -35936,4 +35936,6 @@ yx-axis
 #mCSB_1_scrollbar_horizontal .mCSB_dragger{ width: 100px; }
 
 .mCSB_1_scrollbar .mCSB_dragger .mCSB_draggerRail{ width: 4px; }  */
-
+.container {
+  max-width: 100%;
+}

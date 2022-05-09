@@ -55,38 +55,22 @@ $(document).ready(function() {
     /*chatbar js start*/
 
     /*chat box scroll*/
-    var a = $(window).height() - 80;
-    $(".main-friend-list").slimScroll({
-        height: a,
-        allowPageScroll: false,
-        wheelStep: 5,
-        color: '#1b8bf9'
-    });
+    // var a = $(window).height() - 80;
+    // $(".main-friend-list").slimScroll({
+    //     height: a,
+    //     allowPageScroll: false,
+    //     wheelStep: 5,
+    //     color: '#1b8bf9'
+    // });
 
     // search
-    $("#search-friends").on("keyup", function() {
-        var g = $(this).val().toLowerCase();
-        $(".userlist-box .media-body .chat-header").each(function() {
-            var s = $(this).text().toLowerCase();
-            $(this).closest('.userlist-box')[s.indexOf(g) !== -1 ? 'show' : 'hide']();
-        });
-    });
-
-    // open chat box
-    $('.displayChatbox').on('click', function() {
-        var my_val = $('.pcoded').attr('vertical-placement');
-        if (my_val == 'right') {
-            var options = {
-                direction: 'left'
-            };
-        } else {
-            var options = {
-                direction: 'right'
-            };
-        }
-        $('.showChat').toggle('slide', options, 500);
-    });
-
+    // $("#search-friends").on("keyup", function() {
+    //     var g = $(this).val().toLowerCase();
+    //     $(".userlist-box .media-body .chat-header").each(function() {
+    //         var s = $(this).text().toLowerCase();
+    //         $(this).closest('.userlist-box')[s.indexOf(g) !== -1 ? 'show' : 'hide']();
+    //     });
+    // });
 
     //open friend chat
     $('.userlist-box').on('click', function() {
@@ -117,21 +101,7 @@ $(document).ready(function() {
         $('.showChat_inner').toggle('slide', options, 500);
         $('.showChat').css('display', 'block');
     });
-    // /*chatbar js end*/
-    $(".search-btn").on('click', function() {
-        $(".main-search").addClass('open');
-        $('.main-search .form-control').animate({
-            'width': '200px',
-        });
-    });
-    $(".search-close").on('click', function() {
-        $('.main-search .form-control').animate({
-            'width': '0',
-        });
-        setTimeout(function() {
-            $(".main-search").removeClass('open');
-        }, 300);
-    });
+
     $('#mobile-collapse i').addClass('icon-toggle-right');
     $('#mobile-collapse').on('click', function() {
         $('#mobile-collapse i').toggleClass('icon-toggle-right');
