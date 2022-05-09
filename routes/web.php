@@ -22,5 +22,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('home');
-Route::resource('user', UserController::class);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+Route::resource('user', UserController::class)->except('show')->parameter('user','id');

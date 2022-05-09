@@ -22,7 +22,9 @@
                         <th>Email</th>
                         <th>Status</th>
                         <th>Created at</th>
-                        <th style="width: 0"></th>
+                        <th style="width: 0;" class="text-right">
+                            <a class="text-primary" href="{{ route('user.create') }}">Create</a>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,15 +33,21 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td><label class="label label-inverse-success">active</label></td>
+                            <td>
+                                @switch($user->status)
+                                    @case('active')
+                                    <label class="label label-inverse-success">{{ $user->status }}</label>
+                                    @break
+                                    @case('blocked')
+                                    <label class="label label-inverse-danger">{{ $user->status }}</label>
+                                    @break
+                                @endswitch
+                            </td>
                             <td>{{ $user->created_at }}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary">
-                                    <i class="icofont icofont-pencil-alt-2"></i>
-                                </button>
-                                <button class="btn btn-sm btn-danger">
-                                    <i class="icofont icofont-trash"></i>
-                                </button>
+                                <a class="btn btn-sm btn-inverse icofont icofont-pencil-alt-2"
+                                   href="{{ route('user.edit', $user->id) }}"></a>
+                                <a class="btn btn-sm btn-danger icofont icofont-trash" href="#"></a>
                             </td>
                         </tr>
                     @endforeach

@@ -43,6 +43,8 @@
 
                                 @include('layouts/admin/_page-header')
 
+                                @include('layouts/admin/_alerts')
+
                                 <div class="page-body">
                                     @yield('content')
                                 </div>
@@ -56,18 +58,18 @@
     </div>
 </div>
 
-<script src="libraries\bower_components\jquery\js\jquery.min.js"></script>
-<script src="libraries\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
-<script src="libraries\bower_components\popper.js\js\popper.min.js"></script>
-<script src="libraries\bower_components\bootstrap\js\bootstrap.min.js"></script>
-<script src="libraries\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
-<script src="libraries\bower_components\modernizr\js\modernizr.js"></script>
-<script src="libraries\bower_components\modernizr\js\css-scrollbars.js"></script>
-<script src="libraries\assets\pages\accordion\accordion.js"></script>
-<script src="libraries\assets\js\pcoded.min.js"></script>
-<script src="libraries\assets\js\vartical-layout.min.js"></script>
-<script src="libraries\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="libraries\assets\js\script.js"></script>
+<script src="/libraries/bower_components/jquery/js/jquery.min.js"></script>
+<script src="/libraries/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+<script src="/libraries/bower_components/popper.js/js/popper.min.js"></script>
+<script src="/libraries/bower_components/bootstrap/js/bootstrap.min.js"></script>
+<script src="/libraries/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+<script src="/libraries/bower_components/modernizr/js/modernizr.js"></script>
+<script src="/libraries/bower_components/modernizr/js/css-scrollbars.js"></script>
+<script src="/libraries/assets/pages/accordion/accordion.js"></script>
+<script src="/libraries/assets/js/pcoded.min.js"></script>
+<script src="/libraries/assets/js/vartical-layout.min.js"></script>
+<script src="/libraries/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/libraries/assets/js/script.js"></script>
 </body>
 
 </html>
