@@ -17,7 +17,7 @@ class RequestLogin
      *
      * @var string
      */
-    private string $email;
+    private string $phone;
 
     /**
      * @OA\Property()
@@ -25,4 +25,11 @@ class RequestLogin
      * @var string
      */
     private string $password;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
+    private string $device;
 }

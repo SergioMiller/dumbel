@@ -35,6 +35,32 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Lastname</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control @if($errors->has('lastname')) {{'is-invalid' }} @endif"
+                                       name="lastname"
+                                       id="lastname"
+                                       value="{{ old('lastname', $user->lastname) }}">
+                                @if($errors->has('lastname'))
+                                    <div class="invalid-feedback">{{ $errors->first('lastname') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Phone</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control @if($errors->has('phone')) {{'is-invalid' }} @endif"
+                                       name="phone"
+                                       id="phone"
+                                       value="{{ old('phone', $user->phone) }}">
+                                @if($errors->has('phone'))
+                                    <div class="invalid-feedback">{{ $errors->first('phone') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control @if($errors->has('email')) {{'is-invalid' }} @endif"

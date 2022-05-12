@@ -12,7 +12,9 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['string', 'required', 'max:255'],
-            'email' => ['email', 'required', 'max:255', Rule::unique('users', 'email')->ignore($this->id)],
+            'lastname' => ['string', 'required', 'max:255'],
+            'phone' => ['required_without:email', 'nullable', 'max:24', Rule::unique('users', 'phone')->ignore($this->id)],
+            'email' => ['required_without:phone', 'nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->id)],
             'status' => ['string', Rule::in('active', 'blocked')],
             'password' => ['string', 'nullable'],
         ];

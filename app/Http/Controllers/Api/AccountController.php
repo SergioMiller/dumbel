@@ -3,29 +3,20 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Exceptions\PasswordDoesNotMatchException;
-use App\Exceptions\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Library\Response;
-use App\Services\Auth\AuthService;
+use App\Transformers\AccountTransformer;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class AccountController extends Controller
 {
-    public function __construct(AuthService $authService)
-    {
-        $this->authService = $authService;
-    }
-
     /**
      * @OA\Post(
-     *     path="/api/v1/auth/login",
-     *     description="Return a bearer token.",
-     *     tags={"Auth"},
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestLogin")
-     *     ),
+     *     path="/api/v1/account",
+     *     description="Return account.",
+     *     tags={"Account"},
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -38,7 +29,7 @@ class AuthController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseLogin")
+     *                                 @OA\Schema(ref="#/components/schemas/ResponseAccount")
      *                             }
      *                         )
      *                     )
@@ -49,16 +40,9 @@ class AuthController extends Controller
      * )
      *
      * @param LoginRequest $request
-     *
-     * @return JsonResponse
-     *
-     * @throws PasswordDoesNotMatchException
-     * @throws UserNotFoundException
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function get(Request $request): JsonResponse
     {
-        $token = $this->authService->login($request->validated());
-
-        return Response::success(['token' => $token]);
+        return Response::success(new AccountTransformer($request->user()));
     }
 }

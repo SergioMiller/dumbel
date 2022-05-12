@@ -19,6 +19,8 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Lastname</th>
+                        <th>Phone</th>
                         <th>Email</th>
                         <th>Status</th>
                         <th>Created at</th>
@@ -32,6 +34,8 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->lastname }}</td>
+                            <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
                                 @switch($user->status)
