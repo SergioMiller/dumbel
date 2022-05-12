@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(): Factory|View|Application
+    public function index(): Factory | View | Application
     {
         return view('admin.user.index', [
             'users' => User::query()->orderByDesc('id')->paginate()
         ]);
     }
 
-    public function create(): Factory|View|Application
+    public function create(): Factory | View | Application
     {
         return view('admin.user.create');
     }
@@ -38,7 +38,7 @@ class UserController extends Controller
         return redirect()->to(route('user.edit', $user->id))->with('success', 'Successfully.');
     }
 
-    public function edit(int $id): Factory|View|Application
+    public function edit(int $id): Factory | View | Application
     {
         $user = User::query()->where('id', $id)->first();
 
