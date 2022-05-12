@@ -7,6 +7,7 @@ use App\Exceptions\PasswordDoesNotMatchException;
 use App\Exceptions\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Library\Response;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
@@ -58,6 +59,47 @@ class AuthController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         $token = $this->authService->login($request->validated());
+
+        return Response::success(['token' => $token]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/auth/register",
+     *     description="Return a bearer token.",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestRegister")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                     @OA\Schema(
+     *                         @OA\Property(
+     *                             property="data",
+     *                             allOf={
+     *                                 @OA\Schema(ref="#/components/schemas/ResponseRegister")
+     *                             }
+     *                         )
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param RegisterRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request): JsonResponse
+    {
+        $token = $this->authService->register($request->validated());
 
         return Response::success(['token' => $token]);
     }

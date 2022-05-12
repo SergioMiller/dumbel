@@ -43,4 +43,13 @@ class AuthService
     {
         return $user->createToken($device)->plainTextToken;
     }
+
+    public function register(array $data): string
+    {
+        $user = new User($data);
+        $user->status = 'active';
+        $user->save();
+
+        return $this->generateApiToken($user, $data['device']);
+    }
 }

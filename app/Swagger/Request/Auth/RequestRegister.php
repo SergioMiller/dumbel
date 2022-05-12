@@ -24,6 +24,20 @@ class RequestRegister
      *
      * @var string
      */
+    private string $lastname;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
+    private string $phone;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
     private string $email;
 
     /**
@@ -32,4 +46,11 @@ class RequestRegister
      * @var string
      */
     private string $password;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
+    private string $device;
 }
