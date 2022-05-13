@@ -65,12 +65,12 @@ class AuthService
 
     private function saveQrCode(User $user, array $data): void
     {
-        $qrCode = QrCode::query()->where('uuid', $data['uuid'])->whereNull('user_id')->first();
-
-        if ($qrCode === null) {
+        if (isset($data['uuid'])) {
+            $qrCode = QrCode::query()->where('uuid', $data['uuid'])->whereNull('user_id')->first();
+        } else {
             $qrCode = new QrCode();
             $qrCode->uuid = Str::uuid();
-            $qrCode->source = QrCodeSourceConstant::AUTOMATIC;
+                $qrCode->source = QrCodeSourceConstant::AUTOMATIC;
         }
 
         $qrCode->user_id = $user->id;

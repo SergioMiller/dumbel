@@ -12,7 +12,7 @@ class QrCodeFactory extends Factory
     {
         return [
             'uuid' => Str::uuid(),
-            'source' => QrCodeSourceConstant::AUTOMATIC,
+            'source' => QrCodeSourceConstant::ADMIN,
         ];
     }
 }

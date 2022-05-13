@@ -32,6 +32,12 @@
                     <span class="pcoded-mtext">Users</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('qr-code.index') }}">
+                    <span class="pcoded-micon"><i class="icofont icofont-qr-code"></i></span>
+                    <span class="pcoded-mtext">QR Codes</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

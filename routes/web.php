@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\QrCodeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\SwaggerController;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ Route::get('/swagger', [SwaggerController::class, 'index'])->name('swagger');
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('user', UserController::class)->except('show')->parameter('user', 'id');
+    Route::get('/qr-code', [QrCodeController::class, 'index'])->name('qr-code.index');
 });
