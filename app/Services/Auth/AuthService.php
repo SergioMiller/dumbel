@@ -3,10 +3,15 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
+use App\Constants\QrCodeSourceConstant;
+use App\Constants\UserStatusConstant;
 use App\Exceptions\PasswordDoesNotMatchException;
 use App\Exceptions\UserNotFoundException;
+use App\Models\QrCode;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthService
 {
@@ -21,7 +26,7 @@ class AuthService
     public function login(array $data): string
     {
         /** @var User $user */
-        $user = User::query()->where('phone', $data['phone'])->where('status', 'active')->first();
+        $user = User::query()->where('phone', $data['phone'])->where('status', UserStatusConstant::ACTIVE)->first();
 
         if ($user === null) {
             throw new UserNotFoundException();
@@ -46,10 +51,30 @@ class AuthService
 
     public function register(array $data): string
     {
+        DB::beginTransaction();
         $user = new User($data);
-        $user->status = 'active';
+        $user->status = UserStatusConstant::ACTIVE;
         $user->save();
 
+        $this->saveQrCode($user, $data);
+
+        DB::commit();
+
         return $this->generateApiToken($user, $data['device']);
+    }
+
+    private function saveQrCode(User $user, array $data): void
+    {
+        $qrCode = QrCode::query()->where('uuid', $data['uuid'])->whereNull('user_id')->first();
+
+        if ($qrCode === null) {
+            $qrCode = new QrCode();
+            $qrCode->uuid = Str::uuid();
+            $qrCode->source = QrCodeSourceConstant::AUTOMATIC;
+        }
+
+        $qrCode->user_id = $user->id;
+
+        $qrCode->save();
     }
 }

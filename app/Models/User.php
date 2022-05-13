@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property string $id
+ * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string $lastname
  * @property string $phone

@@ -90,6 +90,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Uuid</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" value="{{ $user->uuid }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control @if($errors->has('password')) {{'is-invalid' }} @endif"

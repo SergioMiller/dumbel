@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/swagger', [SwaggerController::class, 'index'])->name('swagger');
 
 Auth::routes();
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-
-Route::resource('user', UserController::class)->except('show')->parameter('user','id');
-Route::get('/swagger', [SwaggerController::class, 'index'])->name('swagger');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+    Route::resource('user', UserController::class)->except('show')->parameter('user', 'id');
+});

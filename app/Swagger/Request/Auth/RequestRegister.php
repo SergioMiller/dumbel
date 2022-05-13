@@ -53,4 +53,11 @@ class RequestRegister
      * @var string
      */
     private string $device;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
+    private string $uuid;
 }
