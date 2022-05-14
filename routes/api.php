@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\GymController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/account', [AccountController::class, 'get']);
+    Route::post('/gym/create', [GymController::class, 'create']);
+    Route::put('/gym/{id}/update', [GymController::class, 'update']);
+    Route::get('/gym/list/own', [GymController::class, 'list']);
 });

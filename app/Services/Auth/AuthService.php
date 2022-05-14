@@ -70,7 +70,7 @@ class AuthService
         } else {
             $qrCode = new QrCode();
             $qrCode->uuid = Str::uuid();
-                $qrCode->source = QrCodeSourceConstant::AUTOMATIC;
+            $qrCode->source = QrCodeSourceConstant::AUTOMATIC;
         }
 
         $qrCode->user_id = $user->id;
