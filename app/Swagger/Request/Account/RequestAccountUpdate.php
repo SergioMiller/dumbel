@@ -1,24 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Swagger\Response\Account;
+namespace App\Swagger\Request\Account;
 
 /**
  * @OA\Schema(
  *     @OA\Xml(
- *         name="ResponseAccount"
+ *         name="RequestAccountUpdate"
  *     )
  * )
  */
-class ResponseAccount
+class RequestAccountUpdate
 {
-    /**
-     * @OA\Property()
-     *
-     * @var int
-     */
-    private int $id;
-
     /**
      * @OA\Property()
      *
@@ -59,5 +52,5 @@ class ResponseAccount
      *
      * @var string
      */
-    private string $uuid;
+    private string $password;
 }
