@@ -46,4 +46,11 @@ class ResponseAccount
      * @var string
      */
     private string $email;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
+    private string $uuid;
 }

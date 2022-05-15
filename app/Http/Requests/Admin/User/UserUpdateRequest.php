@@ -17,7 +17,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => ['required_without:email', 'nullable', 'max:24', Rule::unique('users', 'phone')->ignore($this->id)],
             'email' => ['required_without:phone', 'nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->id)],
             'status' => ['string', Rule::in(UserStatusConstant::getConstants())],
-            'birthday' => ['date', 'nullable'],
+            'birthday' => ['date', 'before:today', 'nullable'],
             'password' => ['string', 'nullable'],
         ];
     }

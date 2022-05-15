@@ -45,6 +45,13 @@ class RequestRegister
      *
      * @var string
      */
+    private string $birthday;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
     private string $password;
 
     /**

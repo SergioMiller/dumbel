@@ -16,6 +16,8 @@ class AccountTransformer extends Transformer
             'lastname' => $user->lastname,
             'phone' => $user->phone,
             'email' => $user->email,
+            'birthday' => $user->birthday,
+            'uuid' => $user->qrCode->uuid,
         ];
     }
 }

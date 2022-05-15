@@ -20,6 +20,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $status
  * @property string $birthday
  * @property string $password
+ * @property QrCode $qrCode
  */
 class User extends Authenticatable
 {
