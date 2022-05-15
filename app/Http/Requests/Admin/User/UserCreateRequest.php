@@ -17,6 +17,7 @@ class UserCreateRequest extends FormRequest
             'phone' => ['required_without:email', 'nullable', 'max:24', Rule::unique('users', 'phone')],
             'email' => ['required_without:phone', 'nullable', 'email', 'max:255', Rule::unique('users', 'email')],
             'status' => ['string', Rule::in(UserStatusConstant::getConstants())],
+            'birthday' => ['date', 'nullable'],
             'password' => ['string', 'required'],
         ];
     }

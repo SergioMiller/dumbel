@@ -90,6 +90,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Birthday</label>
+                            <div class="col-sm-10">
+                                <input type="date"
+                                       class="form-control @if($errors->has('birthday')) {{'is-invalid' }} @endif"
+                                       name="birthday"
+                                       id="birthday"
+                                       value="{{ old('birthday', $user->birthday) }}">
+                                @if($errors->has('birthday'))
+                                    <div class="invalid-feedback">{{ $errors->first('birthday') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Uuid</label>
                             <div class="col-sm-10">
                                 <input class="form-control" value="{{ $user->qrCode->uuid ?? null }}" readonly>

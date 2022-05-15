@@ -22,6 +22,7 @@
                         <th>Lastname</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>Birthday</th>
                         <th>Status</th>
                         <th>Created at</th>
                         <th style="width: 0;" class="text-right">
@@ -37,6 +38,7 @@
                             <td>{{ $user->lastname }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->birthday }}</td>
                             <td>
                                 @switch($user->status)
                                     @case('active')
