@@ -29,7 +29,13 @@
                     @foreach($qrCodes as $qrCode)
                         <tr>
                             <td>{{ $qrCode->id }}</td>
-                            <td>{{ $qrCode->user->name ?? null }} {{ $qrCode->user->lastname ?? null}}</td>
+                            <td>
+                                @if(!empty($qrCode->user))
+                                    <a href="{{ route('user.edit', $qrCode->user->id) }}">
+                                        {{ $qrCode->user->name }} {{ $qrCode->user->lastname}}
+                                    </a>
+                                @endif
+                            </td>
                             <td>{{ $qrCode->uuid }}</td>
                             <td>
                                 <label class="label label-inverse-primary">{{ $qrCode->source }}</label>

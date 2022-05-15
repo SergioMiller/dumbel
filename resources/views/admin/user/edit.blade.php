@@ -92,7 +92,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Uuid</label>
                             <div class="col-sm-10">
-                                <input class="form-control" value="{{ $user->uuid }}" readonly>
+                                <input class="form-control" value="{{ $user->qrCode->uuid ?? null }}" readonly>
                             </div>
                         </div>
 
