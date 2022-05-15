@@ -38,6 +38,12 @@
                     <span class="pcoded-mtext">QR Codes</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('gym.index') }}">
+                    <span class="pcoded-micon"><i class="icofont icofont-dumbbell"></i></span>
+                    <span class="pcoded-mtext">Gyms</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

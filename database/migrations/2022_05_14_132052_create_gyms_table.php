@@ -12,7 +12,9 @@ return new class extends Migration {
             $table->foreignId('user_id');
             $table->string('name');
             $table->string('description', 512)->nullable();
-            $table->string('address', 512);
+            $table->string('phone', 24)->nullable();
+            $table->string('email', 512)->nullable();
+            $table->string('address', 512)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
@@ -29,7 +31,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('user_gym');
+        Schema::dropIfExists('trainer_gym');
         Schema::dropIfExists('gyms');
     }
 };

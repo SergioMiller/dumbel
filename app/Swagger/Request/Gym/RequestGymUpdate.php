@@ -31,5 +31,19 @@ class RequestGymUpdate
      *
      * @var string
      */
+    private string $phone;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
+    private string $email;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
     private string $address;
 }

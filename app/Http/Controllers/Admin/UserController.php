@@ -31,27 +31,27 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
-        $user = new User($data);
+        $model = new User($data);
 
-        $user->save();
+        $model->save();
 
-        return redirect()->to(route('user.edit', $user->id))->with('success', 'Successfully.');
+        return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
     }
 
     public function edit(int $id): Factory | View | Application
     {
-        $user = User::query()->where('id', $id)->first();
+        $model = User::query()->where('id', $id)->first();
 
-        abort_if($user === null, 404);
+        abort_if($model === null, 404);
 
-        return view('admin.user.edit', ['user' => $user]);
+        return view('admin.user.edit', ['user' => $model]);
     }
 
     public function update(int $id, UserUpdateRequest $request): RedirectResponse
     {
-        $user = User::query()->where('id', $id)->first();
+        $model = User::query()->where('id', $id)->first();
 
-        abort_if($user === null, 404);
+        abort_if($model === null, 404);
 
         $data = $request->validated();
 
@@ -61,9 +61,9 @@ class UserController extends Controller
             unset($data['password']);
         }
 
-        $user->update($data);
+        $model->update($data);
 
-        return redirect()->to(route('user.edit', $user->id))->with('success', 'Successfully.');
+        return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
     }
 
     public function destroy($id)

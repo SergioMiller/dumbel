@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GymController;
 use App\Http\Controllers\Admin\QrCodeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\SwaggerController;
@@ -28,5 +29,6 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('user', UserController::class)->except('show')->parameter('user', 'id');
+    Route::resource('gym', GymController::class)->except('show')->parameter('user', 'id');
     Route::get('/qr-code', [QrCodeController::class, 'index'])->name('qr-code.index');
 });
