@@ -133,5 +133,10 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            @foreach($gym->subscriptions->sortBy('id') as $subscription)
+                @include('admin/gym/_subscription-edit', $subscription)
+            @endforeach
+        </div>
     </div>
 @endsection
