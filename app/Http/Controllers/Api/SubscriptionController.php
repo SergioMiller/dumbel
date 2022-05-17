@@ -4,29 +4,28 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Gym\GymCreateRequest;
-use App\Http\Requests\Api\Gym\GymUpdateRequest;
+use App\Http\Requests\Api\Subscription\SubscriptionCreateRequest;
+use App\Http\Requests\Api\Subscription\SubscriptionUpdateRequest;
 use App\Library\Response;
-use App\Models\Gym;
-use App\Services\GymService;
-use App\Transformers\GymTransformer;
+use App\Models\Subscription;
+use App\Services\SubscriptionService;
+use App\Transformers\SubscriptionTransformer;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
-class GymController extends Controller
+class SubscriptionController extends Controller
 {
-    private GymService $gymService;
+    private SubscriptionService $subscriptionService;
 
-    public function __construct(GymService $gymService)
+    public function __construct(SubscriptionService $subscriptionService)
     {
-        $this->gymService = $gymService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     /**
      * @OA\Post(
-     *     path="/api/v1/gym/create",
-     *     description="Create gym.",
-     *     tags={"Gym"},
+     *     path="/api/v1/subscription/create",
+     *     description="Create subscription.",
+     *     tags={"Subscription"},
      *     @OA\RequestBody(
      *         @OA\JsonContent(ref="#/components/schemas/RequestGymCreate")
      *     ),
@@ -55,22 +54,22 @@ class GymController extends Controller
      *     )
      * )
      *
-     * @param GymCreateRequest $request
+     * @param SubscriptionCreateRequest $request
      *
      * @return JsonResponse
      */
-    public function create(GymCreateRequest $request): JsonResponse
+    public function create(SubscriptionCreateRequest $request): JsonResponse
     {
-        $gym = $this->gymService->create($request->user(), $request->validated());
+        $model = $this->subscriptionService->create($request->validated());
 
-        return Response::success(new GymTransformer($gym));
+        return Response::success(new SubscriptionTransformer($model));
     }
 
     /**
      * @OA\Get(
-     *     path="/api/v1/gym/{id}",
-     *     description="Get gym.",
-     *     tags={"Gym"},
+     *     path="/api/v1/subscription/{id}",
+     *     description="Get subscription.",
+     *     tags={"Subscription"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
@@ -103,25 +102,24 @@ class GymController extends Controller
      * )
      *
      * @param int $id
-     * @param GymUpdateRequest $request
      *
      * @return JsonResponse
      */
-    public function get(int $id, GymUpdateRequest $request): JsonResponse
+    public function get(int $id): JsonResponse
     {
-        /** @var Gym $gym */
-        $gym = Gym::query()->where('id', $id)->where('user_id', $request->user()->id)->first();
+        /** @var Subscription $model */
+        $model = Subscription::query()->where('id', $id)->first();
 
-        abort_if($gym === null, 404, 'Not found.');
+        abort_if($model === null, 404, 'Not found.');
 
-        return Response::success(new GymTransformer($gym));
+        return Response::success(new SubscriptionTransformer($model));
     }
 
     /**
      * @OA\Put(
-     *     path="/api/v1/gym/{id}/update",
-     *     description="Update gym.",
-     *     tags={"Gym"},
+     *     path="/api/v1/subscription/{id}/update",
+     *     description="Update subscription.",
+     *     tags={"Subscription"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
@@ -157,30 +155,36 @@ class GymController extends Controller
      * )
      *
      * @param int $id
-     * @param GymUpdateRequest $request
+     * @param SubscriptionUpdateRequest $request
      *
      * @return JsonResponse
      */
-    public function update(int $id, GymUpdateRequest $request): JsonResponse
+    public function update(int $id, SubscriptionUpdateRequest $request): JsonResponse
     {
-        /** @var Gym $gym */
-        $gym = Gym::query()->where('id', $id)->where('user_id', $request->user()->id)->first();
+        /** @var Subscription $model */
+        $model = Subscription::query()->where('id', $id)->first();
 
-        abort_if($gym === null, 404, 'Not found.');
+        abort_if($model === null, 404, 'Not found.');
 
-        $gym = $this->gymService->update($gym, $request->validated());
+        $model = $this->subscriptionService->update($model, $request->validated());
 
-        return Response::success(new GymTransformer($gym));
+        return Response::success(new SubscriptionTransformer($model));
     }
 
     /**
      * @OA\Get(
-     *     path="/api/v1/gym/list/own",
-     *     description="List gym.",
-     *     tags={"Gym"},
+     *     path="/api/v1/subscription/{gym_id}list",
+     *     description="List subscription.",
+     *     tags={"Subscription"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *     @OA\Parameter(
+     *         name="gym_id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="int")
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -202,12 +206,14 @@ class GymController extends Controller
      *     )
      * )
      *
-     * @param GymUpdateRequest $request
+     * @param int $id
      *
      * @return JsonResponse
      */
-    public function list(Request $request): JsonResponse
+    public function listByGym(int $id): JsonResponse
     {
-        return Response::success(new GymTransformer($request->user()->gyms));
+        $subscriptions = Subscription::query()->where('gym_id', $id)->orderBy('price')->get();
+
+        return Response::success(new SubscriptionTransformer($subscriptions));
     }
 }

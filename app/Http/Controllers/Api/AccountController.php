@@ -20,8 +20,8 @@ class AccountController extends Controller
      *     description="Return account.",
      *     tags={"Account"},
      *     security={
-     *          {"bearerAuth": {}}
-     *      },
+     *         {"bearerAuth" : {}}
+     *     },
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -60,8 +60,8 @@ class AccountController extends Controller
      *         @OA\JsonContent(ref="#/components/schemas/RequestAccountUpdate")
      *     ),
      *     security={
-     *          {"bearerAuth": {}}
-     *      },
+     *         {"bearerAuth" : {}}
+     *     },
      *     @OA\Response(
      *         response=200,
      *         description="OK",
