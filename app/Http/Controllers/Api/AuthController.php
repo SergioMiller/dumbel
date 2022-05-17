@@ -7,6 +7,7 @@ use App\Exceptions\PasswordDoesNotMatchException;
 use App\Exceptions\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\RegisterCheckQrCodeRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Library\Response;
 use App\Services\Auth\AuthService;
@@ -102,5 +103,44 @@ class AuthController extends Controller
         $token = $this->authService->register($request->validated());
 
         return Response::success(['token' => $token]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/auth/register/check-qr-code",
+     *     description="Check qr code before register.",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestRegisterCheckOqCode")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                     @OA\Schema(
+     *                         @OA\Property(
+     *                             property="data",
+     *                             allOf={
+     *                                 @OA\Schema(ref="#/components/schemas/ResponseRegisterCheckQrCode")
+     *                             }
+     *                         )
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param RegisterCheckQrCodeRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function checkQrCode(RegisterCheckQrCodeRequest $request): JsonResponse
+    {
+        return Response::success(['result' => $this->authService->checkQrCode($request->input('uuid'))]);
     }
 }

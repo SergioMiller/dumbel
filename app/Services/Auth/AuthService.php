@@ -77,4 +77,9 @@ class AuthService
 
         $qrCode->save();
     }
+
+    public function checkQrCode(string $uuid): bool
+    {
+        return QrCode::query()->where('uuid', $uuid)->whereNull('user_id')->exists();
+    }
 }
