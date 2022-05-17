@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller
 {
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/api/v1/account",
      *     description="Return account.",
      *     tags={"Account"},
+     *     security={
+     *          {"bearerAuth": {}}
+     *      },
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -56,6 +59,9 @@ class AccountController extends Controller
      *     @OA\RequestBody(
      *         @OA\JsonContent(ref="#/components/schemas/RequestAccountUpdate")
      *     ),
+     *     security={
+     *          {"bearerAuth": {}}
+     *      },
      *     @OA\Response(
      *         response=200,
      *         description="OK",

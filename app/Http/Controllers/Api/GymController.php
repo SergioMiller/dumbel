@@ -30,6 +30,9 @@ class GymController extends Controller
      *     @OA\RequestBody(
      *         @OA\JsonContent(ref="#/components/schemas/RequestGymCreate")
      *     ),
+     *     security={
+     *          {"bearerAuth": {}}
+     *      },
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -68,6 +71,9 @@ class GymController extends Controller
      *     path="/api/v1/gym/{id}/update",
      *     description="Update gym.",
      *     tags={"Gym"},
+     *     security={
+     *          {"bearerAuth": {}}
+     *      },
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -121,6 +127,9 @@ class GymController extends Controller
      *     path="/api/v1/gym/list/own",
      *     description="List gym.",
      *     tags={"Gym"},
+     *     security={
+     *          {"bearerAuth": {}}
+     *      },
      *     @OA\Response(
      *         response=200,
      *         description="OK",
