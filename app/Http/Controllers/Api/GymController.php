@@ -7,9 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Gym\GymCreateRequest;
 use App\Http\Requests\Api\Gym\GymUpdateRequest;
 use App\Library\Response;
-use App\Models\Gym;
+use App\Repository\GymRepository;
 use App\Services\GymService;
 use App\Transformers\GymTransformer;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,12 @@ class GymController extends Controller
 {
     private GymService $gymService;
 
-    public function __construct(GymService $gymService)
+    private GymRepository $gymRepository;
+
+    public function __construct(GymService $gymService, GymRepository $gymRepository)
     {
         $this->gymService = $gymService;
+        $this->gymRepository = $gymRepository;
     }
 
     /**
@@ -103,18 +107,16 @@ class GymController extends Controller
      * )
      *
      * @param int $id
-     * @param GymUpdateRequest $request
      *
      * @return JsonResponse
      */
-    public function get(int $id, GymUpdateRequest $request): JsonResponse
+    public function get(int $id): JsonResponse
     {
-        /** @var Gym $gym */
-        $gym = Gym::query()->where('id', $id)->where('user_id', $request->user()->id)->first();
+        $model = $this->gymRepository->getById($id);
 
-        abort_if($gym === null, 404, 'Not found.');
+        abort_if($model === null, 404, 'Not found.');
 
-        return Response::success(new GymTransformer($gym));
+        return Response::success(new GymTransformer($model));
     }
 
     /**
@@ -160,17 +162,20 @@ class GymController extends Controller
      * @param GymUpdateRequest $request
      *
      * @return JsonResponse
+     *
+     * @throws AuthorizationException
      */
     public function update(int $id, GymUpdateRequest $request): JsonResponse
     {
-        /** @var Gym $gym */
-        $gym = Gym::query()->where('id', $id)->where('user_id', $request->user()->id)->first();
+        $model = $this->gymRepository->getById($id);
 
-        abort_if($gym === null, 404, 'Not found.');
+        $this->authorize('update', $model);
 
-        $gym = $this->gymService->update($gym, $request->validated());
+        abort_if($model === null, 404, 'Not found.');
 
-        return Response::success(new GymTransformer($gym));
+        $model = $this->gymService->update($model, $request->validated());
+
+        return Response::success(new GymTransformer($model));
     }
 
     /**
@@ -206,7 +211,7 @@ class GymController extends Controller
      *
      * @return JsonResponse
      */
-    public function list(Request $request): JsonResponse
+    public function listOwn(Request $request): JsonResponse
     {
         return Response::success(new GymTransformer($request->user()->gyms));
     }

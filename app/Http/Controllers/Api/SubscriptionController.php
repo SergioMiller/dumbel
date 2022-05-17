@@ -7,18 +7,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Subscription\SubscriptionCreateRequest;
 use App\Http\Requests\Api\Subscription\SubscriptionUpdateRequest;
 use App\Library\Response;
-use App\Models\Subscription;
+use App\Repository\SubscriptionRepository;
 use App\Services\SubscriptionService;
 use App\Transformers\SubscriptionTransformer;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
 class SubscriptionController extends Controller
 {
     private SubscriptionService $subscriptionService;
 
-    public function __construct(SubscriptionService $subscriptionService)
+    private SubscriptionRepository $subscriptionRepository;
+
+    public function __construct(SubscriptionService $subscriptionService, SubscriptionRepository $subscriptionRepository)
     {
         $this->subscriptionService = $subscriptionService;
+        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     /**
@@ -107,8 +111,7 @@ class SubscriptionController extends Controller
      */
     public function get(int $id): JsonResponse
     {
-        /** @var Subscription $model */
-        $model = Subscription::query()->where('id', $id)->first();
+        $model = $this->subscriptionRepository->getById($id);
 
         abort_if($model === null, 404, 'Not found.');
 
@@ -158,11 +161,14 @@ class SubscriptionController extends Controller
      * @param SubscriptionUpdateRequest $request
      *
      * @return JsonResponse
+     *
+     * @throws AuthorizationException
      */
     public function update(int $id, SubscriptionUpdateRequest $request): JsonResponse
     {
-        /** @var Subscription $model */
-        $model = Subscription::query()->where('id', $id)->first();
+        $model = $this->subscriptionRepository->getById($id);
+
+        $this->authorize('update', $model);
 
         abort_if($model === null, 404, 'Not found.');
 
@@ -212,7 +218,7 @@ class SubscriptionController extends Controller
      */
     public function listByGym(int $id): JsonResponse
     {
-        $subscriptions = Subscription::query()->where('gym_id', $id)->orderBy('price')->get();
+        $subscriptions = $this->subscriptionRepository->getListByGymId($id);
 
         return Response::success(new SubscriptionTransformer($subscriptions));
     }

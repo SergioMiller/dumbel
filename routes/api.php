@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/gym/create', [GymController::class, 'create']);
     Route::get('/gym/{id}', [GymController::class, 'get']);
     Route::put('/gym/{id}/update', [GymController::class, 'update']);
-    Route::get('/gym/list/own', [GymController::class, 'list']);
+    Route::get('/gym/list/own', [GymController::class, 'listOwn']);
 
     Route::post('/subscription/create', [SubscriptionController::class, 'create']);
     Route::get('/subscription/{id}', [SubscriptionController::class, 'get']);
