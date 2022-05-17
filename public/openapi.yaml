@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  title: 'Swagger dumbel'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000/'
+    description: 'Api localhost'
+paths:
+  /api/v1/account:
+    post:
+      tags:
+        - Account
+      description: 'Return account.'
+      operationId: 7e6803afcd939be81b4182165ccff2af
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - { $ref: '#/components/schemas/Response' }
+                  - { properties: { data: { type: object, allOf: [{ $ref: '#/components/schemas/ResponseAccount' }] } }, type: object }
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Auth
+      description: 'Return a bearer token.'
+      operationId: fb66b153966d9fac2e999136ef0ade67
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestLogin'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - { $ref: '#/components/schemas/Response' }
+                  - { properties: { data: { type: object, allOf: [{ $ref: '#/components/schemas/ResponseLogin' }] } }, type: object }
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Auth
+      description: 'Return a bearer token.'
+      operationId: fb835c97347e657e2a627790c4c5817a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRegister'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - { $ref: '#/components/schemas/Response' }
+                  - { properties: { data: { type: object, allOf: [{ $ref: '#/components/schemas/ResponseRegister' }] } }, type: object }
+components:
+  schemas:
+    RequestLogin:
+      properties:
+        phone:
+          type: string
+        password:
+          type: string
+        device:
+          type: string
+      type: object
+      xml:
+        name: RequestLogin
+    RequestRegister:
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        device:
+          type: string
+      type: object
+      xml:
+        name: RequestRegister
+    ResponseAccount:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastname:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+      type: object
+      xml:
+        name: ResponseAccount
+    ResponseLogin:
+      properties:
+        token:
+          type: string
+      type: object
+      xml:
+        name: Response
+    ResponseRegister:
+      properties:
+        token:
+          type: string
+      type: object
+      xml:
+        name: ResponseRegister
+    Response:
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        meta:
+          type: object
+        data:
+          type: object
+      type: object
+      xml:
+        name: Response
+  securitySchemes:
+    bearerAuth:
+      type: http
+      name: Authorization
+      in: header
+      bearerFormat: JWT
+      scheme: bearer
