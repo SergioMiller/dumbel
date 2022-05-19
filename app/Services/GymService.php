@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Gym;
+use App\Models\GymTrainer;
 use App\Models\User;
 
 class GymService
@@ -23,5 +24,15 @@ class GymService
         $gym->update($data);
 
         return $gym->fresh();
+    }
+
+    public function trainerAdd(array $data): bool
+    {
+        return GymTrainer::query()->insert($data);
+    }
+
+    public function trainerRemove(array $data): int
+    {
+        return GymTrainer::query()->where($data)->delete();
     }
 }

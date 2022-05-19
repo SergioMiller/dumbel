@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Gym\GymCreateRequest;
 use App\Http\Requests\Api\Gym\GymUpdateRequest;
+use App\Http\Requests\Api\Gym\TrainerAddRequest;
+use App\Http\Requests\Api\Gym\TrainerRemoveRequest;
 use App\Library\Response;
 use App\Repository\GymRepository;
 use App\Services\GymService;
@@ -214,5 +216,77 @@ class GymController extends Controller
     public function listOwn(Request $request): JsonResponse
     {
         return Response::success(new GymTransformer($request->user()->gyms));
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/gym/trainer/add",
+     *     description="Trainer add.",
+     *     tags={"Gym"},
+     *     security={
+     *         {"bearerAuth" : {}}
+     *     },
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestGymTrainerAdd")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param TrainerAddRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function trainerAdd(TrainerAddRequest $request): JsonResponse
+    {
+        $this->gymService->trainerAdd($request->validated());
+
+        return Response::success();
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/v1/gym/trainer/remove",
+     *     description="Trainer remove.",
+     *     tags={"Gym"},
+     *     security={
+     *         {"bearerAuth" : {}}
+     *     },
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestGymTrainerRemove")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param TrainerRemoveRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function trainerRemove(TrainerRemoveRequest $request): JsonResponse
+    {
+        $this->gymService->trainerRemove($request->validated());
+
+        return Response::success();
     }
 }
