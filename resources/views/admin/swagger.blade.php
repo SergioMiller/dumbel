@@ -18,7 +18,12 @@
         }
 
         .swagger-ui .wrapper {
+            padding: 0;
             max-width: 100%;
+        }
+
+        .scheme-container .wrapper {
+            padding: 0 20px;
         }
 
         .swagger-ui a.nostyle, .swagger-ui a.nostyle:visited {

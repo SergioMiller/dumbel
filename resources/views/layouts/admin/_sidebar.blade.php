@@ -9,19 +9,8 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li>
-                        <a href="#">
-                            <span class="pcoded-mtext">Default</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="pcoded-mtext">CRM</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="pcoded-mtext">Analytics</span>
-                            <span class="pcoded-badge label label-info ">NEW</span>
+                        <a href="{{ route('swagger') }}">
+                            <span class="pcoded-mtext">Swagger</span>
                         </a>
                     </li>
                 </ul>
