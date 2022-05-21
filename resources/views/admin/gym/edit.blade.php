@@ -113,6 +113,22 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                <select name="status"
+                                        id="status"
+                                        class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
+                                    <option @if($gym->status === 'active') selected @endif value="active">Active</option>
+                                    <option @if($gym->status === 'moderation') selected @endif  value="moderation">Moderation</option>
+                                </select>
+
+                                @if($errors->has('email'))
+                                    <div class="messages">{{ $errors->first('status') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Created at</label>
                             <div class="col-sm-10">
                                 <input class="form-control" value="{{ $user->created_at }}" readonly>

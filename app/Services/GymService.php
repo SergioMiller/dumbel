@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Constants\GymStatusConstant;
 use App\Models\Gym;
 use App\Models\GymTrainer;
 use App\Models\User;
@@ -13,6 +14,7 @@ class GymService
     {
         $gym = new Gym($data);
         $gym->user_id = $user->id;
+        $gym->status = GymStatusConstant::MODERATION;
 
         $gym->save();
 

@@ -108,6 +108,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                <select name="status"
+                                        id="status"
+                                        class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
+                                    <option value="active">Active</option>
+                                    <option value="moderation">Moderation</option>
+                                </select>
+
+                                @if($errors->has('status'))
+                                    <div class="messages">{{ $errors->first('status') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="float-right">
                             <button type="submit" class="btn btn-primary m-b-0">Save</button>
                         </div>

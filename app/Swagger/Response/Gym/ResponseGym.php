@@ -59,6 +59,13 @@ class ResponseGym
      *
      * @var string
      */
+    private string $status;
+
+    /**
+     * @OA\Property()
+     *
+     * @var string
+     */
     private string $created_at;
 
     /**

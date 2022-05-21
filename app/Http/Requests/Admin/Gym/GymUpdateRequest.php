@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Admin\Gym;
 
+use App\Constants\GymStatusConstant;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -17,6 +18,7 @@ class GymUpdateRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:24'],
             'email' => ['nullable', 'email', 'max:512'],
             'address' => ['required', 'string', 'max:512'],
+            'status' => ['string', Rule::in(GymStatusConstant::getConstants())],
         ];
     }
 }

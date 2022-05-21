@@ -20,10 +20,10 @@
                         <th>Id</th>
                         <th>User</th>
                         <th>Name</th>
-                        <th>Description</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
+                        <th>Status</th>
                         <th>Created at</th>
                         <th style="width: 0;" class="text-right">
                             <a class="text-primary" href="{{ route('gym.create') }}">Create</a>
@@ -38,10 +38,19 @@
                                 <a href="{{ route('user.edit', $gym->user->id) }}">{{ $gym->user->name }}</a>
                             </td>
                             <td>{{ $gym->name }}</td>
-                            <td>{{ $gym->description }}</td>
                             <td>{{ $gym->phone }}</td>
                             <td>{{ $gym->email }}</td>
                             <td>{{ $gym->address }}</td>
+                            <td>
+                                @switch($gym->status)
+                                    @case('active')
+                                    <label class="label label-inverse-success">{{ $gym->status }}</label>
+                                    @break
+                                    @case('moderation')
+                                    <label class="label label-inverse-warning">{{ $gym->status }}</label>
+                                    @break
+                                @endswitch
+                            </td>
                             <td>{{ $gym->created_at }}</td>
                             <td>
                                 <a class="btn btn-sm btn-inverse icofont icofont-pencil-alt-2"

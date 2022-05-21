@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +19,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $phone
  * @property string $email
  * @property string $address
- * @property string $created_at
- * @property string $updated_at
+ * @property string $status
+ * @property string|Carbon $created_at
+ * @property string|Carbon $updated_at
  * @property User[]|Collection $trainers
  */
 class Gym extends Model
@@ -33,6 +35,7 @@ class Gym extends Model
         'phone',
         'email',
         'address',
+        'status',
     ];
 
     protected $casts = [

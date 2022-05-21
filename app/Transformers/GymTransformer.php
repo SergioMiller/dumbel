@@ -17,6 +17,7 @@ class GymTransformer extends Transformer
             'phone' => $gym->phone,
             'email' => $gym->email,
             'address' => $gym->address,
+            'status' => $gym->status,
             'created_at' => $gym->created_at->toDateTimeString(),
             'updated_at' => $gym->updated_at->toDateTimeString(),
         ];
