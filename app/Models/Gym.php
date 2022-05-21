@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -18,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $address
  * @property string $created_at
  * @property string $updated_at
+ * @property User[]|Collection $trainers
  */
 class Gym extends Model
 {
@@ -45,5 +48,10 @@ class Gym extends Model
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function trainers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'gym_trainers');
     }
 }

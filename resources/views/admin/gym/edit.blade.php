@@ -132,6 +132,11 @@
                     </form>
                 </div>
             </div>
+
+            @if($gym->trainers->isNotEmpty())
+                @include('admin/gym/_trainers', ['trainers' => $gym->trainers])
+            @endif
+
         </div>
         <div class="col-md-6">
             @foreach($gym->subscriptions->sortBy('id') as $subscription)
