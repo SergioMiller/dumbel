@@ -52,12 +52,11 @@ class AuthService
     public function register(array $data): string
     {
         DB::beginTransaction();
+        $data['password'] = Hash::make($data['password']);
         $user = new User($data);
         $user->status = UserStatusConstant::ACTIVE;
         $user->save();
-
         $this->saveQrCode($user, $data);
-
         DB::commit();
 
         return $this->generateApiToken($user, $data['device']);
@@ -81,5 +80,15 @@ class AuthService
     public function checkQrCode(string $uuid): bool
     {
         return QrCode::query()->where('uuid', $uuid)->whereNull('user_id')->exists();
+    }
+
+    public function registerWithQrCode(QrCode $qrCode, array $data): string
+    {
+        $data['password'] = Hash::make($data['password']);
+
+        $user = $qrCode->user;
+        $user->update($data);
+
+        return $this->generateApiToken($user, $data['device']);
     }
 }

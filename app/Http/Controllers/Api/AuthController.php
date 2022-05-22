@@ -9,8 +9,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\RegisterCheckQrCodeRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
+use App\Http\Requests\Api\Auth\RegisterWithQrCodeRequest;
 use App\Library\Response;
+use App\Models\QrCode;
 use App\Services\Auth\AuthService;
+use App\Transformers\AuthAccountTransformer;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
@@ -142,5 +145,108 @@ class AuthController extends Controller
     public function checkQrCode(RegisterCheckQrCodeRequest $request): JsonResponse
     {
         return Response::success(['result' => $this->authService->checkQrCode($request->input('uuid'))]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/auth/get-user/{uuid}",
+     *     description="Get user.",
+     *     tags={"Auth"},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                     @OA\Schema(
+     *                         @OA\Property(
+     *                             property="data",
+     *                             allOf={
+     *                                 @OA\Schema(ref="#/components/schemas/ResponseAuthAccount")
+     *                             }
+     *                         )
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param string $uuid
+     *
+     * @return JsonResponse
+     */
+    public function getUserByQrCode(string $uuid): JsonResponse
+    {
+        $qrCode = QrCode::query()->where('uuid', $uuid)->whereNot('user_id')->first();
+
+        abort_if($qrCode === null, 404, 'Not found.');
+        abort_if($qrCode->user === null, 404, 'Not found.');
+        abort_if($qrCode->user->password !== null, 404, 'Not found.');
+
+        return Response::success(new AuthAccountTransformer($qrCode->user));
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/auth/register/{uuid}",
+     *     description="Return a bearer token.",
+     *     tags={"Auth"},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestRegisterWithQrCode")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                     @OA\Schema(
+     *                         @OA\Property(
+     *                             property="data",
+     *                             allOf={
+     *                                 @OA\Schema(ref="#/components/schemas/ResponseRegister")
+     *                             }
+     *                         )
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param string $uuid
+     * @param RegisterWithQrCodeRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function registerWithQrCode(string $uuid, RegisterWithQrCodeRequest $request): JsonResponse
+    {
+        /** @var QrCode $qrCode */
+        $qrCode = QrCode::query()->where('uuid', $uuid)->whereNot('user_id')->first();
+
+        abort_if($qrCode === null, 404, 'Not found.');
+        abort_if($qrCode->user === null, 404, 'Not found.');
+        abort_if($qrCode->user->password !== null, 404, 'Not found.');
+
+        $token = $this->authService->registerWithQrCode($qrCode, $request->validated());
+
+        return Response::success(['token' => $token]);
     }
 }

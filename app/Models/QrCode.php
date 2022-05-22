@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property string $uuid
  * @property string $source
+ * @property User $user
  */
 class QrCode extends Model
 {

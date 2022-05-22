@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/register/check-qr-code', [AuthController::class, 'checkQrCode']);
+Route::get('/auth/get-user/{uuid}', [AuthController::class, 'getUserByQrCode'])->where('uuid', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+Route::post('/auth/register/{uuid}', [AuthController::class, 'registerWithQrCode'])->where('uuid', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/account', [AccountController::class, 'get']);
