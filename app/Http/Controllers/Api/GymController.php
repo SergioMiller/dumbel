@@ -12,7 +12,7 @@ use App\Http\Requests\Api\Gym\TrainerAddRequest;
 use App\Http\Requests\Api\Gym\TrainerRemoveRequest;
 use App\Library\Response;
 use App\Repository\GymRepository;
-use App\Services\GymService;
+use App\Services\Api\GymService;
 use App\Transformers\GymTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GymController;
 use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/subscription/{id}', [SubscriptionController::class, 'get']);
     Route::put('/subscription/{id}/update', [SubscriptionController::class, 'update']);
     Route::get('/subscription/{gym_id}/list', [SubscriptionController::class, 'listByGym']);
+
+    Route::post('/user/create', [UserController::class, 'create']);
 });

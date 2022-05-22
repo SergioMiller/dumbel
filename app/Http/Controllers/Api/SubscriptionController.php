@@ -8,7 +8,7 @@ use App\Http\Requests\Api\Subscription\SubscriptionCreateRequest;
 use App\Http\Requests\Api\Subscription\SubscriptionUpdateRequest;
 use App\Library\Response;
 use App\Repository\SubscriptionRepository;
-use App\Services\SubscriptionService;
+use App\Services\Api\SubscriptionService;
 use App\Transformers\SubscriptionTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
