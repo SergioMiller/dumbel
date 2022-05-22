@@ -11,13 +11,15 @@ use App\Http\Requests\Api\Auth\RegisterCheckQrCodeRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Http\Requests\Api\Auth\RegisterWithQrCodeRequest;
 use App\Library\Response;
-use App\Models\QrCode;
+use App\Repository\QrCodeRepository;
 use App\Services\Auth\AuthService;
 use App\Transformers\AuthAccountTransformer;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
+    private AuthService $authService;
+
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
@@ -181,12 +183,13 @@ class AuthController extends Controller
      * )
      *
      * @param string $uuid
+     * @param QrCodeRepository $qrCodeRepository
      *
      * @return JsonResponse
      */
-    public function getUserByQrCode(string $uuid): JsonResponse
+    public function getUserByQrCode(string $uuid, QrCodeRepository $qrCodeRepository): JsonResponse
     {
-        $qrCode = QrCode::query()->where('uuid', $uuid)->whereNot('user_id')->first();
+        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword($uuid);
 
         abort_if($qrCode === null, 404, 'Not found.');
         abort_if($qrCode->user === null, 404, 'Not found.');
@@ -233,13 +236,13 @@ class AuthController extends Controller
      *
      * @param string $uuid
      * @param RegisterWithQrCodeRequest $request
+     * @param QrCodeRepository $qrCodeRepository
      *
      * @return JsonResponse
      */
-    public function registerWithQrCode(string $uuid, RegisterWithQrCodeRequest $request): JsonResponse
+    public function registerWithQrCode(string $uuid, RegisterWithQrCodeRequest $request, QrCodeRepository $qrCodeRepository): JsonResponse
     {
-        /** @var QrCode $qrCode */
-        $qrCode = QrCode::query()->where('uuid', $uuid)->whereNot('user_id')->first();
+        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword($uuid);
 
         abort_if($qrCode === null, 404, 'Not found.');
         abort_if($qrCode->user === null, 404, 'Not found.');
