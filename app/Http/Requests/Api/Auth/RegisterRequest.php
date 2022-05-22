@@ -19,7 +19,7 @@ class RegisterRequest extends FormRequest
             'phone' => ['required_without:email', 'nullable', 'max:24', Rule::unique('users', 'phone')],
             'email' => ['required_without:phone', 'nullable', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['string', 'required'],
-            'birthday' => ['date', 'before:today', 'required'],
+            'birthday' => ['date', 'before:today', 'nullable'],
             'uuid' => ['uuid', 'nullable', Rule::exists('qr_codes', 'uuid')->whereNull('user_id')],
             'device' => ['required', 'string'],
         ];

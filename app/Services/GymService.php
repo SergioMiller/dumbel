@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Constants\GymStatusConstant;
 use App\Models\Gym;
+use App\Models\GymManager;
 use App\Models\GymTrainer;
 use App\Models\User;
 
@@ -36,5 +37,15 @@ class GymService
     public function trainerRemove(array $data): int
     {
         return GymTrainer::query()->where($data)->delete();
+    }
+
+    public function managerAdd(array $data): bool
+    {
+        return GymManager::query()->insert($data);
+    }
+
+    public function managerRemove(array $data): int
+    {
+        return GymManager::query()->where($data)->delete();
     }
 }

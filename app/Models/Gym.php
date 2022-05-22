@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|Carbon $created_at
  * @property string|Carbon $updated_at
  * @property User[]|Collection $trainers
+ * @property User[]|Collection $managers
  */
 class Gym extends Model
 {
@@ -56,5 +57,10 @@ class Gym extends Model
     public function trainers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'gym_trainers');
+    }
+
+    public function managers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'gym_managers');
     }
 }

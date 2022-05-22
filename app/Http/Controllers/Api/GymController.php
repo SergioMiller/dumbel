@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Gym\GymCreateRequest;
 use App\Http\Requests\Api\Gym\GymUpdateRequest;
+use App\Http\Requests\Api\Gym\ManagerAddRequest;
+use App\Http\Requests\Api\Gym\ManagerRemoveRequest;
 use App\Http\Requests\Api\Gym\TrainerAddRequest;
 use App\Http\Requests\Api\Gym\TrainerRemoveRequest;
 use App\Library\Response;
@@ -286,6 +288,78 @@ class GymController extends Controller
     public function trainerRemove(TrainerRemoveRequest $request): JsonResponse
     {
         $this->gymService->trainerRemove($request->validated());
+
+        return Response::success();
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/gym/manager/add",
+     *     description="Manager add.",
+     *     tags={"Gym"},
+     *     security={
+     *         {"bearerAuth" : {}}
+     *     },
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestGymManagerAdd")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param ManagerAddRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function managerAdd(ManagerAddRequest $request): JsonResponse
+    {
+        $this->gymService->managerAdd($request->validated());
+
+        return Response::success();
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/v1/gym/manager/remove",
+     *     description="Manager remove.",
+     *     tags={"Gym"},
+     *     security={
+     *         {"bearerAuth" : {}}
+     *     },
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/RequestGymManagerRemove")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param ManagerRemoveRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function managerRemove(ManagerRemoveRequest $request): JsonResponse
+    {
+        $this->gymService->managerRemove($request->validated());
 
         return Response::success();
     }
