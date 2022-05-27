@@ -28,8 +28,8 @@ class AccountUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('users', 'email')->ignore($this->user()->id)
             ],
-            'password' => ['string', 'required'],
-            'birthday' => ['date', 'before:today', 'required'],
+            'password' => ['string', 'nullable'],
+            'birthday' => ['date', 'before:today', 'nullable'],
         ];
     }
 }
