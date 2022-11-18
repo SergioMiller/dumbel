@@ -25,7 +25,7 @@ class UserController extends Controller
      *     description="Create user.",
      *     tags={"User"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestUserCreate")
+     *         @OA\JsonContent(ref="#/components/schemas/UserCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
@@ -42,7 +42,7 @@ class UserController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseUser")
+     *                                 @OA\Schema(ref="#/components/schemas/UserTransformer")
      *                             }
      *                         )
      *                     )

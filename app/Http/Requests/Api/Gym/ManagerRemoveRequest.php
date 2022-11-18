@@ -7,6 +7,15 @@ use App\Library\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @OA\Schema(
+ *     schema="ManagerRemoveRequest",
+ *     type="object",
+ *     required={"name", "address"},
+ *     @OA\Property(property="gym_id", type="integer", example="1"),
+ *     @OA\Property(property="user_id", type="integer", example="1"),
+ * )
+ */
 class ManagerRemoveRequest extends FormRequest
 {
     use FailedValidation;

@@ -31,7 +31,7 @@ class SubscriptionController extends Controller
      *     description="Create subscription.",
      *     tags={"Subscription"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestSubscriptionCreate")
+     *         @OA\JsonContent(ref="#/components/schemas/SubscriptionCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
@@ -48,7 +48,7 @@ class SubscriptionController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseSubscription")
+     *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
      *                             }
      *                         )
      *                     )
@@ -95,7 +95,7 @@ class SubscriptionController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseSubscription")
+     *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
      *                             }
      *                         )
      *                     )
@@ -133,7 +133,7 @@ class SubscriptionController extends Controller
      *         @OA\Schema(type="int")
      *     ),
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestSubscriptionUpdate")
+     *         @OA\JsonContent(ref="#/components/schemas/SubscriptionUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -147,7 +147,7 @@ class SubscriptionController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseSubscription")
+     *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
      *                             }
      *                         )
      *                     )
@@ -203,7 +203,7 @@ class SubscriptionController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             type="array",
-     *                             @OA\Items(ref="#/components/schemas/ResponseSubscription")
+     *                             @OA\Items(ref="#/components/schemas/SubscriptionTransformer")
      *                         )
      *                     ),
      *                 }

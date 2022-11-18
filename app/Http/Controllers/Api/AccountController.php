@@ -34,7 +34,7 @@ class AccountController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseAccount")
+     *                                 @OA\Schema(ref="#/components/schemas/AccountTransformer")
      *                             }
      *                         )
      *                     )
@@ -57,7 +57,7 @@ class AccountController extends Controller
      *     description="Update account.",
      *     tags={"Account"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestAccountUpdate")
+     *         @OA\JsonContent(ref="#/components/schemas/AccountUpdateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
@@ -74,7 +74,7 @@ class AccountController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseAccount")
+     *                                 @OA\Schema(ref="#/components/schemas/AccountTransformer")
      *                             }
      *                         )
      *                     )

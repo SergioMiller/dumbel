@@ -4,8 +4,21 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\Gym;
 
 use App\Library\FailedValidation;
+use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="GymUpdateRequest",
+ *     type="object",
+ *     required={"name", "address"},
+ *     @OA\Property(property="name", type="string", example="Joh"),
+ *     @OA\Property(property="Description", type="string", example="The best gym."),
+ *     @OA\Property(property="phone", type="integer", example="380987654321"),
+ *     @OA\Property(property="email", type="string", format="email", example="email@email.email"),
+ *     @OA\Property(property="address", type="string", example="Cecelia Havens, 456 White Finch St.,North Augusta, SC 29860"),
+ * )
+ */
 class GymUpdateRequest extends FormRequest
 {
     use FailedValidation;
@@ -15,7 +28,7 @@ class GymUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:512'],
-            'phone' => ['nullable', 'string', 'max:24'],
+            'phone' => ['nullable', 'string', new PhoneNumberRule],
             'email' => ['nullable', 'email', 'max:512'],
             'address' => ['required', 'string', 'max:512'],
         ];

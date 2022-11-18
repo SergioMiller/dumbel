@@ -36,7 +36,7 @@ class GymController extends Controller
      *     description="Create gym.",
      *     tags={"Gym"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestGymCreate")
+     *         @OA\JsonContent(ref="#/components/schemas/GymCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
@@ -53,7 +53,7 @@ class GymController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseGym")
+     *                                 @OA\Schema(ref="#/components/schemas/GymTransformer")
      *                             }
      *                         )
      *                     )
@@ -100,7 +100,7 @@ class GymController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseGym")
+     *                                 @OA\Schema(ref="#/components/schemas/GymTransformer")
      *                             }
      *                         )
      *                     )
@@ -138,7 +138,7 @@ class GymController extends Controller
      *         @OA\Schema(type="int")
      *     ),
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestGymUpdate")
+     *         @OA\JsonContent(ref="#/components/schemas/GymUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -152,7 +152,7 @@ class GymController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseGym")
+     *                                 @OA\Schema(ref="#/components/schemas/GymTransformer")
      *                             }
      *                         )
      *                     )
@@ -202,7 +202,7 @@ class GymController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             type="array",
-     *                             @OA\Items(ref="#/components/schemas/ResponseGym")
+     *                             @OA\Items(ref="#/components/schemas/GymTransformer")
      *                         )
      *                     ),
      *                 }
@@ -229,7 +229,7 @@ class GymController extends Controller
      *         {"bearerAuth" : {}}
      *     },
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestGymTrainerAdd")
+     *         @OA\JsonContent(ref="#/components/schemas/TrainerAddRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -265,7 +265,7 @@ class GymController extends Controller
      *         {"bearerAuth" : {}}
      *     },
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestGymTrainerRemove")
+     *         @OA\JsonContent(ref="#/components/schemas/TrainerRemoveRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -301,7 +301,7 @@ class GymController extends Controller
      *         {"bearerAuth" : {}}
      *     },
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestGymManagerAdd")
+     *         @OA\JsonContent(ref="#/components/schemas/ManagerAddRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -337,7 +337,7 @@ class GymController extends Controller
      *         {"bearerAuth" : {}}
      *     },
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestGymManagerRemove")
+     *         @OA\JsonContent(ref="#/components/schemas/ManagerRemoveRequest")
      *     ),
      *     @OA\Response(
      *         response=200,

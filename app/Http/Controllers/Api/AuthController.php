@@ -31,7 +31,7 @@ class AuthController extends Controller
      *     description="Return a bearer token.",
      *     tags={"Auth"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestLogin")
+     *         @OA\JsonContent(ref="#/components/schemas/LoginRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -44,10 +44,9 @@ class AuthController extends Controller
      *                     @OA\Schema(
      *                         @OA\Property(
      *                             property="data",
-     *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseLogin")
-     *                             }
-     *                         )
+     *                             type="object",
+     *                             @OA\Property(property="token", type="string", example="1|bmnVuChqwG0PoFoQfmrGRhHvHNvjV7gDoVHBcD6l"),
+     *                         ),
      *                     )
      *                 }
      *             )
@@ -75,7 +74,7 @@ class AuthController extends Controller
      *     description="Return a bearer token.",
      *     tags={"Auth"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestRegister")
+     *         @OA\JsonContent(ref="#/components/schemas/RegisterRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -88,10 +87,9 @@ class AuthController extends Controller
      *                     @OA\Schema(
      *                         @OA\Property(
      *                             property="data",
-     *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseRegister")
-     *                             }
-     *                         )
+     *                             type="object",
+     *                             @OA\Property(property="token", type="string", example="1|bmnVuChqwG0PoFoQfmrGRhHvHNvjV7gDoVHBcD6l"),
+     *                         ),
      *                     )
      *                 }
      *             )
@@ -116,7 +114,7 @@ class AuthController extends Controller
      *     description="Check qr code before register.",
      *     tags={"Auth"},
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestRegisterCheckOqCode")
+     *         @OA\JsonContent(ref="#/components/schemas/RegisterCheckQrCodeRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -129,10 +127,9 @@ class AuthController extends Controller
      *                     @OA\Schema(
      *                         @OA\Property(
      *                             property="data",
-     *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseRegisterCheckQrCode")
-     *                             }
-     *                         )
+     *                             type="object",
+     *                             @OA\Property(property="result", type="boolean", example="true"),
+     *                         ),
      *                     )
      *                 }
      *             )
@@ -172,7 +169,7 @@ class AuthController extends Controller
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseAuthAccount")
+     *                                 @OA\Schema(ref="#/components/schemas/AuthAccountTransformer")
      *                             }
      *                         )
      *                     )
@@ -210,7 +207,7 @@ class AuthController extends Controller
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\RequestBody(
-     *         @OA\JsonContent(ref="#/components/schemas/RequestRegisterWithQrCode")
+     *         @OA\JsonContent(ref="#/components/schemas/RegisterWithQrCodeRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -223,10 +220,9 @@ class AuthController extends Controller
      *                     @OA\Schema(
      *                         @OA\Property(
      *                             property="data",
-     *                             allOf={
-     *                                 @OA\Schema(ref="#/components/schemas/ResponseRegister")
-     *                             }
-     *                         )
+     *                             type="object",
+     *                             @OA\Property(property="token", type="string", example="1|bmnVuChqwG0PoFoQfmrGRhHvHNvjV7gDoVHBcD6l"),
+     *                         ),
      *                     )
      *                 }
      *             )
@@ -242,7 +238,7 @@ class AuthController extends Controller
      */
     public function registerWithQrCode(string $uuid, RegisterWithQrCodeRequest $request, QrCodeRepository $qrCodeRepository): JsonResponse
     {
-        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword($uuid);
+        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword(new$uuid);
 
         abort_if($qrCode === null, 404, 'Not found.');
         abort_if($qrCode->user === null, 404, 'Not found.');

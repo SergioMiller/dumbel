@@ -9,7 +9,7 @@ abstract class Response
 {
     public static function success($data = [], array $meta = [], int $code = 200): JsonResponse
     {
-        return response()->json([
+        return new JsonResponse([
             'success' => true,
             'message' => null,
             'meta' => $meta,
@@ -19,7 +19,7 @@ abstract class Response
 
     public static function error(array $data = [], int $code = 500): JsonResponse
     {
-        return response()->json([
+        return new JsonResponse([
             'success' => false,
             'message' => $data['message'] ?? null,
             'meta' => $data['meta'] ?? [],

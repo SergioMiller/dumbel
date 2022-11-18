@@ -4,9 +4,23 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\Account;
 
 use App\Library\FailedValidation;
+use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @OA\Schema(
+ *     schema="AccountUpdateRequest",
+ *     type="object",
+ *     required={"phone", "name", "lastname"},
+ *     @OA\Property(property="name", type="string", example="Joh"),
+ *     @OA\Property(property="lastname", type="string", example="Dou"),
+ *     @OA\Property(property="phone", type="integer", example="380987654321"),
+ *     @OA\Property(property="email", type="string", format="email", example="email@email.email"),
+ *     @OA\Property(property="birthday", type="string", format="date", example="10-10-2020"),
+ *     @OA\Property(property="password", type="string", example="password"),
+ * )
+ */
 class AccountUpdateRequest extends FormRequest
 {
     use FailedValidation;
@@ -19,7 +33,7 @@ class AccountUpdateRequest extends FormRequest
             'phone' => [
                 'required',
                 'nullable',
-                'max:24',
+                new PhoneNumberRule,
                 Rule::unique('users', 'phone')->ignore($this->user()->id)
             ],
             'email' => [
