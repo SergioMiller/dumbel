@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class SubscriptionRepository
 {
-    public function getById(int $id): Subscription | null
+    public function getById(int $id): Subscription|null
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return Subscription::query()->where('id', $id)->first();

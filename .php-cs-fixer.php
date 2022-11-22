@@ -111,7 +111,13 @@ return $config->setRules([
     'short_scalar_cast' => true,
     'doctrine_annotation_spaces' => true,
     'doctrine_annotation_indentation' => true,
-    'constant_case' => true
+    'constant_case' => true,
+    'indentation_type' => true,
+    'native_function_type_declaration_casing' => true,
+    'nullable_type_declaration_for_default_null_value' => true,
+    'types_spaces' => true,
+    'phpdoc_line_span' => true,
+    'yoda_style' => true,
 ])
     ->setFinder($finder)
     ->setUsingCache(false);

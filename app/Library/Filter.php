@@ -19,7 +19,7 @@ abstract class Filter
 
     protected ?User $user;
 
-    public function __construct(array $params, User $user = null)
+    public function __construct(array $params, ?User $user = null)
     {
         $this->params = (object) $params;
         $this->builder = app($this->model)->newQuery();
@@ -38,7 +38,7 @@ abstract class Filter
     {
         $defaultOrder = true;
         foreach ($this->params as $field => $value) {
-            if ($field === 'order' && !empty($value)) {
+            if ('order' === $field && !empty($value)) {
                 $defaultOrder = false;
             }
 
@@ -51,7 +51,7 @@ abstract class Filter
             }
         }
 
-        if ($defaultOrder === true) {
+        if (true === $defaultOrder) {
             $this->defaultOrder();
         }
 
@@ -77,9 +77,9 @@ abstract class Filter
     }
 
     /**
-     * @param string|array $datetime
+     * @param array|string $datetime
      */
-    protected function created_at($datetime): void
+    protected function created_at(array|string $datetime): void
     {
         if (is_string($datetime)) {
             $this->builder->where("$this->table.created_at", $this->prepareUtc($datetime));

@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         $model = User::query()->where('id', $id)->first();
 
-        abort_if($model === null, 404);
+        abort_if(null === $model, 404);
 
         return view('admin.user.edit', ['user' => $model]);
     }
@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $model = User::query()->where('id', $id)->first();
 
-        abort_if($model === null, 404);
+        abort_if(null === $model, 404);
 
         $data = $request->validated();
 

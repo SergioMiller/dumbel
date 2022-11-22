@@ -8,7 +8,7 @@ use Ramsey\Uuid\UuidInterface;
 
 class QrCodeRepository
 {
-    public function getWithUserWhereIsEmptyPassword(UuidInterface $uuid): QrCode | null
+    public function getWithUserWhereIsEmptyPassword(UuidInterface $uuid): QrCode|null
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return QrCode::query()->where('uuid', $uuid)->whereNotNull('user_id')->first();

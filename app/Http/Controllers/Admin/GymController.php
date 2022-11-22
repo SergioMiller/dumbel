@@ -40,7 +40,7 @@ class GymController extends Controller
     {
         $model = Gym::query()->where('id', $id)->first();
 
-        abort_if($model === null, 404);
+        abort_if(null === $model, 404);
 
         return view('admin.gym.edit', [
             'gym' => $model,
@@ -52,7 +52,7 @@ class GymController extends Controller
     {
         $model = Gym::query()->where('id', $id)->first();
 
-        abort_if($model === null, 404);
+        abort_if(null === $model, 404);
 
         $model->update($request->validated());
 

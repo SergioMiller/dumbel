@@ -7,7 +7,7 @@ use App\Models\Gym;
 
 class GymRepository
 {
-    public function getById(int $id): Gym | null
+    public function getById(int $id): Gym|null
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return Gym::query()->where('id', $id)->first();

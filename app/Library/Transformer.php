@@ -20,7 +20,7 @@ abstract class Transformer
 
     public function convert(): ?array
     {
-        if ($this->data === null) {
+        if (null === $this->data) {
             return null;
         }
 

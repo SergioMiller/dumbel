@@ -113,7 +113,7 @@ class SubscriptionController extends Controller
     {
         $model = $this->subscriptionRepository->getById($id);
 
-        abort_if($model === null, 404, 'Not found.');
+        abort_if(null === $model, 404, 'Not found.');
 
         return Response::success(new SubscriptionTransformer($model));
     }
@@ -170,7 +170,7 @@ class SubscriptionController extends Controller
 
         $this->authorize('update', $model);
 
-        abort_if($model === null, 404, 'Not found.');
+        abort_if(null === $model, 404, 'Not found.');
 
         $model = $this->subscriptionService->update($model, $request->validated());
 

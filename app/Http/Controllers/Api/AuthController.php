@@ -188,9 +188,9 @@ class AuthController extends Controller
     {
         $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword($uuid);
 
-        abort_if($qrCode === null, 404, 'Not found.');
-        abort_if($qrCode->user === null, 404, 'Not found.');
-        abort_if($qrCode->user->password !== null, 404, 'Not found.');
+        abort_if(null === $qrCode, 404, 'Not found.');
+        abort_if(null === $qrCode->user, 404, 'Not found.');
+        abort_if(null !== $qrCode->user->password, 404, 'Not found.');
 
         return Response::success(new AuthAccountTransformer($qrCode->user));
     }
@@ -240,9 +240,9 @@ class AuthController extends Controller
     {
         $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword(new$uuid);
 
-        abort_if($qrCode === null, 404, 'Not found.');
-        abort_if($qrCode->user === null, 404, 'Not found.');
-        abort_if($qrCode->user->password !== null, 404, 'Not found.');
+        abort_if(null === $qrCode, 404, 'Not found.');
+        abort_if(null === $qrCode->user, 404, 'Not found.');
+        abort_if(null !== $qrCode->user->password, 404, 'Not found.');
 
         $token = $this->authService->registerWithQrCode($qrCode, $request->validated());
 

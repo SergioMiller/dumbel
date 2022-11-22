@@ -25,7 +25,7 @@ class Paginator
     {
         $builder = clone $this->builder->limit($this->limit);
 
-        if ($this->page !== 1) {
+        if (1 !== $this->page) {
             if ($this->page < 1) {
                 $this->page = 1;
             }

@@ -37,7 +37,7 @@ class JsonResponse extends \Illuminate\Http\JsonResponse
 
     private function preparingData($data): ?array
     {
-        if ($data === null) {
+        if (null === $data) {
             return null;
         }
 

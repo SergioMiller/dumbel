@@ -14,7 +14,7 @@ class ForceJsonResponse
 
         $response = $next($request);
 
-        if ($response instanceof JsonResponse && config('app.debug') === true) {
+        if ($response instanceof JsonResponse && true === config('app.debug')) {
             $queries = $this->getQueries();
 
             $response->setData($response->getData(true) + [

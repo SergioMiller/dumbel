@@ -28,7 +28,7 @@ class AuthService
         /** @var User $user */
         $user = User::query()->where('phone', $data['phone'])->where('status', UserStatusConstant::ACTIVE)->first();
 
-        if ($user === null) {
+        if (null === $user) {
             throw new UserNotFoundException();
         }
 

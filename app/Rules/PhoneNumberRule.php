@@ -11,7 +11,7 @@ class PhoneNumberRule implements Rule
 
     public function passes($attribute, $value): bool
     {
-        if ($value === null) {
+        if (null === $value) {
             return true;
         }
 

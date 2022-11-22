@@ -118,7 +118,7 @@ class GymController extends Controller
     {
         $model = $this->gymRepository->getById($id);
 
-        abort_if($model === null, 404, 'Not found.');
+        abort_if(null === $model, 404, 'Not found.');
 
         return Response::success(new GymTransformer($model));
     }
@@ -175,7 +175,7 @@ class GymController extends Controller
 
         $this->authorize('update', $model);
 
-        abort_if($model === null, 404, 'Not found.');
+        abort_if(null === $model, 404, 'Not found.');
 
         $model = $this->gymService->update($model, $request->validated());
 
