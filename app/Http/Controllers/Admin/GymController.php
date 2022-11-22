@@ -8,21 +8,19 @@ use App\Http\Requests\Admin\Gym\GymCreateRequest;
 use App\Http\Requests\Admin\Gym\GymUpdateRequest;
 use App\Models\Gym;
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class GymController extends Controller
 {
-    public function index(): Factory | View | Application
+    public function index(): View
     {
         return view('admin.gym.index', [
             'gyms' => Gym::query()->with('user')->orderByDesc('id')->paginate()
         ]);
     }
 
-    public function create(): Factory | View | Application
+    public function create(): View
     {
         return view('admin.gym.create', [
             'users' => User::query()->orderBy('name')->get()
@@ -38,7 +36,7 @@ class GymController extends Controller
         return redirect()->to(route('gym.edit', $model->id))->with('success', 'Successfully.');
     }
 
-    public function edit(int $id): Factory | View | Application
+    public function edit(int $id): View
     {
         $model = Gym::query()->where('id', $id)->first();
 

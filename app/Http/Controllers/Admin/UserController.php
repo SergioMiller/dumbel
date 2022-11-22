@@ -7,22 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserCreateRequest;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(): Factory | View | Application
+    public function index(): View
     {
         return view('admin.user.index', [
             'users' => User::query()->orderByDesc('id')->paginate()
         ]);
     }
 
-    public function create(): Factory | View | Application
+    public function create(): View
     {
         return view('admin.user.create');
     }
@@ -38,7 +36,7 @@ class UserController extends Controller
         return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
     }
 
-    public function edit(int $id): Factory | View | Application
+    public function edit(int $id): View
     {
         $model = User::query()->where('id', $id)->first();
 
