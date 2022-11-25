@@ -6,7 +6,7 @@ namespace App\Library\Table\Attributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class LabelAttribute extends Attribute implements AttributeInterface
+class LabelAttributeAbstract extends AttributeAbstract implements AttributeInterface
 {
     private array $labels;
 

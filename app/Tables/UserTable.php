@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace App\Tables;
 
 use App\Constants\UserStatusConstant;
-use App\Library\Table\Attributes\DateAttribute;
-use App\Library\Table\Attributes\DatetimeAttribute;
-use App\Library\Table\Attributes\LabelAttribute;
-use App\Library\Table\Attributes\StringAttribute;
+use App\Library\Table\Attributes\DateAttributeAbstract;
+use App\Library\Table\Attributes\DatetimeAttributeAbstract;
+use App\Library\Table\Attributes\LabelAttributeAbstract;
+use App\Library\Table\Attributes\StringAttributeAbstract;
 use App\Library\Table\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,16 +16,16 @@ class UserTable extends Table
     public function attributes(): array
     {
         return [
-            new StringAttribute(['attribute' => 'id']),
-            new StringAttribute(['attribute' => 'name']),
-            new StringAttribute(['attribute' => 'lastname']),
-            new StringAttribute(['attribute' => 'phone']),
-            new StringAttribute(['attribute' => 'email']),
-            new DateAttribute([
+            new StringAttributeAbstract(['attribute' => 'id']),
+            new StringAttributeAbstract(['attribute' => 'name']),
+            new StringAttributeAbstract(['attribute' => 'lastname']),
+            new StringAttributeAbstract(['attribute' => 'phone']),
+            new StringAttributeAbstract(['attribute' => 'email']),
+            new DateAttributeAbstract([
                 'attribute' => 'birthday',
                 'format' => 'd.m.Y'
             ]),
-            new LabelAttribute([
+            new LabelAttributeAbstract([
                 'attribute' => 'status',
                 'labels' => [
                     UserStatusConstant::ACTIVE => [
@@ -37,7 +37,7 @@ class UserTable extends Table
                     ],
                 ]
             ]),
-            new DatetimeAttribute([
+            new DatetimeAttributeAbstract([
                 'attribute' => 'created_at',
                 'name' => 'Created at',
                 'format' => 'd.m.Y H:i:s'

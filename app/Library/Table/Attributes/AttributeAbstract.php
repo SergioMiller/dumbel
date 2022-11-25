@@ -6,7 +6,7 @@ namespace App\Library\Table\Attributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-abstract class Attribute
+abstract class AttributeAbstract
 {
     protected string $attribute;
 

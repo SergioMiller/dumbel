@@ -6,13 +6,13 @@ namespace App\Library\Table\Attributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-class DatetimeAttribute extends Attribute implements AttributeInterface
+class DateAttributeAbstract extends AttributeAbstract implements AttributeInterface
 {
     private string $format;
 
     public function __construct(array $data)
     {
-        $this->format = $data['format'] ?? 'd-y-m H:i:s';
+        $this->format = $data['format'] ?? 'd-y-m';
         parent::__construct($data);
     }
 

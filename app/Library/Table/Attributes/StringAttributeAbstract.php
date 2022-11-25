@@ -5,7 +5,7 @@ namespace App\Library\Table\Attributes;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StringAttribute extends Attribute implements AttributeInterface
+class StringAttributeAbstract extends AttributeAbstract implements AttributeInterface
 {
     public function render(Model $model, string $attribute): ?string
     {
