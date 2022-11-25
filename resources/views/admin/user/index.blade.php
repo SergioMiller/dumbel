@@ -31,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($table->paginator() as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -60,7 +60,7 @@
                     </tbody>
                 </table>
                 <div class="float-right">
-                    {{ $users->links() }}
+                    {{ $table->paginator()->links() }}
                 </div>
             </div>
         </div>

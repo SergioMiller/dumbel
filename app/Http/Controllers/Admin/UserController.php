@@ -3,20 +3,26 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserCreateRequest;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
+use App\Tables\UserTable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        return view('admin.user.index', [
-            'users' => User::query()->orderByDesc('id')->paginate()
+        $table = (new UserTable($request->query()))->setFilter(UserFilter::class);
+
+        return view('admin.table', [
+            'table' => $table,
+            'attributes' => $table->attributes()
         ]);
     }
 

@@ -19,9 +19,9 @@ abstract class Filter
 
     protected ?User $user;
 
-    public function __construct(array $params, ?User $user = null)
+    public function __construct(object $params, ?User $user = null)
     {
-        $this->params = (object) $params;
+        $this->params = $params;
         $this->builder = app($this->model)->newQuery();
         $this->table = $this->builder->getModel()->getTable();
         $this->user = $user;
@@ -73,7 +73,7 @@ abstract class Filter
 
     protected function defaultOrder(): Builder
     {
-        return $this->builder->orderByDesc("$this->table.created_at");
+        return $this->builder->orderByDesc("$this->table.id");
     }
 
     /**
