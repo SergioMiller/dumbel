@@ -18,7 +18,31 @@
                     <thead>
                     <tr>
                         @foreach($attributes as $attribute)
-                            <th>{{ $attribute->getName() }}</th>
+                            <th>
+                                @if($attribute->isSortable())
+                                    @if(isset($table->getParams()['sort']) && array_key_exists($attribute->getKey(), $table->getParams()['sort']))
+                                        @if($table->getParams()['sort'][$attribute->getKey()] === 'asc')
+                                            <a href="{{ $table->getDescSortLink($attribute->getKey()) }}">
+                                                {{ $attribute->getName() }}
+                                                <i class="icofont icofont-arrow-up"></i>
+                                            </a>
+                                        @endif
+                                        @if($table->getParams()['sort'][$attribute->getKey()] === 'desc')
+                                                <a href="{{ $table->getAscSortLink($attribute->getKey()) }}">
+                                                {{ $attribute->getName() }}
+                                                <i class="icofont icofont-arrow-down"></i>
+                                            </a>
+                                        @endif
+                                    @else
+                                        <a href="{{ $table->getDefaultSortLink($attribute->getKey()) }}">
+                                            {{ $attribute->getName() }}
+                                            <i class="icofont icofont-sort"></i>
+                                        </a>
+                                    @endisset
+                                @else
+                                    {{ $attribute->getName() }}
+                                @endif
+                            </th>
                         @endforeach
                         <th style="width: 0;" class="text-right">
                             <a class="text-primary" href="{{ route('user.create') }}">Create</a>
@@ -48,7 +72,7 @@
                     </tbody>
                 </table>
                 <div class="float-right">
-                    {{ $table->paginator()->links() }}
+                    {{ $table->getLinks() }}
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserCreateRequest;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
-use App\Tables\UserTable;
+use App\Tables\UserTableAbstract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,10 +18,10 @@ class UserController extends Controller
 {
     public function index(Request $request): View
     {
-        $table = (new UserTable($request->query()))->setFilter(UserFilter::class);
+        $table = (new UserTableAbstract($request->query()))->setFilter(UserFilter::class);
 
         return view('admin.table', [
-            'table' => $table,
+            'table'      => $table,
             'attributes' => $table->attributes()
         ]);
     }

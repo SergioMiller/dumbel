@@ -8,22 +8,23 @@ use App\Library\Table\Attributes\DateAttributeAbstract;
 use App\Library\Table\Attributes\DatetimeAttributeAbstract;
 use App\Library\Table\Attributes\LabelAttributeAbstract;
 use App\Library\Table\Attributes\StringAttributeAbstract;
-use App\Library\Table\Table;
+use App\Library\Table\TableAbstract;
 use Illuminate\Database\Eloquent\Model;
 
-class UserTable extends Table
+class UserTableAbstract extends TableAbstract
 {
     public function attributes(): array
     {
         return [
-            new StringAttributeAbstract(['attribute' => 'id']),
-            new StringAttributeAbstract(['attribute' => 'name']),
+            new StringAttributeAbstract(['attribute' => 'id', 'sortable' => true]),
+            new StringAttributeAbstract(['attribute' => 'name', 'sortable' => true]),
             new StringAttributeAbstract(['attribute' => 'lastname']),
             new StringAttributeAbstract(['attribute' => 'phone']),
             new StringAttributeAbstract(['attribute' => 'email']),
             new DateAttributeAbstract([
                 'attribute' => 'birthday',
-                'format' => 'd.m.Y'
+                'format' => 'd.m.Y',
+                'sortable' => true
             ]),
             new LabelAttributeAbstract([
                 'attribute' => 'status',
@@ -40,7 +41,8 @@ class UserTable extends Table
             new DatetimeAttributeAbstract([
                 'attribute' => 'created_at',
                 'name' => 'Created at',
-                'format' => 'd.m.Y H:i:s'
+                'format' => 'd.m.Y H:i:s',
+                'sortable' => true
             ]),
         ];
     }
