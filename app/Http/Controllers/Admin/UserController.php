@@ -22,6 +22,7 @@ class UserController extends Controller
 
         return view('admin.table', [
             'table'      => $table,
+            'paginator'  => $table->paginator(),
             'attributes' => $table->attributes()
         ]);
     }

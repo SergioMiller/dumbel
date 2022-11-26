@@ -53,11 +53,6 @@ abstract class TableAbstract
         return [];
     }
 
-    public function getLinks(): Htmlable
-    {
-        return $this->paginator()->appends($this->getParams())->links();
-    }
-
     public function getDefaultSortLink(string $key): string
     {
         $params = $this->getParams();

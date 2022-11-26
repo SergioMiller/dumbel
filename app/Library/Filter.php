@@ -38,7 +38,7 @@ abstract class Filter
     {
         $defaultOrder = true;
         foreach ($this->params as $field => $value) {
-            if ('order' === $field && !empty($value)) {
+            if ('sort' === $field && !empty($value)) {
                 $defaultOrder = false;
             }
 

@@ -28,7 +28,7 @@
                                             </a>
                                         @endif
                                         @if($table->getParams()['sort'][$attribute->getKey()] === 'desc')
-                                                <a href="{{ $table->getAscSortLink($attribute->getKey()) }}">
+                                            <a href="{{ $table->getAscSortLink($attribute->getKey()) }}">
                                                 {{ $attribute->getName() }}
                                                 <i class="icofont icofont-arrow-down"></i>
                                             </a>
@@ -50,7 +50,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($table->paginator() as $model)
+                    @foreach($paginator as $model)
                         <tr>
                             @foreach($attributes as $attribute)
                                 <td>{!! $attribute->getValue($model) !!}</td>
@@ -72,7 +72,7 @@
                     </tbody>
                 </table>
                 <div class="float-right">
-                    {{ $table->getLinks() }}
+                    {{ $paginator->appends($table->getParams())->links() }}
                 </div>
             </div>
         </div>
