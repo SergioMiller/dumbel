@@ -13,7 +13,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *     type="object",
  *     required={"name", "address"},
  *     @OA\Property(property="name", type="string", example="Joh"),
- *     @OA\Property(property="Description", type="string", example="The best gym."),
+ *     @OA\Property(property="description", type="string", example="The best gym."),
  *     @OA\Property(property="phone", type="integer", example="380987654321"),
  *     @OA\Property(property="email", type="string", format="email", example="email@email.email"),
  *     @OA\Property(property="address", type="string", example="Cecelia Havens, 456 White Finch St.,North Augusta, SC 29860"),

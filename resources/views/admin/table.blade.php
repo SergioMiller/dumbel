@@ -24,19 +24,19 @@
                                         @if($table->getParams()['sort'][$attribute->getKey()] === 'asc')
                                             <a href="{{ $table->getDescSortLink($attribute->getKey()) }}">
                                                 {{ $attribute->getName() }}
-                                                <i class="icofont icofont-arrow-up"></i>
+                                                <i class="icofont icofont-long-arrow-up"></i>
                                             </a>
                                         @endif
                                         @if($table->getParams()['sort'][$attribute->getKey()] === 'desc')
                                             <a href="{{ $table->getAscSortLink($attribute->getKey()) }}">
                                                 {{ $attribute->getName() }}
-                                                <i class="icofont icofont-arrow-down"></i>
+                                                <i class="icofont icofont-long-arrow-down"></i>
                                             </a>
                                         @endif
                                     @else
                                         <a href="{{ $table->getDefaultSortLink($attribute->getKey()) }}">
                                             {{ $attribute->getName() }}
-                                            <i class="icofont icofont-sort"></i>
+                                            <i class="icofont icofont-rounded-expand"></i>
                                         </a>
                                     @endisset
                                 @else
