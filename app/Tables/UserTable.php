@@ -11,26 +11,27 @@ use App\Library\Table\Attributes\StringAttributeAbstract;
 use App\Library\Table\TableAbstract;
 use Illuminate\Database\Eloquent\Model;
 
-class UserTableAbstract extends TableAbstract
+class UserTable extends TableAbstract
 {
+
     public function attributes(): array
     {
         return [
             new StringAttributeAbstract(['attribute' => 'id', 'sortable' => true]),
             new StringAttributeAbstract(['attribute' => 'name', 'sortable' => true]),
-            new StringAttributeAbstract(['attribute' => 'lastname']),
-            new StringAttributeAbstract(['attribute' => 'phone']),
-            new StringAttributeAbstract(['attribute' => 'email']),
+            new StringAttributeAbstract(['attribute' => 'lastname', 'sortable' => true]),
+            new StringAttributeAbstract(['attribute' => 'phone', 'sortable' => true]),
+            new StringAttributeAbstract(['attribute' => 'email', 'sortable' => true]),
             new DateAttributeAbstract([
                 'attribute' => 'birthday',
-                'format' => 'd.m.Y',
-                'sortable' => true
+                'format'    => 'd.m.Y',
+                'sortable'  => true
             ]),
             new LabelAttributeAbstract([
                 'attribute' => 'status',
-                'labels' => [
-                    UserStatusConstant::ACTIVE => [
-                        'name' => 'Active',
+                'labels'    => [
+                    UserStatusConstant::ACTIVE  => [
+                        'name'  => 'Active',
                         'label' => 'success',
                     ],
                     UserStatusConstant::BLOCKED => [
@@ -40,9 +41,9 @@ class UserTableAbstract extends TableAbstract
             ]),
             new DatetimeAttributeAbstract([
                 'attribute' => 'created_at',
-                'name' => 'Created at',
-                'format' => 'd.m.Y H:i:s',
-                'sortable' => true
+                'name'      => 'Created at',
+                'format'    => 'd.m.Y H:i:s',
+                'sortable'  => true
             ]),
         ];
     }

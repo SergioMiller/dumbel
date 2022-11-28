@@ -1,7 +1,7 @@
-<nav class="navbar header-navbar pcoded-header">
+<nav class="navbar header-navbar pcoded-header iscollapsed" navbar-theme="theme1" header-theme="theme1" pcoded-header-position="fixed">
     <div class="navbar-wrapper">
 
-        <div class="navbar-logo">
+        <div class="navbar-logo" logo-theme="theme1">
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu"></i>
             </a>

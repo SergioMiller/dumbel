@@ -23,15 +23,15 @@
 
 <body>
 
-@include('layouts/admin/_preloader')
+{{--@include('layouts/admin/_preloader')--}}
 
-<div id="pcoded" class="pcoded">
+<div id="pcoded" class="pcoded iscollapsed" nav-type="st6" theme-layout="vertical" vertical-placement="left" vertical-layout="wide" pcoded-device-type="desktop" vertical-nav-type="expanded" vertical-effect="shrink" vnavigation-view="view1" fream-type="theme1" sidebar-img="false" sidebar-img-type="img1" layout-type="light">
     <div class="pcoded-overlay-box"></div>
     <div class="pcoded-container navbar-wrapper">
 
         @include('layouts/admin/_header')
 
-        <div class="pcoded-main-container">
+        <div class="pcoded-main-container" style="margin-top: 56px!important;">
             <div class="pcoded-wrapper">
 
                 @include('layouts/admin/_sidebar')
@@ -63,13 +63,8 @@
 <script src="/libraries/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
 <script src="/libraries/bower_components/popper.js/js/popper.min.js"></script>
 <script src="/libraries/bower_components/bootstrap/js/bootstrap.min.js"></script>
-<script src="/libraries/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
-<script src="/libraries/bower_components/modernizr/js/modernizr.js"></script>
-<script src="/libraries/bower_components/modernizr/js/css-scrollbars.js"></script>
-<script src="/libraries/assets/pages/accordion/accordion.js"></script>
 <script src="/libraries/assets/js/pcoded.min.js"></script>
 <script src="/libraries/assets/js/vartical-layout.min.js"></script>
-<script src="/libraries/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/libraries/assets/js/script.js"></script>
 </body>
 

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Users') }}
+    {{ $table->getTitle() }}
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="#">{{ __('Users') }}</a>
+        <a href="javascript:void(0)">{{ $table->getTitle() }}</a>
     </li>
 @endsection
 
@@ -45,7 +45,9 @@
                             </th>
                         @endforeach
                         <th style="width: 0;" class="text-right">
-                            <a class="text-primary" href="{{ route('user.create') }}">Create</a>
+                            @if($createUrl = $table->getCreateUrl() )
+                                <a class="text-primary" href="{{ $createUrl }}">{{ __('Create') }}</a>
+                            @endif
                         </th>
                     </tr>
                     </thead>
@@ -55,9 +57,9 @@
                             @foreach($attributes as $attribute)
                                 <td>{!! $attribute->getValue($model) !!}</td>
                             @endforeach
+                            <td>
+                                @if($table->actions($model) !== [])
 
-                            @if($table->actions($model) !== [])
-                                <td>
                                     @foreach($table->actions($model) as $action)
                                         <a class="{{ $action['class'] }}" href="{{ $action['route'] }}">
                                             @isset($action['text'])
@@ -65,8 +67,8 @@
                                             @endisset
                                         </a>
                                     @endforeach
-                                </td>
-                            @endif
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

@@ -5,19 +5,25 @@ namespace App\Library\Table;
 
 use App\Library\Filter;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 
 abstract class TableAbstract
 {
+    protected ?string $title = null;
+    protected ?string $createUrl = null;
+
     protected object $params;
 
     protected Filter $filter;
 
     public function __construct(array $params)
     {
+        if (isset($params['page'])) {
+            unset($params['page']);
+        }
+
         $this->params = (object)$params;
     }
 
@@ -55,10 +61,6 @@ abstract class TableAbstract
 
     public function getDefaultSortLink(string $key): string
     {
-        $params = $this->getParams();
-        if (isset($params['page'])) {
-            unset($params['page']);
-        }
         return route(Route::currentRouteName(), array_merge($this->getParams(), [
             'sort' => [$key => 'asc']
         ]));
@@ -66,23 +68,41 @@ abstract class TableAbstract
 
     public function getDescSortLink(string $key): string
     {
-        $params = $this->getParams();
-        if (isset($params['page'])) {
-            unset($params['page']);
-        }
-        return route(Route::currentRouteName(), array_merge($params, [
+        return route(Route::currentRouteName(), array_merge($this->getParams(), [
             'sort' => [$key => 'desc']
         ]));
     }
 
     public function getAscSortLink(string $key): string
     {
-        $params = $this->getParams();
-        if (isset($params['page'])) {
-            unset($params['page']);
-        }
-        return route(Route::currentRouteName(), array_merge($params, [
+        return route(Route::currentRouteName(), array_merge($this->getParams(), [
             'sort' => [$key => 'asc']
         ]));
+    }
+
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setCreateUrl(string $createUrl): static
+    {
+        $this->createUrl = $createUrl;
+
+        return $this;
+    }
+
+
+    public function getCreateUrl(): ?string
+    {
+        return $this->createUrl;
     }
 }

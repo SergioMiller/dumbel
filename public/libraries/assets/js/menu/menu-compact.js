@@ -282,11 +282,9 @@
             if ($(this).is(":checked")) {
                 $('.pcoded-header').attr("pcoded-header-position", 'fixed');
                 $('.pcoded-navbar').attr("pcoded-header-position", 'fixed');
-                $('.pcoded-main-container').css('margin-top', $(".pcoded-header").outerHeight());
             } else {
                 $('.pcoded-header').attr("pcoded-header-position", 'relative');
                 $('.pcoded-navbar').attr("pcoded-header-position", 'relative');
-                $('.pcoded-main-container').css('margin-top', '0px');
             }
         });
     };

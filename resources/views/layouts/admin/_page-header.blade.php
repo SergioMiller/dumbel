@@ -11,7 +11,7 @@
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
                     <li class="breadcrumb-item">
-                        <a href="/"><i class="feather icon-home"></i></a>
+                        <a href="{{ route('dashboard') }}"><i class="feather icon-home"></i></a>
                     </li>
                     @yield('breadcrumb')
                 </ul>
