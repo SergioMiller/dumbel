@@ -310,7 +310,7 @@ var delay = (function(){
             backgroundcolor : '#FFFA3C',            //Background color in new postits when randomColor = false
             textcolor       : '#333333',            //Text color
             textshadow      : true,                 //Shadow in the text
-            fontfamily      : 'Open Sans',            //Default font
+            fontfamily      : 'Ubuntu',            //Default font
             fontsize        : 'medium',              //Default font size
             arrow           : 'none',               //Default arrow : none, top, right, bottom, left
         },

@@ -33,7 +33,7 @@
           style: {
               backgroundcolor: '#4680ff', //Background color in new postits when randomColor = false
               textcolor: '#fff', //Text color
-              fontfamily: 'Open Sans', //Default font
+              fontfamily: 'Ubuntu', //Default font
               fontsize: 'small', //Default font size
               arrow: 'none', //Default arrow : none, top, right, bottom, left
           },
@@ -55,7 +55,7 @@
               style: {
                   backgroundcolor: '#4680ff',
                   textcolor: '#fff', //Text color
-                  fontfamily: 'Open Sans', //Default font
+                  fontfamily: 'Ubuntu', //Default font
                   fontsize: 'small', //Default font size
                   arrow: 'none', //Default arrow : none, top, right, bottom, left
               },
@@ -103,7 +103,7 @@
           style: {
               backgroundcolor: '#4680ff', //Background color in new postits when randomColor = false
               textcolor: '#fff', //Text color
-              fontfamily: 'Open Sans', //Default font
+              fontfamily: 'Ubuntu', //Default font
               fontsize: 'small', //Default font size
               arrow: 'none', //Default arrow : none, top, right, bottom, left
           },
@@ -118,7 +118,7 @@
           style: {
               backgroundcolor: '#4680ff', //Background color in new postits when randomColor = false
               textcolor: '#fff', //Text color
-              fontfamily: 'Open Sans', //Default font
+              fontfamily: 'Ubuntu', //Default font
               fontsize: 'small', //Default font size
               arrow: 'none', //Default arrow : none, top, right, bottom, left
           },
@@ -140,7 +140,7 @@
               style: {
                   backgroundcolor: '#4680ff',
                   textcolor: '#fff', //Text color
-                  fontfamily: 'Open Sans', //Default font
+                  fontfamily: 'Ubuntu', //Default font
                   fontsize: 'small', //Default font size
                   arrow: 'none', //Default arrow : none, top, right, bottom, left
               },

@@ -8145,7 +8145,7 @@ table tbody .border-bottom-info td {
 }
 
 .pcoded[theme-layout="vertical"][pcoded-device-type="phone"] .pcoded-header.nocollapsed .pcoded-left-header .pcoded-logo .logo-text {
-    font-family: open sans;
+    font-family: Ubuntu;
     font-size: 16px;
     font-weight: 400;
     margin: 0 auto !important;

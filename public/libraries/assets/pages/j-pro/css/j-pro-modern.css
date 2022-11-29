@@ -30,7 +30,7 @@
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
 	color:rgba(0,0,0,.54);
-	font:16px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:16px 'Ubuntu',Helvetica,Arial,sans-serif;
 	line-height:1;
 	position:relative;
 }
@@ -372,7 +372,7 @@
 .j-pro .j-widget .j-addon-btn {
 	border:none;
 	display:block;
-	font:16px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:16px 'Ubuntu',Helvetica,Arial,sans-serif;
 	height:48px;
 	line-height:48px;
 	padding:0;
@@ -648,7 +648,7 @@
 	display:block;
 	cursor:pointer;
 	float:right;
-	font:16px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:16px 'Ubuntu',Helvetica,Arial,sans-serif;
 	height:48px;
 	margin:10px 0 10px 20px;
 	outline:none;
@@ -663,7 +663,7 @@
 .j-pro .j-file-button {
 	color:#fff;
 	display:block;
-	font-family:'Open Sans',Helvetica,Arial,sans-serif;
+	font-family:'Ubuntu',Helvetica,Arial,sans-serif;
 	font-size:14px;
 	height:40px;
 	line-height:40px;
@@ -748,7 +748,7 @@
 }
 .j-pro .j-tooltip {
 	color:#fff;
-	font:600 13px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:600 13px 'Ubuntu',Helvetica,Arial,sans-serif;
 	line-height:20px;
 	padding:5px 10px;
 }
@@ -863,7 +863,7 @@
 	-o-border-radius:3px;
 	border-radius:3px;
 	display:block;
-	font:16px/24px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:16px/24px 'Ubuntu',Helvetica,Arial,sans-serif;
 	padding:15px;
 }
 .j-pro .j-error-message i,
@@ -1121,7 +1121,7 @@
 	box-shadow:0 0 2px rgba(0,0,0,.5);
 	color:rgba(0,0,0,.54);
 	display:none;
-	font:16px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:16px 'Ubuntu',Helvetica,Arial,sans-serif;
 	text-align:center;
 	padding:10px 0;
 	width:240px;
@@ -1224,7 +1224,7 @@
 	border-radius:3px;
 	color:rgba(0,0,0,.56);
 	cursor:pointer;
-	font:14px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:14px 'Ubuntu',Helvetica,Arial,sans-serif;
 	padding:5px 10px;
 	margin:10px 5px 0;
 	-webkit-transition:all.15s;
@@ -1291,7 +1291,7 @@
 .ui-slider-horizontal .ui-widget-header { background-color:#f0f0f0; }
 
 .j-pro .j-slider-group {
-	font:15px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:15px 'Ubuntu',Helvetica,Arial,sans-serif;
 	height:48px;
 	line-height:48px;
 	padding:0 2px;
@@ -1522,7 +1522,7 @@
 	border-radius:0 0 3px 3px;
 	cursor:default;
 	display:block;
-	font:16px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:16px 'Ubuntu',Helvetica,Arial,sans-serif;
 	left:0;
 	list-style:none;
 	margin:0;
@@ -1568,7 +1568,7 @@
 	border-radius:2px 2px 0 0;
 	display:inline-block;
 	margin:0 0 -3px;
-	font:14px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:14px 'Ubuntu',Helvetica,Arial,sans-serif;
 	padding:11px 13px 13px;
 	-webkit-box-shadow:0 2px 2px rgba(0,0,0,.6);
 	-moz-box-shadow:0 2px 2px rgba(0,0,0,.6);
@@ -1758,7 +1758,7 @@
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
 	color:rgba(0,0,0,.87);
-	font:600 16px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:600 16px 'Ubuntu',Helvetica,Arial,sans-serif;
 	line-height:1;
 	position:relative;
 	padding:25px 20px;
@@ -1812,7 +1812,7 @@
 /* Form details & total price
 =============================== */
 .j-pro .j-total-data,
-.j-pro .j-calculation-data { font:14px/25px 'Open Sans',Helvetica,Arial,sans-serif; }
+.j-pro .j-calculation-data { font:14px/25px 'Ubuntu',Helvetica,Arial,sans-serif; }
 
 .j-pro .j-total-data p { display:block; margin:0; padding:5px 0; }
 
