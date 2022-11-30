@@ -11,7 +11,7 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@4.5.0/swagger-ui.css"/>
+    <link rel="stylesheet" href="{{ asset('swagger-assets/swagger.css') }}"/>
     <style>
         .information-container {
             display: none;
@@ -37,9 +37,8 @@
 @endsection
 
 @section('content')
-
     <div id="swagger-ui"></div>
-    <script src="https://unpkg.com/swagger-ui-dist@4.5.0/swagger-ui-bundle.js" crossorigin></script>
+    <script src="{{ asset('swagger-assets/swagger.js') }}" crossorigin></script>
     <script>
       window.onload = () => {
         window.ui = SwaggerUIBundle({
