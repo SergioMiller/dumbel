@@ -15,6 +15,7 @@ use App\Repository\QrCodeRepository;
 use App\Services\Auth\AuthService;
 use App\Transformers\AuthAccountTransformer;
 use Illuminate\Http\JsonResponse;
+use Ramsey\Uuid\Uuid;
 
 class AuthController extends Controller
 {
@@ -186,7 +187,7 @@ class AuthController extends Controller
      */
     public function getUserByQrCode(string $uuid, QrCodeRepository $qrCodeRepository): JsonResponse
     {
-        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword($uuid);
+        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword(Uuid::fromString($uuid));
 
         abort_if(null === $qrCode, 404, 'Not found.');
         abort_if(null === $qrCode->user, 404, 'Not found.');
@@ -238,7 +239,7 @@ class AuthController extends Controller
      */
     public function registerWithQrCode(string $uuid, RegisterWithQrCodeRequest $request, QrCodeRepository $qrCodeRepository): JsonResponse
     {
-        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword(new$uuid);
+        $qrCode = $qrCodeRepository->getWithUserWhereIsEmptyPassword(Uuid::fromString($uuid));
 
         abort_if(null === $qrCode, 404, 'Not found.');
         abort_if(null === $qrCode->user, 404, 'Not found.');

@@ -179,7 +179,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/subscription/{gym_id}list",
+     *     path="/api/v1/subscription/{gym_id}/list",
      *     description="List subscription.",
      *     tags={"Subscription"},
      *     security={
