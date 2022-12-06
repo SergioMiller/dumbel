@@ -7,25 +7,35 @@ use App\Filters\Admin\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserCreateRequest;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
-use App\Models\User;
+use App\Repository\UserRepository;
+use App\Services\Admin\UserService;
 use App\Tables\UserTable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+final class UserController extends Controller
 {
+    private UserService $userService;
+
+    private UserRepository $userRepository;
+
+    public function __construct(UserService $userService, UserRepository $userRepository)
+    {
+        $this->userService = $userService;
+        $this->userRepository = $userRepository;
+    }
+
     public function index(Request $request): View
     {
         $table = (new UserTable($request->query()))
             ->setFilter(UserFilter::class)
-            ->setTitle(__('Users'))
+            ->setTitle('Користувачі')
             ->setCreateUrl(route('user.create'));
 
         return view('admin.table', [
-            'table'      => $table,
-            'paginator'  => $table->paginator(),
+            'table' => $table,
+            'paginator' => $table->paginator(),
             'attributes' => $table->attributes()
         ]);
     }
@@ -37,18 +47,14 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        $model = new User($data);
-
-        $model->save();
+        $model = $this->userService->store($request->validated());
 
         return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
     }
 
     public function edit(int $id): View
     {
-        $model = User::query()->where('id', $id)->first();
+        $model = $this->userRepository->getById($id);
 
         abort_if(null === $model, 404);
 
@@ -57,24 +63,17 @@ class UserController extends Controller
 
     public function update(int $id, UserUpdateRequest $request): RedirectResponse
     {
-        $model = User::query()->where('id', $id)->first();
-
-        abort_if(null === $model, 404);
-
-        $data = $request->validated();
-
-        if (!empty($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        } else {
-            unset($data['password']);
-        }
-
-        $model->update($data);
+        $model = $this->userService->update($id, $request->validated());
 
         return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
+        $model = $this->userRepository->getById($id);
+
+        abort_if(null === $model, 404);
+
+        return redirect()->to(route('user.index'))->with('success', 'Successfully.');
     }
 }

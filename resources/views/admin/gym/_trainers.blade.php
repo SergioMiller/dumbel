@@ -1,11 +1,14 @@
 <div class="card">
+    <div class="card-footer">
+        <strong>{{ __('Тренери') }}</strong>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Full name</th>
-                <th>Phone</th>
+                <th>ІД</th>
+                <th>Імя</th>
+                <th>Телефон</th>
                 <th style="width: 0;" class="text-right"></th>
             </tr>
             </thead>

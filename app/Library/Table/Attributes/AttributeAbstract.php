@@ -16,8 +16,8 @@ abstract class AttributeAbstract
 
     public function __construct(array $data)
     {
-        $this->attribute = (string)($data['attribute'] ?? '');
-        $this->name = (string)($data['name'] ?? '');
+        $this->attribute = (string) ($data['attribute'] ?? '');
+        $this->name = (string) ($data['name'] ?? '');
         $this->sortable = filter_var($data['sortable'] ?? false, FILTER_VALIDATE_BOOL);
     }
 

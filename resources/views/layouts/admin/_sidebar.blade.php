@@ -8,7 +8,7 @@
                     <span class="pcoded-micon" style="background-color: transparent;">
                         <i class="feather icon-home"></i>
                     </span>
-                    <span class="pcoded-mtext">Dashboard</span>
+                    <span class="pcoded-mtext">Дашборд</span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li>
@@ -23,7 +23,7 @@
                     <span class="pcoded-micon" style="background-color: transparent;">
                         <i class="feather icon-user"></i>
                     </span>
-                    <span class="pcoded-mtext">Users</span>
+                    <span class="pcoded-mtext">Користувачі</span>
                 </a>
             </li>
             <li>
@@ -31,7 +31,7 @@
                     <span class="pcoded-micon" style="background-color: transparent;">
                         <i class="icofont icofont-qr-code"></i>
                     </span>
-                    <span class="pcoded-mtext">QR Codes</span>
+                    <span class="pcoded-mtext">QR Коди</span>
                 </a>
             </li>
             <li>
@@ -39,7 +39,7 @@
                     <span class="pcoded-micon" style="background-color: transparent;">
                         <i class="icofont icofont-dumbbell"></i>
                     </span>
-                    <span class="pcoded-mtext">Gyms</span>
+                    <span class="pcoded-mtext">Спортивні зали</span>
                 </a>
             </li>
         </ul>

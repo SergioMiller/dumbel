@@ -9,6 +9,6 @@ class StringAttributeAbstract extends AttributeAbstract implements AttributeInte
 {
     public function render(Model $model, string $attribute): ?string
     {
-        return (string)$model->$attribute;
+        return (string) $model->$attribute;
     }
 }

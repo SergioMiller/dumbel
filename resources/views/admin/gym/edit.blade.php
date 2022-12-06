@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    Edit {{ $gym->name }}
+    Редагування {{ $gym->name }}
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{ route('gym.index') }}">{{ __('Gyms') }}</a>
+        <a href="{{ route('gym.index') }}">{{ 'Спортивні зали' }}</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">{{ __('Create gym') }}</a>
+        <a href="#">{{ $gym->name }}</a>
     </li>
 @endsection
 
@@ -23,8 +23,10 @@
                         @method('PUT')
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">User</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">
+                                <a href="{{ route('user.edit', $gym->user->id) }}">Власник</a>
+                            </label>
+                            <div class="col-sm-9">
                                 <select name="user_id"
                                         id="status"
                                         class="form-control @if($errors->has('user_id')) {{'is-invalid' }} @endif">
@@ -43,13 +45,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Назва</label>
+                            <div class="col-sm-9">
                                 <input type="text"
                                        class="form-control @if($errors->has('name')) {{'is-invalid' }} @endif"
                                        name="name"
                                        id="name"
-                                       value="{{ old('name', $user->name) }}">
+                                       value="{{ old('name', $gym->name) }}">
                                 @if($errors->has('name'))
                                     <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                                 @endif
@@ -57,8 +59,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Description</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Опис</label>
+                            <div class="col-sm-9">
                                 <input type="text"
                                        class="form-control @if($errors->has('description')) {{'is-invalid' }} @endif"
                                        name="description"
@@ -71,8 +73,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Phone</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Телефон</label>
+                            <div class="col-sm-9">
                                 <input type="text"
                                        class="form-control @if($errors->has('phone')) {{'is-invalid' }} @endif"
                                        name="phone"
@@ -85,8 +87,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
                                 <input type="email"
                                        class="form-control @if($errors->has('email')) {{'is-invalid' }} @endif"
                                        name="email"
@@ -99,8 +101,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Address</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Адреса</label>
+                            <div class="col-sm-9">
                                 <input type="text"
                                        class="form-control @if($errors->has('address')) {{'is-invalid' }} @endif"
                                        name="address"
@@ -113,8 +115,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Status</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Статус</label>
+                            <div class="col-sm-9">
                                 <select name="status"
                                         id="status"
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
@@ -129,21 +131,21 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Created at</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" value="{{ $user->created_at }}" readonly>
+                            <label class="col-sm-3 col-form-label">Створено</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" value="{{ $gym->created_at }}" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Updated at</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" value="{{ $user->updated_at }}" readonly>
+                            <label class="col-sm-3 col-form-label">Відредаговано</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" value="{{ $gym->updated_at }}" readonly>
                             </div>
                         </div>
 
                         <div class="float-right">
-                            <button type="submit" class="btn btn-primary m-b-0">Save</button>
+                            <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
                         </div>
                     </form>
                 </div>
@@ -154,10 +156,14 @@
             @endif
 
         </div>
-        <div class="col-md-6">
-            @foreach($gym->subscriptions->sortBy('id') as $subscription)
-                @include('admin/gym/_subscription-edit', $subscription)
-            @endforeach
-        </div>
+
+        @if($gym->subscriptions->isNotEmpty())
+            <div class="col-md-6">
+                @foreach($gym->subscriptions->sortBy('id') as $subscription)
+                    @include('admin/gym/_subscription-edit', $subscription)
+                @endforeach
+            </div>
+        @endif
+
     </div>
 @endsection

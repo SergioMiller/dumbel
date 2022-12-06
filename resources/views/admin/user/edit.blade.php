@@ -139,7 +139,7 @@
                         </div>
 
                         <div class="float-right">
-                            <button type="submit" class="btn btn-primary m-b-0">Save</button>
+                            <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
                         </div>
                     </form>
                 </div>

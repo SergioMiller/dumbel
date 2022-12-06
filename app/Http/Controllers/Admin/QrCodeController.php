@@ -3,16 +3,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\QrCodeFilter;
 use App\Http\Controllers\Controller;
-use App\Models\QrCode;
+use App\Tables\QrCodeTable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class QrCodeController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        return view('admin.qr-code.index', [
-            'qrCodes' => QrCode::query()->with('user')->orderByDesc('id')->paginate()
+        $table = (new QrCodeTable($request->query()))
+            ->setFilter(QrCodeFilter::class)
+            ->setTitle('Qr коди');
+
+        return view('admin.table', [
+            'table' => $table,
+            'paginator' => $table->paginator(),
+            'attributes' => $table->attributes()
         ]);
     }
 }

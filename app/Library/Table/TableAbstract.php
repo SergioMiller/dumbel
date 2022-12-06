@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 abstract class TableAbstract
 {
     protected ?string $title = null;
+
     protected ?string $createUrl = null;
 
     protected object $params;
@@ -24,7 +25,7 @@ abstract class TableAbstract
             unset($params['page']);
         }
 
-        $this->params = (object)$params;
+        $this->params = (object) $params;
     }
 
     public function setFilter(string $class): self
@@ -36,7 +37,7 @@ abstract class TableAbstract
 
     public function getParams(): array
     {
-        return (array)$this->params;
+        return (array) $this->params;
     }
 
     public function items(): Collection
@@ -80,7 +81,6 @@ abstract class TableAbstract
         ]));
     }
 
-
     public function setTitle(string $title): static
     {
         $this->title = $title;
@@ -99,7 +99,6 @@ abstract class TableAbstract
 
         return $this;
     }
-
 
     public function getCreateUrl(): ?string
     {

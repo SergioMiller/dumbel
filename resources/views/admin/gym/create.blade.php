@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create gym') }}
+    Створити спортивний зал
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{ route('gym.index') }}">{{ __('Gyms') }}</a>
+        <a href="{{ route('gym.index') }}">Спортивні зали</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">{{ __('Create gym') }}</a>
+        <a href="#">Створити спортивний зал</a>
     </li>
 @endsection
 
@@ -22,24 +22,25 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">User</label>
+                            <label class="col-sm-2 col-form-label">Власник <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <select name="user_id"
                                         id="status"
                                         class="form-control @if($errors->has('user_id')) {{'is-invalid' }} @endif">
+                                    <option>Не вибрано</option>
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</option>
                                     @endforeach
                                 </select>
 
                                 @if($errors->has('user_id'))
-                                    <div class="messages">{{ $errors->first('user_id') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('user_id') }}</div>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Name</label>
+                            <label class="col-sm-2 col-form-label">Назва <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text"
                                        class="form-control @if($errors->has('name')) {{'is-invalid' }} @endif"
@@ -53,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Description</label>
+                            <label class="col-sm-2 col-form-label">Опис</label>
                             <div class="col-sm-10">
                                 <input type="text"
                                        class="form-control @if($errors->has('description')) {{'is-invalid' }} @endif"
@@ -67,7 +68,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Address</label>
+                            <label class="col-sm-2 col-form-label">Адреса <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text"
                                        class="form-control @if($errors->has('address')) {{'is-invalid' }} @endif"
@@ -81,7 +82,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Phone</label>
+                            <label class="col-sm-2 col-form-label">Телефон</label>
                             <div class="col-sm-10">
                                 <input type="text"
                                        class="form-control @if($errors->has('phone')) {{'is-invalid' }} @endif"
@@ -109,13 +110,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Status</label>
+                            <label class="col-sm-2 col-form-label">Статус</label>
                             <div class="col-sm-10">
                                 <select name="status"
                                         id="status"
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
-                                    <option value="active">Active</option>
-                                    <option value="moderation">Moderation</option>
+                                    <option value="active">Активний</option>
+                                    <option value="moderation">На модерації</option>
                                 </select>
 
                                 @if($errors->has('status'))
@@ -125,7 +126,7 @@
                         </div>
 
                         <div class="float-right">
-                            <button type="submit" class="btn btn-primary m-b-0">Save</button>
+                            <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
                         </div>
                     </form>
                 </div>

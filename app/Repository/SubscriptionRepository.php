@@ -18,4 +18,16 @@ class SubscriptionRepository
     {
         return Subscription::query()->where('gym_id', $id)->orderBy('price')->get();
     }
+
+    public function update(int $id, array $data): Subscription
+    {
+        /**
+         * @var Subscription $model
+         */
+        $model = Subscription::query()->where('id', $id)->firstOrFail();
+
+        $model->update($data);
+
+        return $model->fresh();
+    }
 }
