@@ -16,14 +16,11 @@ use Illuminate\Http\Request;
 
 final class UserController extends Controller
 {
-    private UserService $userService;
-
-    private UserRepository $userRepository;
-
-    public function __construct(UserService $userService, UserRepository $userRepository)
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly UserRepository $userRepository
+    )
     {
-        $this->userService = $userService;
-        $this->userRepository = $userRepository;
     }
 
     public function index(Request $request): View
@@ -34,8 +31,8 @@ final class UserController extends Controller
             ->setCreateUrl(route('user.create'));
 
         return view('admin.table', [
-            'table' => $table,
-            'paginator' => $table->paginator(),
+            'table'      => $table,
+            'paginator'  => $table->paginator(),
             'attributes' => $table->attributes()
         ]);
     }

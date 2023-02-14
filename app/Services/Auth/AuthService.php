@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
-use App\Constants\QrCodeSourceConstant;
-use App\Constants\UserStatusConstant;
+use App\Enums\QrCodeSourceEnum;
+use App\Enums\UserStatusEnum;
 use App\Exceptions\PasswordDoesNotMatchException;
 use App\Exceptions\UserNotFoundException;
 use App\Models\QrCode;
@@ -26,7 +26,7 @@ class AuthService
     public function login(array $data): string
     {
         /** @var User $user */
-        $user = User::query()->where('phone', $data['phone'])->where('status', UserStatusConstant::ACTIVE)->first();
+        $user = User::query()->where('phone', $data['phone'])->where('status', UserStatusEnum::ACTIVE->value)->first();
 
         if (null === $user) {
             throw new UserNotFoundException();
@@ -54,7 +54,7 @@ class AuthService
         DB::beginTransaction();
         $data['password'] = Hash::make($data['password']);
         $user = new User($data);
-        $user->status = UserStatusConstant::ACTIVE;
+        $user->status = UserStatusEnum::ACTIVE->value;
         $user->save();
         $this->saveQrCode($user, $data);
         DB::commit();
@@ -69,7 +69,7 @@ class AuthService
         } else {
             $qrCode = new QrCode();
             $qrCode->uuid = Str::uuid();
-            $qrCode->source = QrCodeSourceConstant::AUTOMATIC;
+            $qrCode->source = QrCodeSourceEnum::AUTOMATIC->value;
         }
 
         $qrCode->user_id = $user->id;

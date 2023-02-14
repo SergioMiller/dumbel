@@ -1,6 +1,6 @@
 <?php
 
-use App\Constants\GymStatusConstant;
+use App\Enums\GymStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('gyms', function (Blueprint $table) {
+        Schema::create('gyms', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->string('name');
@@ -16,13 +16,13 @@ return new class extends Migration {
             $table->string('phone', 24)->nullable();
             $table->string('email', 512)->nullable();
             $table->string('address', 512)->nullable();
-            $table->string('status',32)->default(GymStatusConstant::MODERATION);
+            $table->string('status',32)->default(GymStatusEnum::MODERATION->value);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
         });
 
-        Schema::create('trainer_gym', function (Blueprint $table) {
+        Schema::create('trainer_gym', static function (Blueprint $table) {
             $table->foreignId('user_id');
             $table->foreignId('gym_id');
 

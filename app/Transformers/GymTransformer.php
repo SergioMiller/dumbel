@@ -5,6 +5,7 @@ namespace App\Transformers;
 
 use App\Library\Transformer;
 use App\Models\Gym;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(schema="GymTransformer")

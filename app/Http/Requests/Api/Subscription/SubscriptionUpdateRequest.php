@@ -5,6 +5,7 @@ namespace App\Http\Requests\Api\Subscription;
 
 use App\Library\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(

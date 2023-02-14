@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services\Api;
 
-use App\Constants\GymStatusConstant;
+use App\Enums\GymStatusEnum;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\GymTrainer;
@@ -15,7 +15,7 @@ class GymService
     {
         $gym = new Gym($data);
         $gym->user_id = $user->id;
-        $gym->status = GymStatusConstant::MODERATION;
+        $gym->status = GymStatusEnum::MODERATION->value;
 
         $gym->save();
 

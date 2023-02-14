@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    Edit {{ $user->name }}
+    Редагування {{ $user->name }}
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="{{ route('user.index') }}">{{ __('Users') }}</a>
+        <a href="{{ route('user.index') }}">Користувачі</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">{{ __('Create user') }}</a>
+        Редагування {{ $user->name }}
     </li>
 @endsection
 
@@ -22,7 +22,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Name</label>
+                            <label class="col-sm-2 col-form-label">Імʼя <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @if($errors->has('name')) {{'is-invalid' }} @endif"
                                        name="name"
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Lastname</label>
+                            <label class="col-sm-2 col-form-label">Фамілія <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @if($errors->has('lastname')) {{'is-invalid' }} @endif"
                                        name="lastname"
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Phone</label>
+                            <label class="col-sm-2 col-form-label">Телефон <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @if($errors->has('phone')) {{'is-invalid' }} @endif"
                                        name="phone"
@@ -74,13 +74,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Status</label>
+                            <label class="col-sm-2 col-form-label">Статус</label>
                             <div class="col-sm-10">
                                 <select name="status"
                                         id="status"
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
-                                    <option @if($user->status === 'active') selected @endif value="active">Active</option>
-                                    <option @if($user->status === 'blocked') selected @endif  value="blocked">Blocked</option>
+                                    <option @if($user->status === 'active') selected @endif value="active">Активний</option>
+                                    <option @if($user->status === 'blocked') selected @endif  value="blocked">Заблокований</option>
                                 </select>
 
                                 @if($errors->has('email'))
@@ -90,8 +90,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Birthday</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">День народження</label>
+                            <div class="col-sm-9">
                                 <input type="date"
                                        class="form-control @if($errors->has('birthday')) {{'is-invalid' }} @endif"
                                        name="birthday"
@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Password</label>
+                            <label class="col-sm-2 col-form-label">Пароль</label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control @if($errors->has('password')) {{'is-invalid' }} @endif"
                                        autocomplete="new-password"
@@ -125,15 +125,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Created at</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Створено</label>
+                            <div class="col-sm-9">
                                 <input class="form-control" value="{{ $user->created_at }}" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Updated at</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 col-form-label">Відредаговано</label>
+                            <div class="col-sm-9">
                                 <input class="form-control" value="{{ $user->updated_at }}" readonly>
                             </div>
                         </div>

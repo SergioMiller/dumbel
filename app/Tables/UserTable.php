@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Tables;
 
-use App\Constants\UserStatusConstant;
+use App\Enums\UserStatusEnum;
 use App\Library\Table\Attributes\DateAttributeAbstract;
 use App\Library\Table\Attributes\DatetimeAttributeAbstract;
 use App\Library\Table\Attributes\LabelAttributeAbstract;
@@ -51,11 +51,11 @@ class UserTable extends TableAbstract
                 'attribute' => 'status',
                 'name' => 'Статус',
                 'labels' => [
-                    UserStatusConstant::ACTIVE => [
+                    UserStatusEnum::ACTIVE->value => [
                         'name' => 'Active',
                         'label' => 'success',
                     ],
-                    UserStatusConstant::BLOCKED => [
+                    UserStatusEnum::BLOCKED->value => [
                         'label' => 'danger'
                     ],
                 ]

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Admin\Gym;
 
-use App\Constants\GymStatusConstant;
+use App\Enums\GymStatusEnum;
 use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -19,7 +19,7 @@ class GymUpdateRequest extends FormRequest
             'phone' => ['nullable', 'string', new PhoneNumberRule],
             'email' => ['nullable', 'email', 'max:512'],
             'address' => ['required', 'string', 'max:512'],
-            'status' => ['string', Rule::in(GymStatusConstant::getConstants())],
+            'status' => ['string', Rule::in(GymStatusEnum::values())],
         ];
     }
 }

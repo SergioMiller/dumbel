@@ -6,6 +6,7 @@ namespace App\Http\Requests\Api\Gym;
 use App\Library\FailedValidation;
 use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(

@@ -7,6 +7,7 @@ use App\Library\FailedValidation;
 use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Tables;
 
-use App\Constants\GymStatusConstant;
+use App\Enums\GymStatusEnum;
 use App\Library\Table\Attributes\DatetimeAttributeAbstract;
 use App\Library\Table\Attributes\LabelAttributeAbstract;
 use App\Library\Table\Attributes\LinkAttributeAbstract;
@@ -54,11 +54,11 @@ class GymTable extends TableAbstract
                 'name' => 'Статус',
                 'sortable' => true,
                 'labels' => [
-                    GymStatusConstant::ACTIVE => [
+                    GymStatusEnum::ACTIVE->value => [
                         'name' => 'Active',
                         'label' => 'success',
                     ],
-                    GymStatusConstant::MODERATION => [
+                    GymStatusEnum::MODERATION->value => [
                         'label' => 'danger'
                     ],
                 ]

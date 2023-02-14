@@ -46,7 +46,7 @@
                         @endforeach
                         <th style="width: 0;" class="text-right">
                             @if($createUrl = $table->getCreateUrl() )
-                                <a class="text-primary" href="{{ $createUrl }}">{{ __('Create') }}</a>
+                                <a class="text-primary" href="{{ $createUrl }}">Створити</a>
                             @endif
                         </th>
                     </tr>
