@@ -8,7 +8,7 @@ use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserCreateRequest extends FormRequest
+final class UserCreateRequest extends FormRequest
 {
     public function rules(): array
     {

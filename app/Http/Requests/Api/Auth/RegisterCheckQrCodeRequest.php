@@ -15,7 +15,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="uuid", type="string", format="uuid", example="3fa85f64-5717-4562-b3fc-2c963f66afa6"),
  * )
  */
-class RegisterCheckQrCodeRequest extends FormRequest
+final class RegisterCheckQrCodeRequest extends FormRequest
 {
     use FailedValidation;
 

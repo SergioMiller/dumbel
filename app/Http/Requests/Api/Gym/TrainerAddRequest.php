@@ -17,7 +17,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="user_id", type="integer", example="1"),
  * )
  */
-class TrainerAddRequest extends FormRequest
+final class TrainerAddRequest extends FormRequest
 {
     use FailedValidation;
 

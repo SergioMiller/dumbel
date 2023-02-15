@@ -8,17 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('gym_managers', function (Blueprint $table) {
+        Schema::create('gym_manager', static function (Blueprint $table) {
             $table->foreignId('gym_id');
             $table->foreignId('user_id');
 
             $table->foreign('gym_id')->references('id')->on('gyms')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+
+            $table->unique(['gym_id','user_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('gym_managers');
+        Schema::dropIfExists('gym_manager');
     }
 };

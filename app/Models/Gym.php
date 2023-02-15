@@ -56,11 +56,11 @@ class Gym extends Model
 
     public function trainers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'gym_trainers');
+        return $this->belongsToMany(User::class, 'gym_trainer');
     }
 
     public function managers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'gym_managers');
+        return $this->belongsToMany(User::class, 'gym_manager');
     }
 }

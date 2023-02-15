@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin\Subscription;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubscriptionUpdateRequest extends FormRequest
+final class SubscriptionUpdateRequest extends FormRequest
 {
     public function rules(): array
     {

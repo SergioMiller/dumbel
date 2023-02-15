@@ -9,4 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class GymManager extends Model
 {
     use HasFactory;
+
+    protected $table = 'gym_manager';
 }

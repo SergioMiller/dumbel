@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('user_subscriptions', function (Blueprint $table) {
+        Schema::create('user_subscriptions', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('gym_id');

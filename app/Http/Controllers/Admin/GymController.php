@@ -14,7 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class GymController extends Controller
+final class GymController extends Controller
 {
     public function index(Request $request): View
     {

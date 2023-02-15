@@ -9,7 +9,7 @@ use App\Tables\QrCodeTable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class QrCodeController extends Controller
+final class QrCodeController extends Controller
 {
     public function index(Request $request): View
     {

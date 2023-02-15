@@ -13,12 +13,12 @@ use App\Http\Requests\Api\Auth\RegisterWithQrCodeRequest;
 use App\Library\Response;
 use App\Repository\QrCodeRepository;
 use App\Services\Auth\AuthService;
-use App\Transformers\AuthAccountTransformer;
+use App\Transformers\Auth\AuthAccountTransformer;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 use Ramsey\Uuid\Uuid;
 
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     public function __construct(private readonly AuthService $authService)
     {

@@ -20,7 +20,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="price", type="integer", example="800"),
  * )
  */
-class SubscriptionUpdateRequest extends FormRequest
+final class SubscriptionUpdateRequest extends FormRequest
 {
     use FailedValidation;
 

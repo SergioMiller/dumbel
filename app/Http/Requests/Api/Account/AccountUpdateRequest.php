@@ -22,7 +22,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="password", type="string", example="password"),
  * )
  */
-class AccountUpdateRequest extends FormRequest
+final class AccountUpdateRequest extends FormRequest
 {
     use FailedValidation;
 

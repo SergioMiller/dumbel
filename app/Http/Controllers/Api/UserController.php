@@ -6,12 +6,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\UserCreateRequest;
 use App\Library\Response;
-use App\Services\Api\UserService;
-use App\Transformers\UserTransformer;
+use App\Services\Api\User\Dto\UserCreateDto;
+use App\Services\Api\User\UserService;
+use App\Transformers\User\UserTransformer;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 
-class UserController extends Controller
+final class UserController extends Controller
 {
     public function __construct(private readonly UserService $userService)
     {
@@ -57,7 +58,7 @@ class UserController extends Controller
      */
     public function create(UserCreateRequest $request): JsonResponse
     {
-        $user = $this->userService->create($request->validated());
+        $user = $this->userService->create(UserCreateDto::fromArray($request->validated()));
 
         return Response::success(new UserTransformer($user));
     }

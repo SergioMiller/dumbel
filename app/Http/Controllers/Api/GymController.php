@@ -12,14 +12,20 @@ use App\Http\Requests\Api\Gym\TrainerAddRequest;
 use App\Http\Requests\Api\Gym\TrainerRemoveRequest;
 use App\Library\Response;
 use App\Repository\GymRepository;
-use App\Services\Api\GymService;
-use App\Transformers\GymTransformer;
+use App\Services\Api\Gym\Dto\GymCreateDto;
+use App\Services\Api\Gym\Dto\GymUpdateDto;
+use App\Services\Api\Gym\Dto\ManagerAddDto;
+use App\Services\Api\Gym\Dto\ManagerRemoveDto;
+use App\Services\Api\Gym\Dto\TrainerAddDto;
+use App\Services\Api\Gym\Dto\TrainerRemoveDto;
+use App\Services\Api\Gym\GymService;
+use App\Transformers\Gym\GymTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
-class GymController extends Controller
+final class GymController extends Controller
 {
     public function __construct(
         private readonly GymService $gymService,
@@ -66,7 +72,7 @@ class GymController extends Controller
      */
     public function create(GymCreateRequest $request): JsonResponse
     {
-        $gym = $this->gymService->create($request->user(), $request->validated());
+        $gym = $this->gymService->create($request->user(), GymCreateDto::fromArray($request->validated()));
 
         return Response::success(new GymTransformer($gym));
     }
@@ -174,7 +180,7 @@ class GymController extends Controller
 
         abort_if(null === $model, 404, 'Not found.');
 
-        $model = $this->gymService->update($model, $request->validated());
+        $model = $this->gymService->update($model, GymUpdateDto::fromArray($request->validated()));
 
         return Response::success(new GymTransformer($model));
     }
@@ -214,7 +220,9 @@ class GymController extends Controller
      */
     public function listOwn(Request $request): JsonResponse
     {
-        return Response::success(new GymTransformer($request->user()->gyms));
+        $list = $this->gymRepository->getByUserId($request->user()->id);
+
+        return Response::success(new GymTransformer($list));
     }
 
     /**
@@ -248,7 +256,7 @@ class GymController extends Controller
      */
     public function trainerAdd(TrainerAddRequest $request): JsonResponse
     {
-        $this->gymService->trainerAdd($request->validated());
+        $this->gymService->trainerAdd(TrainerAddDto::fromArray($request->validated()));
 
         return Response::success();
     }
@@ -284,7 +292,7 @@ class GymController extends Controller
      */
     public function trainerRemove(TrainerRemoveRequest $request): JsonResponse
     {
-        $this->gymService->trainerRemove($request->validated());
+        $this->gymService->trainerRemove(TrainerRemoveDto::fromArray($request->validated()));
 
         return Response::success();
     }
@@ -320,7 +328,7 @@ class GymController extends Controller
      */
     public function managerAdd(ManagerAddRequest $request): JsonResponse
     {
-        $this->gymService->managerAdd($request->validated());
+        $this->gymService->managerAdd(ManagerAddDto::fromArray($request->validated()));
 
         return Response::success();
     }
@@ -356,7 +364,7 @@ class GymController extends Controller
      */
     public function managerRemove(ManagerRemoveRequest $request): JsonResponse
     {
-        $this->gymService->managerRemove($request->validated());
+        $this->gymService->managerRemove(ManagerRemoveDto::fromArray($request->validated()));
 
         return Response::success();
     }

@@ -20,7 +20,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="address", type="string", example="Cecelia Havens, 456 White Finch St.,North Augusta, SC 29860"),
  * )
  */
-class GymCreateRequest extends FormRequest
+final class GymCreateRequest extends FormRequest
 {
     use FailedValidation;
 
@@ -29,7 +29,7 @@ class GymCreateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:512'],
-            'phone' => ['nullable', 'string', new PhoneNumberRule],
+            'phone' => ['nullable', 'integer', new PhoneNumberRule],
             'email' => ['nullable', 'email', 'max:512'],
             'address' => ['required', 'string', 'max:512'],
         ];

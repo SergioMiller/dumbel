@@ -18,7 +18,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="device", type="string", example="Nokia6230i/2.0 (03.25) Profile/MIDP-2.0 Configuration/CLDC-1.1"),
  * )
  */
-class LoginRequest extends FormRequest
+final class LoginRequest extends FormRequest
 {
     use FailedValidation;
 

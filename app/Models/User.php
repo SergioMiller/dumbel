@@ -15,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $uuid
  * @property string $name
  * @property string $lastname
- * @property string $phone
+ * @property integer $phone
  * @property string $email
  * @property string $status
  * @property string $birthday
@@ -42,6 +42,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
+        'phone' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'email_verified_at' => 'datetime',

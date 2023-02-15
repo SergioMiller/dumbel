@@ -8,7 +8,7 @@ use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class GymUpdateRequest extends FormRequest
+final class GymUpdateRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -16,7 +16,7 @@ class GymUpdateRequest extends FormRequest
             'user_id' => ['required', 'int', Rule::exists('users', 'id')],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:512'],
-            'phone' => ['nullable', 'string', new PhoneNumberRule],
+            'phone' => ['nullable', 'integer', new PhoneNumberRule],
             'email' => ['nullable', 'email', 'max:512'],
             'address' => ['required', 'string', 'max:512'],
             'status' => ['string', Rule::in(GymStatusEnum::values())],

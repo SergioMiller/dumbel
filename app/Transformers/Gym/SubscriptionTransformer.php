@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Transformers;
+namespace App\Transformers\Gym;
 
 use App\Library\Transformer;
 use App\Models\Subscription;

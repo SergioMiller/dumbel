@@ -8,13 +8,15 @@ use App\Http\Requests\Api\Subscription\SubscriptionCreateRequest;
 use App\Http\Requests\Api\Subscription\SubscriptionUpdateRequest;
 use App\Library\Response;
 use App\Repository\SubscriptionRepository;
-use App\Services\Api\SubscriptionService;
-use App\Transformers\SubscriptionTransformer;
+use App\Services\Api\Subscription\Dto\SubscriptionCreateDto;
+use App\Services\Api\Subscription\Dto\SubscriptionUpdateDto;
+use App\Services\Api\Subscription\SubscriptionService;
+use App\Transformers\Gym\SubscriptionTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 
-class SubscriptionController extends Controller
+final class SubscriptionController extends Controller
 {
     public function __construct(
         private readonly SubscriptionService $subscriptionService,
@@ -62,7 +64,7 @@ class SubscriptionController extends Controller
      */
     public function create(SubscriptionCreateRequest $request): JsonResponse
     {
-        $model = $this->subscriptionService->create($request->validated());
+        $model = $this->subscriptionService->create(SubscriptionCreateDto::fromArray($request->validated()));
 
         return Response::success(new SubscriptionTransformer($model));
     }
@@ -170,7 +172,7 @@ class SubscriptionController extends Controller
 
         abort_if(null === $model, 404, 'Not found.');
 
-        $model = $this->subscriptionService->update($model, $request->validated());
+        $model = $this->subscriptionService->update($model, SubscriptionUpdateDto::fromArray($request->validated()));
 
         return Response::success(new SubscriptionTransformer($model));
     }

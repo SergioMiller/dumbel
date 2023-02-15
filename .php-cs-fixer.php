@@ -13,7 +13,6 @@ $finder = PhpCsFixer\Finder::create()
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
-
 $config = new PhpCsFixer\Config();
 return $config->setRules([
     '@PSR2' => true,

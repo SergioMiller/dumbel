@@ -22,7 +22,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="uuid", type="string", format="uuid", example="3fa85f64-5717-4562-b3fc-2c963f66afa6"),
  * )
  */
-class UserCreateRequest extends FormRequest
+final class UserCreateRequest extends FormRequest
 {
     use FailedValidation;
 
