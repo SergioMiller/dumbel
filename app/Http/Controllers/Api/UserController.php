@@ -9,12 +9,11 @@ use App\Library\Response;
 use App\Services\Api\UserService;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 class UserController extends Controller
 {
-    private UserService $userService;
-
-    public function __construct(UserService $userService)
+    public function __construct(private readonly UserService $userService)
     {
         $this->userService = $userService;
     }

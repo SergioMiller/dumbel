@@ -16,10 +16,7 @@ use Illuminate\Http\Request;
 
 final class UserController extends Controller
 {
-    public function __construct(
-        private readonly UserService $userService,
-        private readonly UserRepository $userRepository
-    )
+    public function __construct(private readonly UserService $userService, private readonly UserRepository $userRepository)
     {
     }
 

@@ -8,11 +8,9 @@ use App\Repository\SubscriptionRepository;
 
 class SubscriptionService
 {
-    private SubscriptionRepository $subscriptionRepository;
-
-    public function __construct(SubscriptionRepository $subscriptionRepository)
+    public function __construct(private readonly SubscriptionRepository $subscriptionRepository)
     {
-        $this->subscriptionRepository = $subscriptionRepository;
+
     }
 
     public function update(int $id, array $data): Subscription

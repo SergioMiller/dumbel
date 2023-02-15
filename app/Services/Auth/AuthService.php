@@ -16,12 +16,8 @@ use Illuminate\Support\Str;
 class AuthService
 {
     /**
-     * @param array $data
-     *
-     * @return string
-     *
-     * @throws UserNotFoundException
      * @throws PasswordDoesNotMatchException
+     * @throws UserNotFoundException
      */
     public function login(array $data): string
     {

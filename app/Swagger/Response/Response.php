@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Swagger\Response;
 
+use OpenApi\Annotations as OA;
+
 /**
  * @OA\Schema(
  *     @OA\Xml(

@@ -4,7 +4,7 @@ up:
 
 .PHONY: swagger
 swagger:
-		./vendor/bin/openapi --output ./public ./app
+	docker compose exec php sh -lc './vendor/bin/openapi --output ./public ./app'
 
 .PHONY: php-cs-fixer
 php-cs-fixer:

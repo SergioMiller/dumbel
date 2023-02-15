@@ -15,15 +15,13 @@ use App\Repository\QrCodeRepository;
 use App\Services\Auth\AuthService;
 use App\Transformers\AuthAccountTransformer;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 use Ramsey\Uuid\Uuid;
 
 class AuthController extends Controller
 {
-    private AuthService $authService;
-
-    public function __construct(AuthService $authService)
+    public function __construct(private readonly AuthService $authService)
     {
-        $this->authService = $authService;
     }
 
     /**

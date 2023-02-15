@@ -12,17 +12,15 @@ use App\Services\Api\SubscriptionService;
 use App\Transformers\SubscriptionTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 class SubscriptionController extends Controller
 {
-    private SubscriptionService $subscriptionService;
-
-    private SubscriptionRepository $subscriptionRepository;
-
-    public function __construct(SubscriptionService $subscriptionService, SubscriptionRepository $subscriptionRepository)
+    public function __construct(
+        private readonly SubscriptionService $subscriptionService,
+        private readonly SubscriptionRepository $subscriptionRepository
+    )
     {
-        $this->subscriptionService = $subscriptionService;
-        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     /**

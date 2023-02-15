@@ -9,11 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private readonly UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     public function store(array $data): User

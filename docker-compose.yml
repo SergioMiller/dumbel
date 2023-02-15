@@ -8,7 +8,7 @@ services:
         volumes:
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
             #- ./docker/nginx/certs:/etc/nginx/certs
-            - ./:/var/www/html
+            - ./:/var/www/html:cached
         links:
             - php
 

@@ -12,16 +12,10 @@ use Illuminate\Http\RedirectResponse;
 
 final class SubscriptionController extends Controller
 {
-    private SubscriptionService $subscriptionService;
-
-    private SubscriptionRepository $subscriptionRepository;
-
     public function __construct(
-        SubscriptionService $subscriptionService,
-        SubscriptionRepository $subscriptionRepository
+        private readonly SubscriptionService $subscriptionService,
+        private readonly SubscriptionRepository $subscriptionRepository
     ) {
-        $this->subscriptionService = $subscriptionService;
-        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     public function edit(int $id): View

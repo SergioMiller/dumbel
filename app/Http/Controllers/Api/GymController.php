@@ -17,17 +17,14 @@ use App\Transformers\GymTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
 class GymController extends Controller
 {
-    private GymService $gymService;
-
-    private GymRepository $gymRepository;
-
-    public function __construct(GymService $gymService, GymRepository $gymRepository)
+    public function __construct(
+        private readonly GymService $gymService,
+        private readonly GymRepository $gymRepository)
     {
-        $this->gymService = $gymService;
-        $this->gymRepository = $gymRepository;
     }
 
     /**
