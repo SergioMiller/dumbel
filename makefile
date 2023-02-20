@@ -22,10 +22,10 @@ optimize:
 composer-install:
 		docker-compose exec php sh -lc 'composer install'
 
-.PHONY: migrate
-migrate:
-		docker-compose exec app sh -lc 'php artisan migrate'
+.PHONY: db-migrate
+db-migrate:
+		docker-compose exec php sh -lc 'php artisan migrate'
 
-.PHONY: seed
-seed:
-		docker-compose exec app sh -lc 'php artisan migrate'
+.PHONY: db-seed
+db-seed:
+		docker-compose exec php sh -lc 'php artisan db:seed'

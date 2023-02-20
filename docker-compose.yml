@@ -6,39 +6,57 @@ services:
         ports:
             - ${APP_PORT}:80
         volumes:
-            - ./docker/nginx/conf.d:/etc/nginx/conf.d
+            - ./docker/nginx/config:/etc/nginx/conf.d
             #- ./docker/nginx/certs:/etc/nginx/certs
-            - ./:/var/www/html:cached
+            - ./public:/var/www/html/public:cached
         links:
             - php
-
+        networks:
+            - dumbel
     php:
         build:
             context: ./docker/php-fpm
         volumes:
-            - ./docker/php-fpm/config/php.ini:/usr/local/etc/php/php.ini
-            - ./:/var/www/html
+            - ./app/:/var/www/html/app
+            - ./bootstrap/:/var/www/html/bootstrap
+            - ./config/:/var/www/html/config
+            - ./database/:/var/www/html/database
+            - ./public/:/var/www/html/public
+            - ./resources/:/var/www/html/resources
+            - ./routes/:/var/www/html/routes
+            - ./storage/:/var/www/html/storage
+            - ./vendor/:/var/www/html/vendor
+            - ./composer.json:/var/www/html/composer.json
+            - ./composer.lock:/var/www/html/composer.lock
+            - ./artisan:/var/www/html/artisan
+            - ./.env:/var/www/html/.env
         environment:
             - DB_HOST=${DB_HOST}
         links:
             - postgres
-
+        networks:
+            - dumbel
     postgres:
         image: postgres
         volumes:
             - postgres_data:/var/lib/postgresql/data:cached
         environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
             POSTGRES_PASSWORD: ${DB_PASSWORD}
+            PGDATA: /data/postgres
         ports:
             - ${POSTGRESS_PORT}:5432
-            - 6001:6001
-
+        restart: unless-stopped
+        networks:
+            - dumbel
     adminer:
         image: adminer
         restart: always
         ports:
             - ${ADMINER_PORT}:8080
-
+        networks:
+            - dumbel
     redis:
         image: redis:latest
         volumes:
@@ -47,6 +65,14 @@ services:
             ALLOW_EMPTY_PASSWORD: 'yes'
         ports:
             - ${DOCKER_REDIS_PORT}:6379
-
+        networks:
+            - dumbel
 volumes:
     postgres_data:
+networks:
+    dumbel:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                -   subnet: 192.168.5.0/24
