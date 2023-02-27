@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
@@ -23,18 +24,23 @@ final class AccountController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/AccountTransformer")
      *                             }
      *                         )
@@ -57,24 +63,31 @@ final class AccountController extends Controller
      *     path="/api/v1/account",
      *     description="Update account.",
      *     tags={"Account"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/AccountUpdateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/AccountTransformer")
      *                             }
      *                         )

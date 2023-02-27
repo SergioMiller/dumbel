@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
@@ -28,8 +29,8 @@ final class UserController extends Controller
             ->setCreateUrl(route('user.create'));
 
         return view('admin.table', [
-            'table'      => $table,
-            'paginator'  => $table->paginator(),
+            'table' => $table,
+            'paginator' => $table->paginator(),
             'attributes' => $table->attributes()
         ]);
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Gym;
@@ -13,6 +14,7 @@ use OpenApi\Annotations as OA;
  *     schema="ManagerRemoveRequest",
  *     type="object",
  *     required={"name", "address"},
+ *
  *     @OA\Property(property="gym_id", type="integer", example="1"),
  *     @OA\Property(property="user_id", type="integer", example="1"),
  * )

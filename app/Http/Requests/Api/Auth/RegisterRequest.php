@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Auth;
@@ -14,6 +15,7 @@ use OpenApi\Annotations as OA;
  *     schema="RegisterRequest",
  *     type="object",
  *     required={"phone", "name", "lastname"},
+ *
  *     @OA\Property(property="name", type="string", example="Joh"),
  *     @OA\Property(property="lastname", type="string", example="Dou"),
  *     @OA\Property(property="phone", type="integer", example="380987654321"),
@@ -33,7 +35,7 @@ final class RegisterRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:255'],
             'lastname' => ['string', 'required', 'max:255'],
-            'phone' => ['required', new PhoneNumberRule, Rule::unique('users', 'phone')],
+            'phone' => ['required', new PhoneNumberRule(), Rule::unique('users', 'phone')],
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['string', 'required'],
             'birthday' => ['date', 'before:today', 'nullable'],

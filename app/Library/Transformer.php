@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Library;
@@ -26,6 +27,7 @@ abstract class Transformer
 
         if ($this->data instanceof Collection || is_array($this->data)) {
             $list = [];
+
             foreach ($this->data as $item) {
                 $list[] = $this->toArray($item);
             }
@@ -40,6 +42,7 @@ abstract class Transformer
     {
         if ($this->data instanceof Collection) {
             $list = [];
+
             foreach ($this->data as $item) {
                 $list[] = $this->build($this->toArray($item));
             }
@@ -53,6 +56,7 @@ abstract class Transformer
     private function build($data): array
     {
         $list = [];
+
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $list[$key] = $this->build($value);

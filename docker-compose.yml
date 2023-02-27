@@ -30,6 +30,7 @@ services:
             - ./composer.lock:/var/www/html/composer.lock
             - ./artisan:/var/www/html/artisan
             - ./.env:/var/www/html/.env
+            - ./.php-cs-fixer.php:/var/www/html/.php-cs-fixer.php
         environment:
             - DB_HOST=${DB_HOST}
         links:

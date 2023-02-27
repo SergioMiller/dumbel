@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Api\Gym\Dto;
@@ -32,11 +33,11 @@ final class GymCreateDto implements Arrayable
     public function toArray(): array
     {
         return [
-            'name'        => $this->name,
+            'name' => $this->name,
             'description' => $this->description,
-            'phone'       => $this->phone,
-            'email'       => $this->email,
-            'address'     => $this->address,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'address' => $this->address,
         ];
     }
 }

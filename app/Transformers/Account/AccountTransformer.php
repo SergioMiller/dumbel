@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Transformers\Account;
@@ -9,6 +10,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(schema="AccountTransformer")
+ *
  * @OA\Property(property="id", type="integer", example="1"),
  * @OA\Property(property="name", type="string", example="Joh"),
  * @OA\Property(property="lastname", type="string", example="Doe"),

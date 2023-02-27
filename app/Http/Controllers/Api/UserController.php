@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
@@ -24,24 +25,31 @@ final class UserController extends Controller
      *     path="/api/v1/user/create",
      *     description="Create user.",
      *     tags={"User"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/UserCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/UserTransformer")
      *                             }
      *                         )

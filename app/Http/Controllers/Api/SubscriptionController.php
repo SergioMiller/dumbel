@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
@@ -21,8 +22,7 @@ final class SubscriptionController extends Controller
     public function __construct(
         private readonly SubscriptionService $subscriptionService,
         private readonly SubscriptionRepository $subscriptionRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -30,24 +30,31 @@ final class SubscriptionController extends Controller
      *     path="/api/v1/subscription/create",
      *     description="Create subscription.",
      *     tags={"Subscription"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/SubscriptionCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
      *                             }
      *                         )
@@ -77,24 +84,31 @@ final class SubscriptionController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="int")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
      *                             }
      *                         )
@@ -126,27 +140,36 @@ final class SubscriptionController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="int")
      *     ),
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/SubscriptionUpdateRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
      *                             }
      *                         )
@@ -185,24 +208,31 @@ final class SubscriptionController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Parameter(
      *         name="gym_id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="int")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             type="array",
+     *
      *                             @OA\Items(ref="#/components/schemas/SubscriptionTransformer")
      *                         )
      *                     ),

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Transformers\Gym;
@@ -9,6 +10,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(schema="TrainerTransformer")
+ *
  * @OA\Property(property="id", type="integer", example="1"),
  * @OA\Property(property="name", type="string", example="Joh"),
  * @OA\Property(property="lastname", type="string", example="Dou"),

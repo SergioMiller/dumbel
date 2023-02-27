@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Transformers\Gym;
@@ -9,6 +10,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(schema="GymTransformer")
+ *
  * @OA\Property(property="name", type="string", example="Gym"),
  * @OA\Property(property="description", type="string", example="Gym description."),
  * @OA\Property(property="phone", type="integer", example="380987654321"),
@@ -25,17 +27,17 @@ class GymTransformer extends Transformer
     public function toArray(Gym $gym): array
     {
         return [
-            'id'          => $gym->id,
-            'name'        => $gym->name,
+            'id' => $gym->id,
+            'name' => $gym->name,
             'description' => $gym->description,
-            'phone'       => $gym->phone,
-            'email'       => $gym->email,
-            'address'     => $gym->address,
-            'status'      => $gym->status,
-            'created_at'  => $gym->created_at->toDateTimeString(),
-            'updated_at'  => $gym->updated_at->toDateTimeString(),
-            'trainers'    => new TrainerTransformer($gym->trainers),
-            'managers'    => new ManagerTransformer($gym->managers),
+            'phone' => $gym->phone,
+            'email' => $gym->email,
+            'address' => $gym->address,
+            'status' => $gym->status,
+            'created_at' => $gym->created_at->toDateTimeString(),
+            'updated_at' => $gym->updated_at->toDateTimeString(),
+            'trainers' => new TrainerTransformer($gym->trainers),
+            'managers' => new ManagerTransformer($gym->managers),
         ];
     }
 }

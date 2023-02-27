@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
@@ -29,8 +30,8 @@ final class GymController extends Controller
 {
     public function __construct(
         private readonly GymService $gymService,
-        private readonly GymRepository $gymRepository)
-    {
+        private readonly GymRepository $gymRepository
+    ) {
     }
 
     /**
@@ -38,24 +39,31 @@ final class GymController extends Controller
      *     path="/api/v1/gym/create",
      *     description="Create gym.",
      *     tags={"Gym"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/GymCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/GymTransformer")
      *                             }
      *                         )
@@ -85,24 +93,31 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="int")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/GymTransformer")
      *                             }
      *                         )
@@ -134,27 +149,36 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="int")
      *     ),
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/GymUpdateRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/GymTransformer")
      *                             }
      *                         )
@@ -193,18 +217,23 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             type="array",
+     *
      *                             @OA\Items(ref="#/components/schemas/GymTransformer")
      *                         )
      *                     ),
@@ -233,14 +262,19 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/TrainerAddRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
@@ -269,14 +303,19 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/TrainerRemoveRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
@@ -305,14 +344,19 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/ManagerAddRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
@@ -341,14 +385,19 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/ManagerRemoveRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),

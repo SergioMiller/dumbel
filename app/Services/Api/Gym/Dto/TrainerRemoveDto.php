@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Api\Gym\Dto;
@@ -23,7 +24,7 @@ final class TrainerRemoveDto implements Arrayable
     public function toArray(): array
     {
         return [
-            'gym_id'  => $this->gym_id,
+            'gym_id' => $this->gym_id,
             'user_id' => $this->user_id,
         ];
     }

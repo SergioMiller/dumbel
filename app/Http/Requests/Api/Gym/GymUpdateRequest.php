@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Gym;
@@ -13,6 +14,7 @@ use OpenApi\Annotations as OA;
  *     schema="GymUpdateRequest",
  *     type="object",
  *     required={"name", "address"},
+ *
  *     @OA\Property(property="name", type="string", example="Joh"),
  *     @OA\Property(property="description", type="string", example="The best gym."),
  *     @OA\Property(property="phone", type="integer", example="380987654321"),
@@ -29,7 +31,7 @@ final class GymUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:512'],
-            'phone' => ['nullable', 'integer', new PhoneNumberRule],
+            'phone' => ['nullable', 'integer', new PhoneNumberRule()],
             'email' => ['nullable', 'email', 'max:512'],
             'address' => ['required', 'string', 'max:512'],
         ];

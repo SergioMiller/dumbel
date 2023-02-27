@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Auth;
@@ -14,6 +15,7 @@ use OpenApi\Annotations as OA;
  *     schema="RegisterWithQrCodeRequest",
  *     type="object",
  *     required={"phone", "name", "lastname"},
+ *
  *     @OA\Property(property="name", type="string", example="Joh"),
  *     @OA\Property(property="lastname", type="string", example="Dou"),
  *     @OA\Property(property="phone", type="integer", example="380987654321"),
@@ -35,7 +37,7 @@ final class RegisterWithQrCodeRequest extends FormRequest
             'phone' => [
                 'required',
                 'nullable',
-                new PhoneNumberRule,
+                new PhoneNumberRule(),
                 Rule::unique('users', 'phone')
             ],
             'email' => [

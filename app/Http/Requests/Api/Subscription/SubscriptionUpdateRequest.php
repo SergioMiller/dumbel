@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Subscription;
@@ -12,6 +13,7 @@ use OpenApi\Annotations as OA;
  *     schema="SubscriptionUpdateRequest",
  *     type="object",
  *     required={"name", "day_quantity", "works_from", "works_to"},
+ *
  *     @OA\Property(property="name", type="string", example="Unlimit"),
  *     @OA\Property(property="day_quantity", type="integer", example="12"),
  *     @OA\Property(property="works_from", type="integer", example="8"),

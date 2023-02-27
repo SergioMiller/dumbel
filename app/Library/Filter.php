@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Library;
@@ -37,6 +38,7 @@ abstract class Filter
     protected function filter(): Filter
     {
         $defaultOrder = true;
+
         foreach ($this->params as $field => $value) {
             if ('sort' === $field && !empty($value)) {
                 $defaultOrder = false;

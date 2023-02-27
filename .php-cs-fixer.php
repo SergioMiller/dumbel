@@ -116,6 +116,8 @@ return $config->setRules([
     'nullable_type_declaration_for_default_null_value' => true,
     'types_spaces' => true,
     'phpdoc_line_span' => true,
+    'no_blank_lines_after_phpdoc' => true,
+    'phpdoc_trim_consecutive_blank_line_separation' => true,
     'yoda_style' => true,
 ])
     ->setFinder($finder)

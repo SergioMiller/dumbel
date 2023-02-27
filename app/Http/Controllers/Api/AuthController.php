@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
@@ -29,18 +30,24 @@ final class AuthController extends Controller
      *     path="/api/v1/auth/login",
      *     description="Return a bearer token.",
      *     tags={"Auth"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/LoginRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             type="object",
@@ -72,18 +79,24 @@ final class AuthController extends Controller
      *     path="/api/v1/auth/register",
      *     description="Return a bearer token.",
      *     tags={"Auth"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/RegisterRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             type="object",
@@ -112,18 +125,24 @@ final class AuthController extends Controller
      *     path="/api/v1/auth/register/check-qr-code",
      *     description="Check qr code before register.",
      *     tags={"Auth"},
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/RegisterCheckQrCodeRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             type="object",
@@ -150,24 +169,31 @@ final class AuthController extends Controller
      *     path="/api/v1/auth/get-user/{uuid}",
      *     description="Get user.",
      *     tags={"Auth"},
+     *
      *     @OA\Parameter(
      *         name="uuid",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             allOf={
+     *
      *                                 @OA\Schema(ref="#/components/schemas/AuthAccountTransformer")
      *                             }
      *                         )
@@ -199,24 +225,32 @@ final class AuthController extends Controller
      *     path="/api/v1/auth/register/{uuid}",
      *     description="Return a bearer token.",
      *     tags={"Auth"},
+     *
      *     @OA\Parameter(
      *         name="uuid",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\RequestBody(
+     *
      *         @OA\JsonContent(ref="#/components/schemas/RegisterWithQrCodeRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
+     *
      *         @OA\MediaType(
      *             mediaType="application/json",
+     *
      *             @OA\Schema(
      *                 allOf={
      *                     @OA\Schema(ref="#/components/schemas/Response"),
      *                     @OA\Schema(
+     *
      *                         @OA\Property(
      *                             property="data",
      *                             type="object",

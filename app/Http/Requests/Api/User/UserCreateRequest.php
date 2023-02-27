@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Api\User;
@@ -14,6 +15,7 @@ use OpenApi\Annotations as OA;
  *     schema="UserCreateRequest",
  *     type="object",
  *     required={"phone", "name", "lastname"},
+ *
  *     @OA\Property(property="name", type="string", example="Joh"),
  *     @OA\Property(property="lastname", type="string", example="Dou"),
  *     @OA\Property(property="phone", type="integer", example="380987654321"),
@@ -31,7 +33,7 @@ final class UserCreateRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:255'],
             'lastname' => ['string', 'required', 'max:255'],
-            'phone' => ['required', 'nullable', new PhoneNumberRule, Rule::unique('users', 'phone')],
+            'phone' => ['required', 'nullable', new PhoneNumberRule(), Rule::unique('users', 'phone')],
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')],
             'birthday' => ['date', 'before:today', 'nullable'],
             'uuid' => ['uuid', 'required', Rule::exists('qr_codes', 'uuid')->whereNull('user_id')],

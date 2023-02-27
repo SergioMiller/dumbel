@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -10,15 +11,19 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\OpenApi(
+ *
  *     @OA\Info(
  *         version="1.0.0",
  *         title="Swagger dumbel",
  *     ),
+ *
  *     @OA\Server(
  *         description="Api localhost",
  *         url="http://localhost:8000/"
  *     ),
+ *
  *     @OA\Components(
+ *
  *         @OA\SecurityScheme(
  *             securityScheme="bearerAuth",
  *             in="header",
@@ -32,5 +37,7 @@ use Illuminate\Routing\Controller as BaseController;
  */
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 }

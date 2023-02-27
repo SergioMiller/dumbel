@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Library;
@@ -46,6 +47,7 @@ class JsonResponse extends \Illuminate\Http\JsonResponse
         }
 
         $list = [];
+
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $list[$key] = $this->preparingData($value);

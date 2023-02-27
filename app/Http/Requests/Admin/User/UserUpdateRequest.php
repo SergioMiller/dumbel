@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Requests\Admin\User;
@@ -15,7 +16,7 @@ final class UserUpdateRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:255'],
             'lastname' => ['string', 'required', 'max:255'],
-            'phone' => ['required', 'nullable', new PhoneNumberRule, Rule::unique('users', 'phone')->ignore($this->id)],
+            'phone' => ['required', 'nullable', new PhoneNumberRule(), Rule::unique('users', 'phone')->ignore($this->id)],
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->id)],
             'status' => ['string', Rule::in(UserStatusEnum::values())],
             'birthday' => ['date', 'before:today', 'nullable'],
