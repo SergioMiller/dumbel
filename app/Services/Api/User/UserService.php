@@ -20,6 +20,7 @@ class UserService
             ->where('uuid', $data->getUuid()->toString())
             ->whereNull('user_id')
             ->update(['user_id' => $user->id]);
+
         DB::commit();
 
         return $user;

@@ -155,6 +155,10 @@
                 @include('admin/gym/_trainers', ['trainers' => $gym->trainers])
             @endif
 
+            @if($gym->managers->isNotEmpty())
+                @include('admin/gym/_managers', ['managers' => $gym->managers])
+            @endif
+
         </div>
 
         @if($gym->subscriptions->isNotEmpty())

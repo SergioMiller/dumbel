@@ -14,7 +14,7 @@ final class UserCreateDto implements Arrayable
 
     private readonly string $lastname;
 
-    private readonly ?string $phone;
+    private readonly ?int $phone;
 
     private readonly ?string $email;
 
@@ -30,7 +30,7 @@ final class UserCreateDto implements Arrayable
         $instance->phone = $data['phone'] ?? null;
         $instance->email = $data['email'] ?? null;
         $instance->birthday = $data['birthday'] ?? null;
-        $instance->uuid = Uuid::fromString($data['birthday']);
+        $instance->uuid = Uuid::fromString($data['uuid']);
 
         return $instance;
     }
@@ -38,12 +38,12 @@ final class UserCreateDto implements Arrayable
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
+            'name'     => $this->name,
             'lastname' => $this->lastname,
-            'phone' => $this->phone,
-            'email' => $this->email,
+            'phone'    => $this->phone,
+            'email'    => $this->email,
             'birthday' => $this->birthday,
-            'uuid' => $this->uuid,
+            'uuid'     => $this->uuid->toString(),
         ];
     }
 

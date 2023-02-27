@@ -33,7 +33,7 @@ final class UserCreateRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:255'],
             'lastname' => ['string', 'required', 'max:255'],
-            'phone' => ['required', 'nullable', new PhoneNumberRule(), Rule::unique('users', 'phone')],
+            'phone' => ['nullable', 'integer', new PhoneNumberRule(), Rule::unique('users', 'phone')],
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')],
             'birthday' => ['date', 'before:today', 'nullable'],
             'uuid' => ['uuid', 'required', Rule::exists('qr_codes', 'uuid')->whereNull('user_id')],

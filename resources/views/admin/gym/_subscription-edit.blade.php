@@ -15,16 +15,12 @@
             <td>{{ $subscription->day_quantity }}</td>
         </tr>
         <tr>
-            <td>Активний з</td>
-            <td>{{ $subscription->works_from }}</td>
-        </tr>
-        <tr>
-            <td>Активний до</td>
-            <td>{{ $subscription->works_to }}</td>
+            <td>Активний, год</td>
+            <td>{{ $subscription->works_from }} - {{ $subscription->works_to }}</td>
         </tr>
         <tr>
             <td>Кількість тренувань</td>
-            <td>{{ $subscription->idtraining_quantity }}</td>
+            <td>{{ $subscription->training_quantity }}</td>
         </tr>
         <tr>
             <td>Ціна</td>
