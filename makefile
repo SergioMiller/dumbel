@@ -8,7 +8,7 @@ swagger:
 
 .PHONY: php-cs-fixer
 php-cs-fixer:
-		php-cs-fixer fix app/ --allow-risky=yes
+		docker compose exec php sh -lc 'php-cs-fixer fix app/ --allow-risky=yes'
 
 .PHONY: app
 app:

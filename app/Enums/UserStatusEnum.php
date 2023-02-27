@@ -11,6 +11,5 @@ enum UserStatusEnum: string
     use EnumToArray;
 
     case ACTIVE = 'active';
-
     case BLOCKED = 'blocked';
 }

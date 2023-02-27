@@ -11,6 +11,5 @@ enum QrCodeSourceEnum: string
     use EnumToArray;
 
     case AUTOMATIC = 'automatic';
-
     case ADMIN = 'admin';
 }

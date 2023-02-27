@@ -11,6 +11,5 @@ enum GymStatusEnum: string
     use EnumToArray;
 
     case ACTIVE = 'active';
-
     case MODERATION = 'moderation';
 }
