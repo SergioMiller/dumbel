@@ -9,17 +9,17 @@ use Ramsey\Uuid\UuidInterface;
 
 final class UserCreateDto implements Arrayable
 {
-    private string $name;
+    private readonly string $name;
 
-    private string $lastname;
+    private readonly string $lastname;
 
-    private ?string $phone;
+    private readonly ?string $phone;
 
-    private ?string $email;
+    private readonly ?string $email;
 
-    private ?string $birthday;
+    private readonly ?string $birthday;
 
-    private UuidInterface $uuid;
+    private readonly UuidInterface $uuid;
 
     public static function fromArray(array $data): self
     {

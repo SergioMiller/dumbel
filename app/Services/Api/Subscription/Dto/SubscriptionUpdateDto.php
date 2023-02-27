@@ -7,17 +7,17 @@ use Illuminate\Contracts\Support\Arrayable;
 
 final class SubscriptionUpdateDto implements Arrayable
 {
-    private string $name;
+    private readonly string $name;
 
-    private int $day_quantity;
+    private readonly int $day_quantity;
 
-    private int $works_from;
+    private readonly int $works_from;
 
-    private int $works_to;
+    private readonly int $works_to;
 
-    private ?int $training_quantity;
+    private readonly ?int $training_quantity;
 
-    private ?int $price;
+    private readonly ?int $price;
 
     public static function fromArray(array $data): self
     {

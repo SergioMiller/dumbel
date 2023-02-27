@@ -15,7 +15,10 @@ class UserService
         DB::beginTransaction();
         $user = new User($data->toArray());
         $user->save();
-        QrCode::query()->where('uuid', $data->getUuid()->toString())->whereNull('user_id')->update(['user_id' => $user->id]);
+        QrCode::query()
+            ->where('uuid', $data->getUuid()->toString())
+            ->whereNull('user_id')
+            ->update(['user_id' => $user->id]);
         DB::commit();
 
         return $user;

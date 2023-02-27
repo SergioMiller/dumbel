@@ -7,9 +7,9 @@ use Illuminate\Contracts\Support\Arrayable;
 
 final class ManagerRemoveDto implements Arrayable
 {
-    private int $gym_id;
+    private readonly int $gym_id;
 
-    private int $user_id;
+    private readonly int $user_id;
 
     public static function fromArray(array $data): self
     {

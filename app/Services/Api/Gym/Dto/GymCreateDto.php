@@ -7,15 +7,15 @@ use Illuminate\Contracts\Support\Arrayable;
 
 final class GymCreateDto implements Arrayable
 {
-    private string $name;
+    private readonly string $name;
 
-    private ?string $description;
+    private readonly ?string $description;
 
-    private ?int $phone;
+    private readonly ?int $phone;
 
-    private ?string $email;
+    private readonly ?string $email;
 
-    private string $address;
+    private readonly string $address;
 
     public static function fromArray(array $data): self
     {
@@ -32,11 +32,11 @@ final class GymCreateDto implements Arrayable
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
+            'name'        => $this->name,
             'description' => $this->description,
-            'phone' => $this->phone,
-            'email' => $this->email,
-            'address' => $this->address,
+            'phone'       => $this->phone,
+            'email'       => $this->email,
+            'address'     => $this->address,
         ];
     }
 }

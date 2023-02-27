@@ -7,15 +7,15 @@ use Illuminate\Contracts\Support\Arrayable;
 
 final class GymUpdateDto implements Arrayable
 {
-    private string $name;
+    private readonly string $name;
 
-    private ?string $description;
+    private readonly ?string $description;
 
-    private ?int $phone;
+    private readonly ?int $phone;
 
-    private ?string $email;
+    private readonly ?string $email;
 
-    private string $address;
+    private readonly string $address;
 
     public static function fromArray(array $data): self
     {
