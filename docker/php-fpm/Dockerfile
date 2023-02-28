@@ -45,12 +45,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-configure soap --enable-soap \
   && docker-php-ext-install \
     pdo_pgsql \
+    pcntl \
+    posix \
 #    exif \
 #    iconv \
 #    mbstring \
 #    mysqli \
 #    phar \
-#    posix \
 #    soap \
 #    tokenizer \
      zip
