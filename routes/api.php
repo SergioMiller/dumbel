@@ -44,4 +44,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/subscription/{gym_id}/list', [SubscriptionController::class, 'listByGym']);
 
     Route::post('/user/create', [UserController::class, 'create']);
+    Route::post('/user/attach-subscription', [UserController::class, 'attachSubscription']);
 });

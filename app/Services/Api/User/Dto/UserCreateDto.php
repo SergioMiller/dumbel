@@ -38,12 +38,12 @@ final class UserCreateDto implements Arrayable
     public function toArray(): array
     {
         return [
-            'name'     => $this->name,
+            'name' => $this->name,
             'lastname' => $this->lastname,
-            'phone'    => $this->phone,
-            'email'    => $this->email,
+            'phone' => $this->phone,
+            'email' => $this->email,
             'birthday' => $this->birthday,
-            'uuid'     => $this->uuid->toString(),
+            'uuid' => $this->uuid->toString(),
         ];
     }
 

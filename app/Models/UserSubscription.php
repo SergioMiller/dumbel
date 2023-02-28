@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int $id
  * @property int $user_id
  * @property int $gym_id
  * @property int $administrator_id
@@ -24,7 +25,7 @@ class UserSubscription extends Model
 {
     use HasFactory;
 
-    public const UPDATED_AT = false;
+    public const UPDATED_AT = null;
 
     protected $fillable = [
         'user_id',
@@ -36,5 +37,6 @@ class UserSubscription extends Model
         'works_to',
         'training_quantity',
         'price',
+        'created_at',
     ];
 }

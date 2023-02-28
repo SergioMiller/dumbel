@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('user_subscriptions', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('gym_id');
-            $table->foreignId('administrator_id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('gym_id');
+            $table->bigInteger('administrator_id');
 
             $table->string('name');
             $table->integer('day_quantity');
@@ -21,10 +21,6 @@ return new class extends Migration
             $table->integer('training_quantity')->nullable();
             $table->integer('price');
             $table->dateTime('created_at');
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('gym_id')->references('id')->on('gyms');
-            $table->foreign('administrator_id')->references('id')->on('users');
         });
     }
 
