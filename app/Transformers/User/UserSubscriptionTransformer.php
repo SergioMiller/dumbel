@@ -38,7 +38,7 @@ class UserSubscriptionTransformer extends Transformer
             'works_to' => $userSubscription->works_to,
             'training_quantity' => $userSubscription->training_quantity,
             'price' => $userSubscription->price,
-            'created_at' => $userSubscription->created_at,
+            'created_at' => $userSubscription->created_at->toDateTimeString(),
         ];
     }
 }
