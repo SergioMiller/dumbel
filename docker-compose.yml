@@ -1,35 +1,45 @@
 version: '3'
 
 services:
-    web:
-        image: nginx:latest
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
+        restart: unless-stopped
         ports:
-            - ${APP_PORT}:80
+            - "8000:80"
+        working_dir: /var/www
         volumes:
-            - ./docker/nginx/config:/etc/nginx/conf.d
-            #- ./docker/nginx/certs:/etc/nginx/certs
-            - ./public:/var/www/html/public:cached
-        links:
-            - php
+            - ./public/:/var/www/public
         networks:
             - dumbel
-    php:
+        links:
+            - app
+        depends_on:
+            - app
+
+    app:
         build:
-            context: ./docker/php-fpm
+            context: .
+            dockerfile: docker/php/Dockerfile
+        hostname: dumbel-php
+        restart: unless-stopped
+        working_dir: /var/www
         volumes:
-            - ./app/:/var/www/html/app
-            - ./bootstrap/:/var/www/html/bootstrap
-            - ./config/:/var/www/html/config
-            - ./database/:/var/www/html/database
-            - ./public/:/var/www/html/public
-            - ./resources/:/var/www/html/resources
-            - ./routes/:/var/www/html/routes
-            - ./storage/:/var/www/html/storage
-            - ./vendor/:/var/www/html/vendor
-            - ./composer.json:/var/www/html/composer.json
-            - ./composer.lock:/var/www/html/composer.lock
-            - ./artisan:/var/www/html/artisan
-            - ./.env:/var/www/html/.env
+            - ./app/:/var/www/app
+            - ./bootstrap/:/var/www/bootstrap
+            - ./config/:/var/www/config
+            - ./database/:/var/www/database
+            - ./public/:/var/www/public
+            - ./resources/:/var/www/resources
+            - ./routes/:/var/www/routes
+            - ./storage/:/var/www/storage
+            - ./tests/:/var/www/tests
+            - ./vendor/:/var/www/vendor
+            - ./composer.json:/var/www/composer.json
+            - ./composer.lock:/var/www/composer.lock
+            - ./artisan:/var/www/artisan
+            - ./.env:/var/www/.env
             - ./.php-cs-fixer.php:/var/www/html/.php-cs-fixer.php
         environment:
             - DB_HOST=${DB_HOST}
@@ -37,6 +47,7 @@ services:
             - postgres
         networks:
             - dumbel
+
     postgres:
         image: postgres
         volumes:
@@ -51,6 +62,7 @@ services:
         restart: unless-stopped
         networks:
             - dumbel
+
     adminer:
         image: adminer
         restart: always
@@ -58,6 +70,7 @@ services:
             - ${ADMINER_PORT}:8080
         networks:
             - dumbel
+
     redis:
         image: redis:latest
         volumes:

@@ -25,6 +25,7 @@ RUN apt-get install -y --no-install-recommends \
         git \
 #        libmemcached-dev \
 #        libz-dev \
+        unzip \
         libpq-dev \
         libwebp-dev \
 #        libfreetype6-dev \
@@ -94,6 +95,32 @@ RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
 #RUN pecl install http://pecl.php.net/get/geoip-1.1.1.tgz && \
 #    docker-php-ext-enable geoip
 
-COPY config/php.ini /usr/local/etc/php/php.ini
+COPY docker/php/config/php.ini /usr/local/etc/php/php.ini
+
+WORKDIR /var/www
+
+COPY app /var/www/app/
+COPY bootstrap /var/www/bootstrap/
+COPY config /var/www/config/
+COPY database /var/www/database/
+COPY public /var/www/public/
+COPY resources /var/www/resources/
+COPY routes /var/www/routes/
+COPY storage /var/www/storage/
+COPY tests /var/www/tests/
+COPY .env /var/www/
+
+COPY composer.json composer.lock artisan .php-cs-fixer.php /var/www/
+
+RUN composer install; \
+    mkdir -p storage/logs; \
+    chmod -R 777 bootstrap/cache; \
+    chmod -R 777 storage
+
+COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
 EXPOSE 9000
+
+ENTRYPOINT ["docker-entrypoint"]
+CMD ["php-fpm", "--nodaemonize"]
