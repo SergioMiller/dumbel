@@ -23,6 +23,6 @@ class LabelAttributeAbstract extends AttributeAbstract implements AttributeInter
         $label = $this->labels[$value]['label'] ?? 'primary';
         $value = $this->labels[$value]['name'] ?? Str::title($value);
 
-        return "<label class='label label-inverse-{$label}'>{$value}</label>";
+        return "<label class='badge badge-{$label}'>{$value}</label>";
     }
 }

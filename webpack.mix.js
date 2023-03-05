@@ -16,8 +16,8 @@ const mix = require('laravel-mix');
 //     .sass('resources/sass/app.scss', 'public/css');
 
 mix.js([
-    'resources/theme/libraries/bower_components/jquery/js/jquery.min.js',
-    'resources/theme/libraries/bower_components/jquery-ui/js/jquery-ui.min.js',
-    'resources/js/admin.js',
+  'node_modules/admin-lte/dist/js/adminlte.min.js',
+  'resources/js/admin.js',
 ], 'public/js/admin.js')
-    .sass('resources/sass/admin.scss', 'public/css');
+    .sass('resources/sass/admin.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css');

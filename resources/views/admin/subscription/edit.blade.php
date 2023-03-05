@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form id="main" method="post" action="{{ route('subscription.update', $subscription->id) }}">
                         @csrf
                         @method('PUT')

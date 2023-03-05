@@ -45,11 +45,11 @@ class GymTable extends TableAbstract
                 'name' => 'Адреса',
                 'sortable' => true
             ]),
-            new StringAttributeAbstract([
-                'attribute' => 'email',
-                'name' => 'Email',
-                'sortable' => true
-            ]),
+//            new StringAttributeAbstract([
+//                'attribute' => 'email',
+//                'name' => 'Email',
+//                'sortable' => true
+//            ]),
             new LabelAttributeAbstract([
                 'attribute' => 'status',
                 'name' => 'Статус',
@@ -78,11 +78,13 @@ class GymTable extends TableAbstract
         return [
             [
                 'route' => route('gym.edit', $item->id),
-                'class' => 'btn btn-sm btn-inverse icofont icofont-pencil-alt-2',
+                'class' => 'btn btn-sm btn-primary',
+                'icon' => '<i class="fas fa-pen"></i>',
             ],
             [
                 'route' => '#',
-                'class' => 'btn btn-sm btn-danger icofont icofont-trash',
+                'class' => 'btn btn-sm btn-danger',
+                'icon' => '<i class="fas fa-trash"></i>',
             ]
         ];
     }

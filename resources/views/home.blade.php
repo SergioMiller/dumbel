@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-c-yellow update-card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-end">
                                 <div class="col-8">
                                     <h4 class="text-white">$30200</h4>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-c-green update-card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-end">
                                 <div class="col-8">
                                     <h4 class="text-white">290+</h4>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-c-pink update-card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-end">
                                 <div class="col-8">
                                     <h4 class="text-white">145</h4>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-c-lite-green update-card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-end">
                                 <div class="col-8">
                                     <h4 class="text-white">500</h4>
@@ -145,7 +145,7 @@
             <div class="row">
                 <div class="col-xl-4 col-md-6">
                     <div class="card social-card bg-simple-c-blue">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <i class="feather icon-mail f-34 text-c-blue social-icon"></i>
@@ -164,7 +164,7 @@
 
                 <div class="col-xl-4 col-md-6">
                     <div class="card social-card bg-simple-c-pink">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <i class="feather icon-twitter f-34 text-c-pink social-icon"></i>
@@ -183,7 +183,7 @@
 
                 <div class="col-xl-4 col-md-12">
                     <div class="card social-card bg-simple-c-green">
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <i class="feather icon-instagram f-34 text-c-green social-icon"></i>

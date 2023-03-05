@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="#">Swagger</a>
+        <a href="#" class="text-default">Swagger</a>
     </li>
 @endsection
 
@@ -18,8 +18,9 @@
         }
 
         .swagger-ui .wrapper {
-            padding: 0;
             max-width: 100%;
+            background: #fff;
+            padding: 15px;
         }
 
         .scheme-container .wrapper {
@@ -32,6 +33,10 @@
 
         .wrapper .col-12 {
             padding: 0;
+        }
+
+        .swagger-ui .scheme-container {
+            padding: 15px;
         }
     </style>
 @endsection

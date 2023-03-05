@@ -17,10 +17,10 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-block">
-                    <form id="main" method="post" action="{{ route('gym.update', $gym->id) }}">
-                        @csrf
-                        @method('PUT')
+                <form id="main" method="post" action="{{ route('gym.update', $gym->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-body">
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">
@@ -120,8 +120,11 @@
                                 <select name="status"
                                         id="status"
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
-                                    <option @if($gym->status === 'active') selected @endif value="active">Active</option>
-                                    <option @if($gym->status === 'moderation') selected @endif  value="moderation">Moderation</option>
+                                    <option @if($gym->status === 'active') selected @endif value="active">Active
+                                    </option>
+                                    <option @if($gym->status === 'moderation') selected @endif  value="moderation">
+                                        Moderation
+                                    </option>
                                 </select>
 
                                 @if($errors->has('email'))
@@ -144,11 +147,14 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="card-footer">
                         <div class="float-right">
                             <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
 
             @if($gym->trainers->isNotEmpty())

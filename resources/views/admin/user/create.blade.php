@@ -9,7 +9,7 @@
         <a href="{{ route('user.index') }}">Користувачі</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">Створення користувача</a>
+        Створення користувача
     </li>
 @endsection
 
@@ -17,8 +17,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-block">
-                    <form id="main" method="post" action="{{ route('user.store') }}">
+                <form id="main" method="post" action="{{ route('user.store') }}">
+                    <div class="card-body">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Імʼя <span class="text-danger">*</span></label>
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Email  <span class="text-danger">*</span></label>
+                            <label class="col-sm-2 col-form-label">Email <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="email"
                                        class="form-control @if($errors->has('email')) {{'is-invalid' }} @endif"
@@ -120,12 +120,14 @@
                             </div>
                         </div>
 
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
-                        </div>
-                    </form>
-                </div>
             </div>
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
+                            </div>
+                        </div>
+                </form>
         </div>
+    </div>
     </div>
 @endsection

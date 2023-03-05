@@ -9,7 +9,7 @@
         <a href="{{ route('gym.index') }}">Спортивні зали</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">Створити спортивний зал</a>
+        Створити спортивний зал
     </li>
 @endsection
 
@@ -17,9 +17,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-block">
-                    <form id="main" method="post" action="{{ route('gym.store') }}">
-                        @csrf
+                <form id="main" method="post" action="{{ route('gym.store') }}">
+                    @csrf
+                    <div class="card-body">
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Власник <span class="text-danger">*</span></label>
@@ -125,11 +125,14 @@
                             </div>
                         </div>
 
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
+
+                    </div>
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </div>

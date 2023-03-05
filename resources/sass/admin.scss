@@ -1,11 +1,35 @@
 //@import '~bootstrap/scss/bootstrap';
-@import "../theme/libraries/bower_components/bootstrap/css/bootstrap.min.css";
-@import "../theme/libraries/assets/css/themify-icons.css";
-@import "../theme/libraries/assets/css/icofont.css";
-@import "../theme/libraries/assets/css/feather.css";
-@import "../theme/libraries/assets/css/style.css";
-@import "../theme/libraries/assets/css/jquery.mCustomScrollbar.css";
+//@import "~admin-lte/node_modules/bootstrap/scss/bootstrap.scss";
+//@import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
+//@import "~admin-lte/dist/css/adminlte.css";
+@import "theme/admin-lte.css";
+@import "theme/fa.css";
+
+* {
+    font-family: Ubuntu, sans-serif;
+}
 
 .invalid-feedback {
     font-size: .7rem;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.text-default {
+    color: #212529;
+}
+
+.dark-mode .text-default {
+    color: #e1e1e1;
+}
+
+.admin-sort {
+    vertical-align: middle;
+    white-space: nowrap;
+
+    i {
+        vertical-align: middle;
+    }
 }

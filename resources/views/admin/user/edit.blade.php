@@ -17,14 +17,15 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-block">
-                    <form id="main" method="post" action="{{ route('user.update', $user->id) }}">
+                <form id="main" method="post" action="{{ route('user.update', $user->id) }}">
+                    <div class="card-body">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Імʼя <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control @if($errors->has('name')) {{'is-invalid' }} @endif"
+                                <input type="text"
+                                       class="form-control @if($errors->has('name')) {{'is-invalid' }} @endif"
                                        name="name"
                                        id="name"
                                        value="{{ old('name', $user->name) }}">
@@ -37,7 +38,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Фамілія <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control @if($errors->has('lastname')) {{'is-invalid' }} @endif"
+                                <input type="text"
+                                       class="form-control @if($errors->has('lastname')) {{'is-invalid' }} @endif"
                                        name="lastname"
                                        id="lastname"
                                        value="{{ old('lastname', $user->lastname) }}">
@@ -50,7 +52,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Телефон <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control @if($errors->has('phone')) {{'is-invalid' }} @endif"
+                                <input type="text"
+                                       class="form-control @if($errors->has('phone')) {{'is-invalid' }} @endif"
                                        name="phone"
                                        id="phone"
                                        value="{{ old('phone', $user->phone) }}">
@@ -63,7 +66,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control @if($errors->has('email')) {{'is-invalid' }} @endif"
+                                <input type="email"
+                                       class="form-control @if($errors->has('email')) {{'is-invalid' }} @endif"
                                        name="email"
                                        id="email"
                                        value="{{ old('email', $user->email) }}">
@@ -79,8 +83,11 @@
                                 <select name="status"
                                         id="status"
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
-                                    <option @if($user->status === 'active') selected @endif value="active">Активний</option>
-                                    <option @if($user->status === 'blocked') selected @endif  value="blocked">Заблокований</option>
+                                    <option @if($user->status === 'active') selected @endif value="active">Активний
+                                    </option>
+                                    <option @if($user->status === 'blocked') selected @endif  value="blocked">
+                                        Заблокований
+                                    </option>
                                 </select>
 
                                 @if($errors->has('email'))
@@ -113,7 +120,8 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Пароль</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control @if($errors->has('password')) {{'is-invalid' }} @endif"
+                                <input type="password"
+                                       class="form-control @if($errors->has('password')) {{'is-invalid' }} @endif"
                                        autocomplete="new-password"
                                        name="password"
                                        id="password"
@@ -138,11 +146,13 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="card-footer">
                         <div class="float-right">
                             <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

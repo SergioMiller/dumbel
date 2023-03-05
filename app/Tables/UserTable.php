@@ -75,11 +75,13 @@ class UserTable extends TableAbstract
         return [
             [
                 'route' => route('user.edit', $item->id),
-                'class' => 'btn btn-sm btn-inverse icofont icofont-pencil-alt-2',
+                'class' => 'btn btn-sm btn-primary',
+                'icon' => '<i class="fas fa-pen"></i>',
             ],
             [
                 'route' => '#',
-                'class' => 'btn btn-sm btn-danger icofont icofont-trash',
+                'class' => 'btn btn-sm btn-danger',
+                'icon' => '<i class="fas fa-trash"></i>',
             ]
         ];
     }
