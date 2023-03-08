@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Api\User\Dto;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 final class UserCreateDto implements Arrayable
 {
@@ -20,8 +18,6 @@ final class UserCreateDto implements Arrayable
 
     private readonly ?string $birthday;
 
-    private readonly UuidInterface $uuid;
-
     public static function fromArray(array $data): self
     {
         $instance = new  self();
@@ -30,7 +26,6 @@ final class UserCreateDto implements Arrayable
         $instance->phone = $data['phone'] ?? null;
         $instance->email = $data['email'] ?? null;
         $instance->birthday = $data['birthday'] ?? null;
-        $instance->uuid = Uuid::fromString($data['uuid']);
 
         return $instance;
     }
@@ -43,12 +38,6 @@ final class UserCreateDto implements Arrayable
             'phone' => $this->phone,
             'email' => $this->email,
             'birthday' => $this->birthday,
-            'uuid' => $this->uuid->toString(),
         ];
-    }
-
-    public function getUuid(): UuidInterface
-    {
-        return $this->uuid;
     }
 }

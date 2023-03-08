@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
-use App\Enums\QrCodeSourceEnum;
 use App\Enums\UserStatusEnum;
 use App\Exceptions\PasswordDoesNotMatchException;
 use App\Exceptions\UserNotFoundException;
-use App\Models\QrCode;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class AuthService
 {
@@ -53,38 +50,8 @@ class AuthService
         $user = new User($data);
         $user->status = UserStatusEnum::ACTIVE->value;
         $user->save();
-        $this->saveQrCode($user, $data);
+        #TODO:create client card
         DB::commit();
-
-        return $this->generateApiToken($user, $data['device']);
-    }
-
-    private function saveQrCode(User $user, array $data): void
-    {
-        if (isset($data['uuid'])) {
-            $qrCode = QrCode::query()->where('uuid', $data['uuid'])->whereNull('user_id')->first();
-        } else {
-            $qrCode = new QrCode();
-            $qrCode->uuid = Str::uuid();
-            $qrCode->source = QrCodeSourceEnum::AUTOMATIC->value;
-        }
-
-        $qrCode->user_id = $user->id;
-
-        $qrCode->save();
-    }
-
-    public function checkQrCode(string $uuid): bool
-    {
-        return QrCode::query()->where('uuid', $uuid)->whereNull('user_id')->exists();
-    }
-
-    public function registerWithQrCode(QrCode $qrCode, array $data): string
-    {
-        $data['password'] = Hash::make($data['password']);
-
-        $user = $qrCode->user;
-        $user->update($data);
 
         return $this->generateApiToken($user, $data['device']);
     }

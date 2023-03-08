@@ -22,7 +22,6 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="email", type="string", format="email", example="email@email.email"),
  *     @OA\Property(property="password", type="string", example="password"),
  *     @OA\Property(property="birthday", type="string", format="date", example="10-10-2020"),
- *     @OA\Property(property="uuid", type="string", format="uuid", example="3fa85f64-5717-4562-b3fc-2c963f66afa6"),
  *     @OA\Property(property="device", type="string", example="Nokia6230i/2.0 (03.25) Profile/MIDP-2.0 Configuration/CLDC-1.1"),
  * )
  */
@@ -39,7 +38,6 @@ final class RegisterRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['string', 'required'],
             'birthday' => ['date', 'before:today', 'nullable'],
-            'uuid' => ['uuid', 'nullable', Rule::exists('qr_codes', 'uuid')->whereNull('user_id')],
             'device' => ['required', 'string'],
         ];
     }

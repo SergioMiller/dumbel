@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,7 +20,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $status
  * @property string $birthday
  * @property string $password
- * @property QrCode $qrCode
  */
 class User extends Authenticatable
 {
@@ -54,10 +52,5 @@ class User extends Authenticatable
     public function gyms(): HasMany
     {
         return $this->hasMany(Gym::class)->orderByDesc('created_at');
-    }
-
-    public function qrCode(): HasOne
-    {
-        return $this->hasOne(QrCode::class);
     }
 }

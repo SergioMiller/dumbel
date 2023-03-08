@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\UserStatusEnum;
 use App\Models\Gym;
-use App\Models\QrCode;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -35,7 +34,6 @@ class DatabaseSeeder extends Seeder
                     )->count(1)
                 )
                 ->create();
-            QrCode::factory(100)->create();
         }
     }
 }

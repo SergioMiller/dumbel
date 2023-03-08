@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GymController;
-use App\Http\Controllers\Admin\QrCodeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SwaggerController;
 use App\Http\Controllers\Admin\SubscriptionController;
@@ -20,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', static function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], static function () {
     Route::get('/swagger', [SwaggerController::class, 'index'])->name('swagger');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -34,5 +33,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('gym', GymController::class)->except('show')->parameter('user', 'id');
     Route::get('/gym/subscription/{id}', [SubscriptionController::class, 'edit'])->name('subscription.edit');
     Route::put('/gym/subscription/{id}', [SubscriptionController::class, 'update'])->name('subscription.update');
-    Route::get('/qr-code', [QrCodeController::class, 'index'])->name('qr-code.index');
 });

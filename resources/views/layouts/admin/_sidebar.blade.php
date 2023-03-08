@@ -9,7 +9,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link {{ request()->routeIs('dashboard', 'swagger') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard<i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -23,21 +23,21 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}" class="nav-link">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <p>Користувачі</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('qr-code.index') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-barcode"></i>
-                        <p>QR Коди</p>
+                        <p>Картки клієнтів</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('gym.index') }}" class="nav-link">
+                    <a href="{{ route('gym.index') }}" class="nav-link {{ request()->routeIs('gym.index') ? 'active' : '' }}">
                         <i class="fas fa-futbol"></i>
                         <p>Спортивні зали</p>
                     </a>
