@@ -21,8 +21,8 @@
     @yield('css')
 </head>
 
-<body class="sidebar-mini layout-fixed dark-mode">
-{{--<body class="sidebar-mini layout-fixed">--}}
+{{--<body class="sidebar-mini layout-fixed dark-mode">--}}
+<body class="sidebar-mini layout-fixed">
 <div class="wrapper">
 
     @include('layouts/admin/_header')
@@ -38,8 +38,14 @@
                 @yield('content')
             </div>
         </section>
-    </div>
-</div>
 
+    </div>
+
+    @include('layouts/admin/_footer')
+
+    @include('layouts/admin/_control-sidebar')
+
+</div>
+<script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>

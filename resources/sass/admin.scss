@@ -6,6 +6,7 @@
 @import "theme/fa.css";
 
 * {
+    font-size: 14px;
     font-family: Ubuntu, sans-serif;
 }
 
@@ -19,6 +20,14 @@ a:hover {
 
 .text-default {
     color: #212529;
+}
+
+.text-default-white {
+    color: rgba(255, 255, 255, 0.75);
+
+    &:hover{
+        color: rgba(255, 255, 255, 0.5);
+    }
 }
 
 .dark-mode .text-default {

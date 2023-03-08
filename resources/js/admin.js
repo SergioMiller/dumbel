@@ -4,5 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
-
-
+require('./theme/jquery.min')
+require('./theme/bootstrap.min')
+require('./theme/adminlte.min.js')
+require('./theme/demo.js')

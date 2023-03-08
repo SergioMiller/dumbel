@@ -15,7 +15,7 @@
             <td>{{ $subscription->day_quantity }}</td>
         </tr>
         <tr>
-            <td>Активний, год</td>
+            <td>Активний, з - до</td>
             <td>{{ $subscription->works_from }} - {{ $subscription->works_to }}</td>
         </tr>
         <tr>
@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>Ціна</td>
-            <td>{{ $subscription->price }}</td>
+            <td><strong>{{ $subscription->price }}</strong>@isset($subscription->price)грн.@endisset</td>
         </tr>
         <tr>
             <td>Створено</td>

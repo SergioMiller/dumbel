@@ -12,7 +12,7 @@
         <a href="{{ route('gym.edit', $subscription->gym->id) }}">{{ $subscription->gym->name }}</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">{{ $subscription->name }}</a>
+        {{ $subscription->name }}
     </li>
 @endsection
 

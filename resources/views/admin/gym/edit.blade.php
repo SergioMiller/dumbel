@@ -9,7 +9,7 @@
         <a href="{{ route('gym.index') }}">{{ 'Спортивні зали' }}</a>
     </li>
     <li class="breadcrumb-item">
-        <a href="#">{{ $gym->name }}</a>
+        {{ $gym->name }}
     </li>
 @endsection
 

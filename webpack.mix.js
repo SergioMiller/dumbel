@@ -16,7 +16,7 @@ const mix = require('laravel-mix');
 //     .sass('resources/sass/app.scss', 'public/css');
 
 mix.js([
-  'node_modules/admin-lte/dist/js/adminlte.min.js',
+  // 'node_modules/admin-lte/dist/js/adminlte.min.js',
   'resources/js/admin.js',
 ], 'public/js/admin.js')
     .sass('resources/sass/admin.scss', 'public/css')

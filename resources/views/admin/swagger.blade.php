@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <a href="#" class="text-default">Swagger</a>
+        Swagger
     </li>
 @endsection
 
