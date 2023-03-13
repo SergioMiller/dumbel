@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GymController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SwaggerController;
-use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\GymMembershipController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,10 +27,11 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], static function () {
     Route::get('/swagger', [SwaggerController::class, 'index'])->name('swagger');
+    Route::get('/swagger/openapi.yaml', [SwaggerController::class, 'openapi'])->name('openapi');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('user', UserController::class)->except('show')->parameter('user', 'id');
     Route::resource('gym', GymController::class)->except('show')->parameter('user', 'id');
-    Route::get('/gym/subscription/{id}', [SubscriptionController::class, 'edit'])->name('subscription.edit');
-    Route::put('/gym/subscription/{id}', [SubscriptionController::class, 'update'])->name('subscription.update');
+    Route::get('/gym/gym-membership/{id}', [GymMembershipController::class, 'edit'])->name('gym-membership.edit');
+    Route::put('/gym/gym-membership/{id}', [GymMembershipController::class, 'update'])->name('gym-membership.update');
 });

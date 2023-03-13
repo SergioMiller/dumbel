@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Admin\Subscription;
+namespace App\Http\Requests\Admin\GymMembership;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-final class SubscriptionUpdateRequest extends FormRequest
+final class GymMembershipUpdateRequest extends FormRequest
 {
     public function rules(): array
     {

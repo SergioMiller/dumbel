@@ -10,15 +10,15 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(
- *     schema="AttachSubscribeRequest",
+ *     schema="GymMembershipAttachRequest",
  *     type="object",
- *     required={"user_id", "subscription_id"},
+ *     required={"user_id", "gym_membership_id"},
  *
  *     @OA\Property(property="user_id", type="integer", example="1"),
- *     @OA\Property(property="subscription_id", type="integer", example="1"),
+ *     @OA\Property(property="gym_membership_id", type="integer", example="1"),
  * )
  */
-final class AttachSubscriptionRequest extends FormRequest
+final class GymMembershipAttachRequest extends FormRequest
 {
     use FailedValidation;
 
@@ -26,7 +26,7 @@ final class AttachSubscriptionRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'integer'],
-            'subscription_id' => ['required', 'integer'],
+            'gym_membership_id' => ['required', 'integer'],
         ];
     }
 }

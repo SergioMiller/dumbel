@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price
  * @property string|Carbon $created_at
  */
-class UserSubscription extends Model
+class UserGymMembership extends Model
 {
     use HasFactory;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Api\Subscription\Dto;
+namespace App\Services\Api\GymMembership\Dto;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-final class SubscriptionUpdateDto implements Arrayable
+final class GymMembershipUpdateDto implements Arrayable
 {
     private readonly string $name;
 

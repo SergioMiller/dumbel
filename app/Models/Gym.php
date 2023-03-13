@@ -50,9 +50,9 @@ class Gym extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function subscriptions(): HasMany
+    public function gymMembership(): HasMany
     {
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(GymMembership::class);
     }
 
     public function trainers(): BelongsToMany

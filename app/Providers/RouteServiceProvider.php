@@ -14,8 +14,9 @@ class RouteServiceProvider extends ServiceProvider
 {
     public const HOME = '/dashboard';
 
-    public function boot()
+    public function boot(): void
     {
+        Route::pattern('id', '[0-9]+');
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -30,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', function (Request $request) {
+        RateLimiter::for('api', static function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }

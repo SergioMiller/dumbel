@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->index(['user_id']);
         });
 
-        Schema::table('subscriptions', static function (Blueprint $table) {
+        Schema::table('gym_memberships', static function (Blueprint $table) {
             $table->index(['gym_id']);
         });
     }
@@ -28,8 +28,8 @@ return new class extends Migration {
             $table->dropIndex('gyms_user_id_index');
         });
 
-        Schema::table('subscriptions', static function (Blueprint $table) {
-            $table->dropIndex('subscriptions_gym_id_index');
+        Schema::table('gym_memberships', static function (Blueprint $table) {
+            $table->dropIndex('gym_memberships_gym_id_index');
         });
     }
 };

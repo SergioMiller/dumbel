@@ -6,17 +6,17 @@ namespace App\Services\Api\User\Dto;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-final class AttachSubscriptionDto implements Arrayable
+final class AttachGymMembershipDto implements Arrayable
 {
     private readonly int $user_id;
 
-    private readonly int $subscription_id;
+    private readonly int $gym_membership_id;
 
     public static function fromArray(array $data): self
     {
         $instance = new  self();
         $instance->user_id = $data['user_id'];
-        $instance->subscription_id = $data['subscription_id'];
+        $instance->gym_membership_id = $data['gym_membership_id'];
 
         return $instance;
     }
@@ -25,7 +25,7 @@ final class AttachSubscriptionDto implements Arrayable
     {
         return [
             'user_id' => $this->user_id,
-            'subscription_id' => $this->subscription_id,
+            'gym_membership_id' => $this->gym_membership_id,
         ];
     }
 
@@ -34,8 +34,8 @@ final class AttachSubscriptionDto implements Arrayable
         return $this->user_id;
     }
 
-    public function getSubscriptionId(): int
+    public function getMembershipId(): int
     {
-        return $this->subscription_id;
+        return $this->gym_membership_id;
     }
 }

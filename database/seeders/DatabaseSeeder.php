@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\UserStatusEnum;
 use App\Models\Gym;
-use App\Models\Subscription;
+use App\Models\GymMembership;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             User::factory(10)
                 ->has(
                     Gym::factory()->has(
-                        Subscription::factory()->count(6)
+                        GymMembership::factory()->count(6)
                     )->count(3)
                 )
                 ->create();

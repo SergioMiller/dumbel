@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Gym\GymCreateRequest;
 use App\Http\Requests\Admin\Gym\GymUpdateRequest;
 use App\Models\Gym;
+use App\Models\GymMembership;
 use App\Models\User;
 use App\Tables\GymTable;
 use Illuminate\Contracts\View\View;
@@ -25,8 +26,8 @@ final class GymController extends Controller
             ->setCreateUrl(route('gym.create'));
 
         return view('admin.table', [
-            'table' => $table,
-            'paginator' => $table->paginator(),
+            'table'      => $table,
+            'paginator'  => $table->paginator(),
             'attributes' => $table->attributes()
         ]);
     }
@@ -49,13 +50,15 @@ final class GymController extends Controller
 
     public function edit(int $id): View
     {
+        /** @var Gym $gym */
         $model = Gym::query()->where('id', $id)->first();
 
         abort_if(null === $model, 404);
 
         return view('admin.gym.edit', [
-            'gym' => $model,
-            'users' => User::query()->get()
+            'gym'         => $model,
+            'memberships' => GymMembership::query()->where('gym_id', $model->id)->paginate(5),
+            'users'       => User::query()->get()
         ]);
     }
 

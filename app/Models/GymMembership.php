@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|Carbon $updated_at
  * @property Gym $gym
  */
-class Subscription extends Model
+class GymMembership extends Model
 {
     use HasFactory;
 

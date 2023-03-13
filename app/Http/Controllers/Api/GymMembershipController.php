@@ -5,35 +5,35 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Subscription\SubscriptionCreateRequest;
-use App\Http\Requests\Api\Subscription\SubscriptionUpdateRequest;
+use App\Http\Requests\Api\GymMembership\GymMembershipCreateRequest;
+use App\Http\Requests\Api\GymMembership\GymMembershipUpdateRequest;
 use App\Library\Response;
-use App\Repository\SubscriptionRepository;
-use App\Services\Api\Subscription\Dto\SubscriptionCreateDto;
-use App\Services\Api\Subscription\Dto\SubscriptionUpdateDto;
-use App\Services\Api\Subscription\SubscriptionService;
-use App\Transformers\Gym\SubscriptionTransformer;
+use App\Repository\GymMembershipRepository;
+use App\Services\Api\GymMembership\Dto\GymMembershipCreateDto;
+use App\Services\Api\GymMembership\Dto\GymMembershipUpdateDto;
+use App\Services\Api\GymMembership\GymMembershipService;
+use App\Transformers\Gym\GymMembershipTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 
-final class SubscriptionController extends Controller
+final class GymMembershipController extends Controller
 {
     public function __construct(
-        private readonly SubscriptionService $subscriptionService,
-        private readonly SubscriptionRepository $subscriptionRepository
+        private readonly GymMembershipService $gymMembershipService,
+        private readonly GymMembershipRepository $gymMembershipRepository
     ) {
     }
 
     /**
      * @OA\Post(
-     *     path="/api/v1/subscription/create",
-     *     description="Create subscription.",
-     *     tags={"Subscription"},
+     *     path="/api/v1/gym-membership/create",
+     *     description="Gym membership create.",
+     *     tags={"Gym membership"},
      *
      *     @OA\RequestBody(
      *
-     *         @OA\JsonContent(ref="#/components/schemas/SubscriptionCreateRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/GymMembershipCreateRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
@@ -55,7 +55,7 @@ final class SubscriptionController extends Controller
      *                             property="data",
      *                             allOf={
      *
-     *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
+     *                                 @OA\Schema(ref="#/components/schemas/GymMembershipTransformer")
      *                             }
      *                         )
      *                     )
@@ -65,22 +65,22 @@ final class SubscriptionController extends Controller
      *     )
      * )
      *
-     * @param SubscriptionCreateRequest $request
+     * @param GymMembershipCreateRequest $request
      *
      * @return JsonResponse
      */
-    public function create(SubscriptionCreateRequest $request): JsonResponse
+    public function create(GymMembershipCreateRequest $request): JsonResponse
     {
-        $model = $this->subscriptionService->create(SubscriptionCreateDto::fromArray($request->validated()));
+        $model = $this->gymMembershipService->create(GymMembershipCreateDto::fromArray($request->validated()));
 
-        return Response::success(new SubscriptionTransformer($model));
+        return Response::success(new GymMembershipTransformer($model));
     }
 
     /**
      * @OA\Get(
-     *     path="/api/v1/subscription/{id}",
-     *     description="Get subscription.",
-     *     tags={"Subscription"},
+     *     path="/api/v1/gym-membership/{id}",
+     *     description="Gym membership get.",
+     *     tags={"Gym membership"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
@@ -109,7 +109,7 @@ final class SubscriptionController extends Controller
      *                             property="data",
      *                             allOf={
      *
-     *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
+     *                                 @OA\Schema(ref="#/components/schemas/GymMembershipTransformer")
      *                             }
      *                         )
      *                     )
@@ -125,18 +125,18 @@ final class SubscriptionController extends Controller
      */
     public function get(int $id): JsonResponse
     {
-        $model = $this->subscriptionRepository->getById($id);
+        $model = $this->gymMembershipRepository->getById($id);
 
         abort_if(null === $model, 404, 'Not found.');
 
-        return Response::success(new SubscriptionTransformer($model));
+        return Response::success(new GymMembershipTransformer($model));
     }
 
     /**
      * @OA\Put(
-     *     path="/api/v1/subscription/{id}/update",
-     *     description="Update subscription.",
-     *     tags={"Subscription"},
+     *     path="/api/v1/gym-membership/{id}/update",
+     *     description="Gym membership update.",
+     *     tags={"Gym membership"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
@@ -151,7 +151,7 @@ final class SubscriptionController extends Controller
      *
      *     @OA\RequestBody(
      *
-     *         @OA\JsonContent(ref="#/components/schemas/SubscriptionUpdateRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/GymMembershipUpdateRequest")
      *     ),
      *
      *     @OA\Response(
@@ -170,7 +170,7 @@ final class SubscriptionController extends Controller
      *                             property="data",
      *                             allOf={
      *
-     *                                 @OA\Schema(ref="#/components/schemas/SubscriptionTransformer")
+     *                                 @OA\Schema(ref="#/components/schemas/GymMembershipTransformer")
      *                             }
      *                         )
      *                     )
@@ -181,30 +181,30 @@ final class SubscriptionController extends Controller
      * )
      *
      * @param int $id
-     * @param SubscriptionUpdateRequest $request
+     * @param GymMembershipUpdateRequest $request
      *
      * @return JsonResponse
      *
      * @throws AuthorizationException
      */
-    public function update(int $id, SubscriptionUpdateRequest $request): JsonResponse
+    public function update(int $id, GymMembershipUpdateRequest $request): JsonResponse
     {
-        $model = $this->subscriptionRepository->getById($id);
+        $model = $this->gymMembershipRepository->getById($id);
 
         $this->authorize('update', $model);
 
         abort_if(null === $model, 404, 'Not found.');
 
-        $model = $this->subscriptionService->update($model, SubscriptionUpdateDto::fromArray($request->validated()));
+        $model = $this->gymMembershipService->update($model, GymMembershipUpdateDto::fromArray($request->validated()));
 
-        return Response::success(new SubscriptionTransformer($model));
+        return Response::success(new GymMembershipTransformer($model));
     }
 
     /**
      * @OA\Get(
-     *     path="/api/v1/subscription/{gym_id}/list",
-     *     description="List subscription.",
-     *     tags={"Subscription"},
+     *     path="/api/v1/gym-membership/{gym_id}/list",
+     *     description="Gym membership list.",
+     *     tags={"Gym membership"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
@@ -233,7 +233,7 @@ final class SubscriptionController extends Controller
      *                             property="data",
      *                             type="array",
      *
-     *                             @OA\Items(ref="#/components/schemas/SubscriptionTransformer")
+     *                             @OA\Items(ref="#/components/schemas/GymMembershipTransformer")
      *                         )
      *                     ),
      *                 }
@@ -248,8 +248,8 @@ final class SubscriptionController extends Controller
      */
     public function listByGym(int $id): JsonResponse
     {
-        $subscriptions = $this->subscriptionRepository->getListByGymId($id);
+        $gymMembership = $this->gymMembershipRepository->getListByGymId($id);
 
-        return Response::success(new SubscriptionTransformer($subscriptions));
+        return Response::success(new GymMembershipTransformer($gymMembership));
     }
 }

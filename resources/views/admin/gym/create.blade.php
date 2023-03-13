@@ -127,11 +127,9 @@
 
 
                     </div>
-                        <div class="card-footer">
-                            <div class="float-right">
-                                <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
-                            </div>
-                        </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary m-b-0 float-right">Зберегти</button>
+                    </div>
                 </form>
             </div>
         </div>

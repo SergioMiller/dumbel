@@ -150,9 +150,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-primary m-b-0">Зберегти</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary m-b-0 float-right">Зберегти</button>
                     </div>
                 </form>
             </div>
@@ -167,11 +165,14 @@
 
         </div>
 
-        @if($gym->subscriptions->isNotEmpty())
+        @if($memberships->isNotEmpty())
             <div class="col-md-6">
-                @foreach($gym->subscriptions->sortBy('id') as $subscription)
-                    @include('admin/gym/_subscription-edit', $subscription)
+                @foreach($memberships as $gymMembership)
+                    @include('admin.gym._membership', $gymMembership)
                 @endforeach
+                <div class="float-right">
+                    {{ $memberships->links() }}
+                </div>
             </div>
         @endif
 

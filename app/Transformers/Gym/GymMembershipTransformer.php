@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Transformers\Gym;
 
 use App\Library\Transformer;
-use App\Models\Subscription;
+use App\Models\GymMembership;
 use OpenApi\Annotations as OA;
 
 /**
- * @OA\Schema(schema="SubscriptionTransformer")
+ * @OA\Schema(schema="GymMembershipTransformer")
  *
  * @OA\Property(property="id", type="integer", example="1"),
  * @OA\Property(property="gym_id", type="integer", example="1"),
@@ -22,21 +22,21 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="created_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
  * @OA\Property(property="updated_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
  */
-class SubscriptionTransformer extends Transformer
+class GymMembershipTransformer extends Transformer
 {
-    public function toArray(Subscription $subscription): array
+    public function toArray(GymMembership $gymMembership): array
     {
         return [
-            'id' => $subscription->id,
-            'gym_id' => $subscription->gym_id,
-            'name' => $subscription->name,
-            'day_quantity' => $subscription->day_quantity,
-            'works_from' => $subscription->works_from,
-            'works_to' => $subscription->works_to,
-            'training_quantity' => $subscription->training_quantity,
-            'price' => $subscription->price,
-            'created_at' => $subscription->created_at->toDateTimeString(),
-            'updated_at' => $subscription->updated_at->toDateTimeString(),
+            'id' => $gymMembership->id,
+            'gym_id' => $gymMembership->gym_id,
+            'name' => $gymMembership->name,
+            'day_quantity' => $gymMembership->day_quantity,
+            'works_from' => $gymMembership->works_from,
+            'works_to' => $gymMembership->works_to,
+            'training_quantity' => $gymMembership->training_quantity,
+            'price' => $gymMembership->price,
+            'created_at' => $gymMembership->created_at->toDateTimeString(),
+            'updated_at' => $gymMembership->updated_at->toDateTimeString(),
         ];
     }
 }

@@ -47,7 +47,7 @@
     <script>
       window.onload = () => {
         window.ui = SwaggerUIBundle({
-          url: "/openapi.yaml",
+          url: "/swagger/openapi.yaml",
           dom_id: '#swagger-ui',
         });
       };

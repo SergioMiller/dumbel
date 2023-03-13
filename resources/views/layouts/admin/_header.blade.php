@@ -139,14 +139,13 @@
                 <a href="{{ route('user.edit', auth()->id()) }}" class="text-default-white">
                     {{ auth()->user()->name }} {{ auth()->user()->lastname }}
                 </a>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Вийти
+                </a>
             </span>
         </div>
-        <a href="{{ route('logout') }}"
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-           class="btn btn-default btn-sm"
-            title="Exit">
-            <i class="fas fa-door-open"></i>
-        </a>
+
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         </form>

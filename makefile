@@ -28,7 +28,7 @@ optimize:
 
 .PHONY: swagger
 swagger:
-	docker-compose exec app bash -lc './vendor/bin/openapi ./app -o ./storage'
+	docker-compose exec app bash -lc './vendor/bin/openapi ./app -o ./storage/app'
 
 .PHONY: app
 app:

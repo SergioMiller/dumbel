@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GymController;
-use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\GymMembershipController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,11 +34,11 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::post('/gym/manager/add', [GymController::class, 'managerAdd']);
     Route::delete('/gym/manager/remove', [GymController::class, 'managerRemove']);
 
-    Route::post('/subscription/create', [SubscriptionController::class, 'create']);
-    Route::get('/subscription/{id}', [SubscriptionController::class, 'get']);
-    Route::put('/subscription/{id}/update', [SubscriptionController::class, 'update']);
-    Route::get('/subscription/{gym_id}/list', [SubscriptionController::class, 'listByGym']);
+    Route::post('/gym-membership/create', [GymMembershipController::class, 'create']);
+    Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
+    Route::put('/gym-membership/{id}/update', [GymMembershipController::class, 'update']);
+    Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
 
     Route::post('/user/create', [UserController::class, 'create']);
-    Route::post('/user/attach-subscription', [UserController::class, 'attachSubscription']);
+    Route::post('/user/gym-membership-attach', [UserController::class, 'gymMembershipAttach']);
 });

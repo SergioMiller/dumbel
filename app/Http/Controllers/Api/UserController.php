@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\User\AttachSubscriptionRequest;
+use App\Http\Requests\Api\User\GymMembershipAttachRequest;
 use App\Http\Requests\Api\User\UserCreateRequest;
 use App\Library\Response;
-use App\Services\Api\User\Dto\AttachSubscriptionDto;
+use App\Services\Api\User\Dto\AttachGymMembershipDto;
 use App\Services\Api\User\Dto\UserCreateDto;
 use App\Services\Api\User\UserService;
-use App\Transformers\User\UserSubscriptionTransformer;
+use App\Transformers\User\UserGymMembershipTransformer;
 use App\Transformers\User\UserTransformer;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
@@ -75,13 +75,13 @@ final class UserController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/user/attach-subscription",
-     *     description="Attach subscrittion.",
+     *     path="/api/v1/user/gym-membership-attach",
+     *     description="Gym membership attach.",
      *     tags={"User"},
      *
      *     @OA\RequestBody(
      *
-     *         @OA\JsonContent(ref="#/components/schemas/AttachSubscribeRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/GymMembershipAttachRequest")
      *     ),
      *     security={
      *         {"bearerAuth" : {}}
@@ -103,7 +103,7 @@ final class UserController extends Controller
      *                             property="data",
      *                             allOf={
      *
-     *                                 @OA\Schema(ref="#/components/schemas/UserSubscriptionTransformer")
+     *                                 @OA\Schema(ref="#/components/schemas/UserGymMembershipTransformer")
      *                             }
      *                         )
      *                     )
@@ -113,17 +113,17 @@ final class UserController extends Controller
      *     )
      * )
      *
-     * @param AttachSubscriptionRequest $request
+     * @param GymMembershipAttachRequest $request
      *
      * @return JsonResponse
      */
-    public function attachSubscription(AttachSubscriptionRequest $request): JsonResponse
+    public function gymMembershipAttach(GymMembershipAttachRequest $request): JsonResponse
     {
-        $data = $this->userService->attachSubscription(
+        $data = $this->userService->gymMembershipAttachRequest(
             $request->user(),
-            AttachSubscriptionDto::fromArray($request->validated())
+            AttachGymMembershipDto::fromArray($request->validated())
         );
 
-        return Response::success(new UserSubscriptionTransformer($data));
+        return Response::success(new UserGymMembershipTransformer($data));
     }
 }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Services\Api\User;
 
 use App\Models\User;
-use App\Models\UserSubscription;
-use App\Repository\SubscriptionRepository;
+use App\Models\UserGymMembership;
+use App\Repository\GymMembershipRepository;
 use App\Repository\UserRepository;
-use App\Services\Api\User\Dto\AttachSubscriptionDto;
+use App\Services\Api\User\Dto\AttachGymMembershipDto;
 use App\Services\Api\User\Dto\UserCreateDto;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +18,9 @@ class UserService
 {
     public function __construct(
         private readonly UserRepository $userRepository,
-        private readonly SubscriptionRepository $subscriptionRepository
-    ) {
+        private readonly GymMembershipRepository $gymMembershipRepository
+    )
+    {
     }
 
     public function create(UserCreateDto $data): User
@@ -34,7 +35,7 @@ class UserService
         return $user;
     }
 
-    public function attachSubscription(User $administrator, AttachSubscriptionDto $data): UserSubscription
+    public function gymMembershipAttachRequest(User $administrator, AttachGymMembershipDto $data): UserGymMembership
     {
         $user = $this->userRepository->getById($data->getUserId());
 
@@ -42,26 +43,26 @@ class UserService
             throw new NotFoundHttpException('User not found.');
         }
 
-        $subscription = $this->subscriptionRepository->getById($data->getSubscriptionId());
+        $gymMembership = $this->gymMembershipRepository->getById($data->getMembershipId());
 
-        if (null === $subscription) {
-            throw new NotFoundHttpException('Subscription not found.');
+        if (null === $gymMembership) {
+            throw new NotFoundHttpException('Gym membership not found.');
         }
 
-        $userSubscription = new UserSubscription();
-        $userSubscription->user_id = $user->id;
-        $userSubscription->gym_id = $subscription->gym_id;
-        $userSubscription->administrator_id = $administrator->id;
-        $userSubscription->name = $subscription->name;
-        $userSubscription->day_quantity = $subscription->day_quantity;
-        $userSubscription->works_from = $subscription->works_from;
-        $userSubscription->works_to = $subscription->works_to;
-        $userSubscription->training_quantity = $subscription->training_quantity;
-        $userSubscription->price = $subscription->price;
-        $userSubscription->created_at = Carbon::now()->toDateTimeString();
+        $userGymMembership = new UserGymMembership();
+        $userGymMembership->user_id = $user->id;
+        $userGymMembership->gym_id = $gymMembership->gym_id;
+        $userGymMembership->administrator_id = $administrator->id;
+        $userGymMembership->name = $gymMembership->name;
+        $userGymMembership->day_quantity = $gymMembership->day_quantity;
+        $userGymMembership->works_from = $gymMembership->works_from;
+        $userGymMembership->works_to = $gymMembership->works_to;
+        $userGymMembership->training_quantity = $gymMembership->training_quantity;
+        $userGymMembership->price = $gymMembership->price;
+        $userGymMembership->created_at = Carbon::now()->toDateTimeString();
 
-        $userSubscription->save();
+        $userGymMembership->save();
 
-        return $userSubscription;
+        return $userGymMembership;
     }
 }
