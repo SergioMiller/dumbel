@@ -45,11 +45,11 @@ class GymTable extends TableAbstract
                 'name' => 'Адреса',
                 'sortable' => true
             ]),
-//            new StringAttributeAbstract([
-//                'attribute' => 'email',
-//                'name' => 'Email',
-//                'sortable' => true
-//            ]),
+            //            new StringAttributeAbstract([
+            //                'attribute' => 'email',
+            //                'name' => 'Email',
+            //                'sortable' => true
+            //            ]),
             new LabelAttributeAbstract([
                 'attribute' => 'status',
                 'name' => 'Статус',

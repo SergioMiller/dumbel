@@ -191,9 +191,9 @@ final class GymMembershipController extends Controller
     {
         $model = $this->gymMembershipRepository->getById($id);
 
-        $this->authorize('update', $model);
-
         abort_if(null === $model, 404, 'Not found.');
+
+        $this->authorize('update', $model);
 
         $model = $this->gymMembershipService->update($model, GymMembershipUpdateDto::fromArray($request->validated()));
 

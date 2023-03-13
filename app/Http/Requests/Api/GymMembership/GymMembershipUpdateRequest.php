@@ -15,7 +15,8 @@ use OpenApi\Annotations as OA;
  *     required={"name", "day_quantity", "works_from", "works_to"},
  *
  *     @OA\Property(property="name", type="string", example="Unlimit"),
- *     @OA\Property(property="day_quantity", type="integer", example="12"),
+ *     @OA\Property(property="day_quantity", type="integer", example="31"),
+ *     @OA\Property(property="freeze_day_quantity", type="integer", example="7"),
  *     @OA\Property(property="works_from", type="integer", example="8"),
  *     @OA\Property(property="works_to", type="integer", example="21"),
  *     @OA\Property(property="training_quantity", type="integer", example="12"),
@@ -31,6 +32,7 @@ final class GymMembershipUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'day_quantity' => ['required', 'integer', 'max:31'],
+            'freeze_day_quantity' => ['nullable', 'integer', 'lt:day_quantity'],
             'works_from' => ['required', 'integer', 'min:0', 'max:24'],
             'works_to' => ['required', 'integer', 'min:0', 'max:24'],
             'training_quantity' => ['nullable', 'integer'],

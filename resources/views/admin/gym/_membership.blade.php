@@ -20,6 +20,10 @@
             <td>{{ $gymMembership->day_quantity }}</td>
         </tr>
         <tr>
+            <td>Заморозка для карти в днях</td>
+            <td>{{ $gymMembership->freeze_day_quantity }}</td>
+        </tr>
+        <tr>
             <td>Активний, з - до</td>
             <td>{{ $gymMembership->works_from }} - {{ $gymMembership->works_to }}</td>
         </tr>

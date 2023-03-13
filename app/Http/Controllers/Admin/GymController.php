@@ -26,8 +26,8 @@ final class GymController extends Controller
             ->setCreateUrl(route('gym.create'));
 
         return view('admin.table', [
-            'table'      => $table,
-            'paginator'  => $table->paginator(),
+            'table' => $table,
+            'paginator' => $table->paginator(),
             'attributes' => $table->attributes()
         ]);
     }
@@ -56,9 +56,9 @@ final class GymController extends Controller
         abort_if(null === $model, 404);
 
         return view('admin.gym.edit', [
-            'gym'         => $model,
+            'gym' => $model,
             'memberships' => GymMembership::query()->where('gym_id', $model->id)->paginate(5),
-            'users'       => User::query()->get()
+            'users' => User::query()->get()
         ]);
     }
 

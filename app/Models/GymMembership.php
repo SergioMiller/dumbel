@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer $gym_id
  * @property string $name
  * @property integer $day_quantity
+ * @property integer|null $freeze_day_quantity
  * @property integer $works_from
  * @property integer $works_to
  * @property integer $training_quantity
@@ -30,6 +31,7 @@ class GymMembership extends Model
         'gym_id',
         'name',
         'day_quantity',
+        'freeze_day_quantity',
         'works_from',
         'works_to',
         'training_quantity',

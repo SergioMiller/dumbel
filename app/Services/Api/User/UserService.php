@@ -19,8 +19,7 @@ class UserService
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly GymMembershipRepository $gymMembershipRepository
-    )
-    {
+    ) {
     }
 
     public function create(UserCreateDto $data): User
@@ -52,9 +51,11 @@ class UserService
         $userGymMembership = new UserGymMembership();
         $userGymMembership->user_id = $user->id;
         $userGymMembership->gym_id = $gymMembership->gym_id;
+        $userGymMembership->gym_membership_id = $gymMembership->id;
         $userGymMembership->administrator_id = $administrator->id;
         $userGymMembership->name = $gymMembership->name;
         $userGymMembership->day_quantity = $gymMembership->day_quantity;
+        $userGymMembership->freeze_day_quantity = $gymMembership->freeze_day_quantity;
         $userGymMembership->works_from = $gymMembership->works_from;
         $userGymMembership->works_to = $gymMembership->works_to;
         $userGymMembership->training_quantity = $gymMembership->training_quantity;

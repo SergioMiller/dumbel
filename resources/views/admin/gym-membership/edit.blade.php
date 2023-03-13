@@ -53,7 +53,21 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Працює <span class="text-danger">*</span></label>
+                            <label class="col-sm-4 col-form-label">Заморозка для карти в днях</label>
+                            <div class="col-sm-8">
+                                <input type="text"
+                                       class="form-control @if($errors->has('freeze_day_quantity')) {{'is-invalid' }} @endif"
+                                       name="freeze_day_quantity"
+                                       id="freeze_day_quantity"
+                                       value="{{ old('freeze_day_quantity', $membership->freeze_day_quantity) }}">
+                                @if($errors->has('freeze_day_quantity'))
+                                    <div class="invalid-feedback">{{ $errors->first('freeze_day_quantity') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Активний, з - до <span class="text-danger">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text"
                                        class="form-control @if($errors->has('works_from')) {{'is-invalid' }} @endif"

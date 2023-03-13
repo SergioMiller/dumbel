@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('works_to');
             $table->integer('training_quantity')->nullable();
             $table->integer('price');
-            $table->dateTime('created_at');
+            $table->timestamps();
         });
     }
 

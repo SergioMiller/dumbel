@@ -33,3 +33,7 @@ swagger:
 .PHONY: app
 app:
 		docker-compose exec app bash
+
+.PHONY: php-cs-fixer
+php-cs-fixer:
+		docker-compose exec app bash -lc 'php-cs-fixer fix app/ --allow-risky=yes'

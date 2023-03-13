@@ -10,6 +10,19 @@
     </li>
 @endsection
 
+@section('content')
+    <div id="swagger-ui"></div>
+    <script src="{{ asset('swagger-assets/swagger.js') }}" crossorigin></script>
+    <script>
+      window.onload = () => {
+        window.ui = SwaggerUIBundle({
+          url: "/swagger/openapi.yaml",
+          dom_id: '#swagger-ui',
+        });
+      };
+    </script>
+@endsection
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('swagger-assets/swagger.css') }}"/>
     <style>
@@ -38,18 +51,9 @@
         .swagger-ui .scheme-container {
             padding: 15px;
         }
-    </style>
-@endsection
 
-@section('content')
-    <div id="swagger-ui"></div>
-    <script src="{{ asset('swagger-assets/swagger.js') }}" crossorigin></script>
-    <script>
-      window.onload = () => {
-        window.ui = SwaggerUIBundle({
-          url: "/swagger/openapi.yaml",
-          dom_id: '#swagger-ui',
-        });
-      };
-    </script>
+        .swagger-ui * {
+            font-family: Consolas, monaco, monospace !important;
+        }
+    </style>
 @endsection

@@ -12,31 +12,35 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $user_id
  * @property int $gym_id
+ * @property int $gym_membership_id
  * @property int $administrator_id
  * @property string $name
  * @property int $day_quantity
+ * @property int $freeze_day_quantity
  * @property int $works_from
  * @property int $works_to
  * @property int $training_quantity
  * @property int $price
  * @property string|Carbon $created_at
+ * @property string|Carbon $updated_at
  */
 class UserGymMembership extends Model
 {
     use HasFactory;
 
-    public const UPDATED_AT = null;
-
     protected $fillable = [
         'user_id',
         'gym_id',
+        'gym_membership_id',
         'administrator_id',
         'name',
         'day_quantity',
+        'freeze_day_quantity',
         'works_from',
         'works_to',
         'training_quantity',
         'price',
         'created_at',
+        'updated_at',
     ];
 }
