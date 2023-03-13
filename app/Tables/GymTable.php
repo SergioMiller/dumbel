@@ -60,6 +60,9 @@ class GymTable extends TableAbstract
                         'label' => 'success',
                     ],
                     GymStatusEnum::MODERATION->value => [
+                        'label' => 'warning'
+                    ],
+                    GymStatusEnum::DEACTIVATED->value => [
                         'label' => 'danger'
                     ],
                 ]

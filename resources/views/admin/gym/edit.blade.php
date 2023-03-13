@@ -120,10 +120,14 @@
                                 <select name="status"
                                         id="status"
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
-                                    <option @if($gym->status === 'active') selected @endif value="active">Active
+                                    <option @if($gym->status === 'active') selected @endif value="active">
+                                        Active
                                     </option>
                                     <option @if($gym->status === 'moderation') selected @endif  value="moderation">
                                         Moderation
+                                    </option>
+                                    <option @if($gym->status === 'deactivated') selected @endif  value="deactivated">
+                                        Deactivated
                                     </option>
                                 </select>
 

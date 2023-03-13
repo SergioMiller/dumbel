@@ -12,4 +12,5 @@ enum GymStatusEnum: string
 
     case ACTIVE = 'active';
     case MODERATION = 'moderation';
+    case DEACTIVATED = 'deactivated';
 }

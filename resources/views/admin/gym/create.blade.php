@@ -117,6 +117,7 @@
                                         class="form-control @if($errors->has('status')) {{'is-invalid' }} @endif">
                                     <option value="active">Активний</option>
                                     <option value="moderation">На модерації</option>
+                                    <option value="deactivated">Деактивовано</option>
                                 </select>
 
                                 @if($errors->has('status'))
