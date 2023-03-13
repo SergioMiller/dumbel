@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
             User::factory(10)
                 ->has(
                     Gym::factory()->has(
-                        Subscription::factory()->count(4)
-                    )->count(1)
+                        Subscription::factory()->count(6)
+                    )->count(3)
                 )
                 ->create();
         }
