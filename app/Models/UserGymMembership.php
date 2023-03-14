@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price
  * @property string $status
  * @property string $date_start
+ * @property-read string $date_end
  * @property string|Carbon $created_at
  * @property string|Carbon $updated_at
  */
@@ -47,4 +48,9 @@ class UserGymMembership extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function getDateEndAttribute(): string
+    {
+        return Carbon::createFromDate($this->date_start)->addDays($this->day_quantity)->toDateString();
+    }
 }
