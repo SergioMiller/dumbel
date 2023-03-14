@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Api\GymMembership\Dto;
+namespace App\Services\Api\UserGymMembership\Dto;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-final class GymMembershipAttachDto implements Arrayable
+final class UserGymMembershipAttachDto implements Arrayable
 {
     private readonly int $user_id;
 
@@ -16,7 +16,7 @@ final class GymMembershipAttachDto implements Arrayable
 
     public static function fromArray(array $data): self
     {
-        $instance = new  self();
+        $instance = new self();
         $instance->user_id = $data['user_id'];
         $instance->gym_membership_id = $data['gym_membership_id'];
         $instance->date_start = $data['date_start'];

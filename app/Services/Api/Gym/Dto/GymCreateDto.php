@@ -20,7 +20,7 @@ final class GymCreateDto implements Arrayable
 
     public static function fromArray(array $data): self
     {
-        $instance = new  self();
+        $instance = new self();
         $instance->name = $data['name'];
         $instance->description = $data['description'] ?? null;
         $instance->phone = $data['phone'] ?? null;

@@ -20,7 +20,7 @@ final class UserCreateDto implements Arrayable
 
     public static function fromArray(array $data): self
     {
-        $instance = new  self();
+        $instance = new self();
         $instance->name = $data['name'];
         $instance->lastname = $data['lastname'];
         $instance->phone = $data['phone'] ?? null;

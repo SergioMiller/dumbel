@@ -4,29 +4,37 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\FreezeDaysAvailableLimitExceededException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Account\AccountUpdateRequest;
 use App\Http\Requests\Api\GymMembership\GymMembershipAttachRequest;
 use App\Http\Requests\Api\GymMembership\GymMembershipCreateRequest;
+use App\Http\Requests\Api\GymMembership\GymMembershipFreezeRequest;
 use App\Http\Requests\Api\GymMembership\GymMembershipUpdateRequest;
 use App\Library\Response;
 use App\Repository\GymMembershipRepository;
-use App\Services\Api\GymMembership\Dto\GymMembershipAttachDto;
+use App\Repository\UserGymMembershipRepository;
 use App\Services\Api\GymMembership\Dto\GymMembershipCreateDto;
 use App\Services\Api\GymMembership\Dto\GymMembershipUpdateDto;
 use App\Services\Api\GymMembership\GymMembershipService;
+use App\Services\Api\UserGymMembership\Dto\UserGymMembershipAttachDto;
+use App\Services\Api\UserGymMembership\Dto\UserGymMembershipFreezeDto;
+use App\Services\Api\UserGymMembership\UserGymMembershipService;
 use App\Transformers\GymMembership\GymMembershipTransformer;
 use App\Transformers\GymMembership\UserGymMembershipTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class GymMembershipController extends Controller
 {
     public function __construct(
         private readonly GymMembershipService $gymMembershipService,
-        private readonly GymMembershipRepository $gymMembershipRepository
+        private readonly GymMembershipRepository $gymMembershipRepository,
+        private readonly UserGymMembershipService $userGymMembershipService,
+        private readonly UserGymMembershipRepository $userGymMembershipRepository,
     ) {
     }
 
@@ -253,9 +261,9 @@ final class GymMembershipController extends Controller
      */
     public function listByGym(int $id): JsonResponse
     {
-        $gymMembership = $this->gymMembershipRepository->getListByGymId($id);
+        $model = $this->gymMembershipRepository->getListByGymId($id);
 
-        return Response::success(new GymMembershipTransformer($gymMembership));
+        return Response::success(new GymMembershipTransformer($model));
     }
 
     /**
@@ -304,12 +312,12 @@ final class GymMembershipController extends Controller
      */
     public function gymMembershipAttach(GymMembershipAttachRequest $request): JsonResponse
     {
-        $data = $this->gymMembershipService->gymMembershipAttach(
+        $model = $this->userGymMembershipService->gymMembershipAttach(
             $request->user(),
-            GymMembershipAttachDto::fromArray($request->validated())
+            UserGymMembershipAttachDto::fromArray($request->validated())
         );
 
-        return Response::success(new UserGymMembershipTransformer($data));
+        return Response::success(new UserGymMembershipTransformer($model));
     }
 
     /**
@@ -353,8 +361,73 @@ final class GymMembershipController extends Controller
      */
     public function gymMembershipActive(Request $request): JsonResponse
     {
-        $activeGymMembership = $this->gymMembershipRepository->getActiveForUser($request->user()->id);
+        $models = $this->userGymMembershipRepository->getActiveForUser($request->user()->id);
 
-        return Response::success(new UserGymMembershipTransformer($activeGymMembership));
+        return Response::success(new UserGymMembershipTransformer($models));
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/gym-membership/freeze",
+     *     description="Freeze gym member.",
+     *     tags={"Gym membership"},
+     *     security={
+     *         {"bearerAuth" : {}}
+     *     },
+     *
+     *     @OA\RequestBody(
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/GymMembershipFreezeRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *
+     *             @OA\Schema(
+     *                 allOf={
+     *                     @OA\Schema(ref="#/components/schemas/Response"),
+     *                     @OA\Schema(
+     *
+     *                         @OA\Property(
+     *                             property="data",
+     *                             allOf={
+     *
+     *                                 @OA\Schema(ref="#/components/schemas/UserGymMembershipTransformer")
+     *                             }
+     *                         )
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     )
+     * )
+     *
+     * @param GymMembershipFreezeRequest $request
+     *
+     * @return JsonResponse
+     *
+     * @throws AuthorizationException
+     * @throws FreezeDaysAvailableLimitExceededException
+     */
+    public function freeze(GymMembershipFreezeRequest $request): JsonResponse
+    {
+        $model = $this->userGymMembershipRepository->getById($request->get('user_gym_membership_id'));
+
+        if (null === $model) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->authorize('freeze', $model);
+
+        $model = $this->userGymMembershipService->freeze(
+            $model,
+            UserGymMembershipFreezeDto::fromArray($request->toArray())
+        );
+
+        return Response::success(new UserGymMembershipTransformer($model));
     }
 }

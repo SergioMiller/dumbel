@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('user_gym_memberships', static function (Blueprint $table) {
-            $table->bigInteger('gym_membership_id')->after('gym_id');
+            $table->bigInteger('gym_membership_id')->index()->after('gym_id');
         });
     }
 

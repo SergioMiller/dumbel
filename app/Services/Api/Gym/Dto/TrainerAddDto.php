@@ -14,7 +14,7 @@ final class TrainerAddDto implements Arrayable
 
     public static function fromArray(array $data): self
     {
-        $instance = new  self();
+        $instance = new self();
         $instance->gym_id = $data['gym_id'];
         $instance->user_id = $data['user_id'];
 

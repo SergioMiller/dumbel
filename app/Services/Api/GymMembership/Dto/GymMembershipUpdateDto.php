@@ -24,7 +24,7 @@ final class GymMembershipUpdateDto implements Arrayable
 
     public static function fromArray(array $data): self
     {
-        $instance = new  self();
+        $instance = new self();
         $instance->name = $data['name'];
         $instance->day_quantity = $data['day_quantity'];
         $instance->freeze_day_quantity = $data['freeze_day_quantity'] ?? null;

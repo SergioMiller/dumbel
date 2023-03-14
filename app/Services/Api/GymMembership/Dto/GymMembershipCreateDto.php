@@ -26,7 +26,7 @@ final class GymMembershipCreateDto implements Arrayable
 
     public static function fromArray(array $data): self
     {
-        $instance = new  self();
+        $instance = new self();
         $instance->gym_id = $data['gym_id'];
         $instance->name = $data['name'];
         $instance->day_quantity = $data['day_quantity'];

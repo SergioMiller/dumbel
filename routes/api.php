@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
     Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
     Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);
+    Route::post('/gym-membership/freeze', [GymMembershipController::class, 'freeze']);
 
     Route::post('/user/create', [UserController::class, 'create']);
 });
