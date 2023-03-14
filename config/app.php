@@ -41,7 +41,8 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug'     => (bool)env('APP_DEBUG', false),
+    'debug_api' => (bool)env('APP_DEBUG_API', false),
 
     /*
     |--------------------------------------------------------------------------

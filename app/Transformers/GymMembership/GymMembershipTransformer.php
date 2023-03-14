@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\Gym;
+namespace App\Transformers\GymMembership;
 
 use App\Library\Transformer;
 use App\Models\GymMembership;

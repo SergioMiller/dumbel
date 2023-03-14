@@ -24,6 +24,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::get('/account', [AccountController::class, 'get']);
     Route::put('/account', [AccountController::class, 'update']);
+
     Route::post('/gym/create', [GymController::class, 'create']);
     Route::get('/gym/{id}', [GymController::class, 'get']);
     Route::put('/gym/{id}/update', [GymController::class, 'update']);
@@ -38,7 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
     Route::put('/gym-membership/{id}/update', [GymMembershipController::class, 'update']);
     Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
+    Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
+    Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);
 
     Route::post('/user/create', [UserController::class, 'create']);
-    Route::post('/user/gym-membership-attach', [UserController::class, 'gymMembershipAttach']);
 });

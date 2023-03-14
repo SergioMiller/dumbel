@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $works_to
  * @property int $training_quantity
  * @property int $price
+ * @property string $status
+ * @property string $date_start
  * @property string|Carbon $created_at
  * @property string|Carbon $updated_at
  */
@@ -40,6 +42,8 @@ class UserGymMembership extends Model
         'works_to',
         'training_quantity',
         'price',
+        'status',
+        'date_start',
         'created_at',
         'updated_at',
     ];

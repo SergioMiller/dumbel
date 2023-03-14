@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Enums\GymMembershipStatusEnum;
 use App\Models\GymMembership;
+use App\Models\UserGymMembership;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class GymMembershipRepository
 {
@@ -38,6 +41,10 @@ class GymMembershipRepository
 
     public function getActiveForUser(int $userId): Collection
     {
-        return new Collection();
+        return UserGymMembership::query()
+            ->where('user_id', $userId)
+            ->where('status', GymMembershipStatusEnum::ACTIVE->value)
+            ->where('date_start', '>=', DB::raw("NOW() - interval '1 day' * day_quantity"))
+            ->get();
     }
 }

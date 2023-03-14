@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Account\AccountUpdateRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Library\Response;
-use App\Repository\GymMembershipRepository;
-use App\Transformers\Account\AccountActiveGymMembershipTransformer;
 use App\Transformers\Account\AccountTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,10 +16,6 @@ use OpenApi\Annotations as OA;
 
 final class AccountController extends Controller
 {
-    public function __construct(private readonly GymMembershipRepository $gymMembershipRepository)
-    {
-    }
-
     /**
      * @OA\Get(
      *     path="/api/v1/account",
@@ -121,12 +115,5 @@ final class AccountController extends Controller
         $request->user()->update($data);
 
         return Response::success(new AccountTransformer($request->user()->fresh()));
-    }
-
-    public function activeGymMemberships(Request $request): JsonResponse
-    {
-        $activeGymMembership = $this->gymMembershipRepository->getActiveForUser($request->user()->id);
-
-        return Response::success(new AccountActiveGymMembershipTransformer($activeGymMembership));
     }
 }
