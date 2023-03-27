@@ -7,6 +7,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -24,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property string $date_start
  * @property-read string $date_end
+ * @property-read Collection|array $freezes
  * @property string|Carbon $created_at
  * @property string|Carbon $updated_at
  */
@@ -49,8 +52,19 @@ class UserGymMembership extends Model
         'updated_at',
     ];
 
+    /**
+     * @return HasMany
+     */
+    public function freezes(): HasMany
+    {
+        return $this->hasMany(UserGymMembershipFreeze::class)->orderBy('date_start');
+    }
+
     public function getDateEndAttribute(): string
     {
-        return Carbon::createFromDate($this->date_start)->addDays($this->day_quantity)->toDateString();
+        return Carbon::createFromDate($this->date_start)
+            ->addDays($this->day_quantity)
+            ->addDays($this->freezes->sum('day_quantity'))
+            ->toDateString();
     }
 }

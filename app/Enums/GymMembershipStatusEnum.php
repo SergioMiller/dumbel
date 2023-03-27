@@ -11,5 +11,5 @@ enum GymMembershipStatusEnum: string
     use EnumToArray;
 
     case ACTIVE = 'active';
-    case ON_HOLD = 'on_hold';
+    case FREEZE = 'freeze';
 }

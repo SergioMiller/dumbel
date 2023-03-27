@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Api\UserGymMembership\Dto;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 
 final class UserGymMembershipAttachDto implements Arrayable
@@ -12,14 +13,14 @@ final class UserGymMembershipAttachDto implements Arrayable
 
     private readonly int $gym_membership_id;
 
-    private readonly string $date_start;
+    private readonly Carbon $date_start;
 
     public static function fromArray(array $data): self
     {
         $instance = new self();
         $instance->user_id = $data['user_id'];
         $instance->gym_membership_id = $data['gym_membership_id'];
-        $instance->date_start = $data['date_start'];
+        $instance->date_start = Carbon::createFromDate($data['date_start']);
 
         return $instance;
     }
@@ -43,7 +44,7 @@ final class UserGymMembershipAttachDto implements Arrayable
         return $this->gym_membership_id;
     }
 
-    public function getDateStart(): string
+    public function getDateStart(): Carbon
     {
         return $this->date_start;
     }

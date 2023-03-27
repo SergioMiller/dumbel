@@ -19,7 +19,9 @@ class UserGymMembershipRepository
     public function getById(int $id): UserGymMembership|null
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->model->newQuery()->where('id', $id)->first();
+        return $this->model->newQuery()
+            ->with('freezes')
+            ->where('id', $id)->first();
     }
 
     public function getActiveForUser(int $userId): Collection

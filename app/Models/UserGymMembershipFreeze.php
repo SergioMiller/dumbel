@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,8 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $date_start
  * @property int $date_end
  * @property int $day_quantity
- * @property string $created_at
- * @property string $updated_at
+ * @property Carbon|string $created_at
+ * @property Carbon|string $updated_at
  */
 class UserGymMembershipFreeze extends Model
 {

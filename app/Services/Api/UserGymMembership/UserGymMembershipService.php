@@ -7,6 +7,7 @@ namespace App\Services\Api\UserGymMembership;
 use App\Enums\GymMembershipStatusEnum;
 use App\Exceptions\FreezeDaysAvailableLimitExceededException;
 use App\Exceptions\FreezeDaysHasCrossDatesException;
+use App\Exceptions\FreezeDaysIncorrectFrameException;
 use App\Models\User;
 use App\Models\UserGymMembership;
 use App\Models\UserGymMembershipFreeze;
@@ -54,7 +55,7 @@ class UserGymMembershipService
         $model->training_quantity = $gymMembership->training_quantity;
         $model->price = $gymMembership->price;
         $model->status = GymMembershipStatusEnum::ACTIVE->value;
-        $model->date_start = $data->getDateStart();
+        $model->date_start = $data->getDateStart()->toDateString();
         $model->created_at = Carbon::now()->toDateTimeString();
 
         $model->save();
@@ -64,6 +65,7 @@ class UserGymMembershipService
 
     /**
      * @throws FreezeDaysAvailableLimitExceededException
+     * @throws FreezeDaysIncorrectFrameException
      */
     public function freeze(UserGymMembership $gymMembership, UserGymMembershipFreezeDto $data): UserGymMembership
     {
@@ -75,6 +77,11 @@ class UserGymMembershipService
             $data->getUserGymMembershipId()
         );
 
+        #Перевірка початку та кінця абонементу.
+        if ($this->hasIncorrectDateFrame($gymMembership, $dateStart, $dateEnd)) {
+            throw new FreezeDaysIncorrectFrameException();
+        }
+
         #Перевищено ліміт доступних днів заморожування.
         $userGymMembershipFreezeUsedDyaQuantity = $userGymMembershipFreezes->sum('day_quantity');
 
@@ -83,8 +90,8 @@ class UserGymMembershipService
         }
 
         #Дати заморозки мають перехресні дати з активними заморозками.
-        $userGymMembershipFreezes->map(function (UserGymMembershipFreeze $item) use ($data) {
-            if ($this->hasCrossDates($item, $data)) {
+        $userGymMembershipFreezes->map(function (UserGymMembershipFreeze $freeze) use ($data) {
+            if ($this->hasCrossDates($freeze, $data)) {
                 throw new FreezeDaysHasCrossDatesException();
             }
         });
@@ -96,17 +103,31 @@ class UserGymMembershipService
         $model->day_quantity = $diffInDays;
         $model->save();
 
-        return $gymMembership;
+        $dateToday = Carbon::today();
+
+        if ($dateToday->between($dateStart, $dateEnd)) {
+            $gymMembership->update(['status' => GymMembershipStatusEnum::FREEZE->value]);
+        }
+
+        return $gymMembership->fresh();
     }
 
-    private function hasCrossDates(UserGymMembershipFreeze $item, UserGymMembershipFreezeDto $data): bool
+    private function hasCrossDates(UserGymMembershipFreeze $freeze, UserGymMembershipFreezeDto $data): bool
     {
-        $dateStart = Carbon::createFromDate($item->date_start);
-        $dateEnd = Carbon::createFromDate($item->date_end);
+        $dateStart = Carbon::createFromDate($freeze->date_start);
+        $dateEnd = Carbon::createFromDate($freeze->date_end);
 
         $newDateStart = Carbon::createFromDate($data->getDateStart());
         $newDateEnd = Carbon::createFromDate($data->getDateEnd());
 
         return $newDateStart->between($dateStart, $dateEnd) || $newDateEnd->between($dateStart, $dateEnd);
+    }
+
+    private function hasIncorrectDateFrame(UserGymMembership $gymMembership, Carbon $dateStart, Carbon $dateEnd): bool
+    {
+        $gymMembershipDateStart = Carbon::createFromDate($gymMembership->date_start);
+        $gymMembershipDateEnd = Carbon::createFromDate($gymMembership->date_end);
+
+        return $dateStart < $gymMembershipDateStart || $dateStart > $gymMembershipDateEnd || $dateEnd < $gymMembershipDateStart || $dateEnd > $gymMembershipDateEnd;
     }
 }

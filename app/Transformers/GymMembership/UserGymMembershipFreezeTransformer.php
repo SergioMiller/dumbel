@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transformers\GymMembership;
 
 use App\Library\Transformer;
-use App\Models\UserGymMembership;
+use App\Models\UserGymMembershipFreeze;
 use OpenApi\Annotations as OA;
 
 /**
@@ -26,28 +26,17 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="date_end", type="string", format="datetime", example="10-10-2020"),
  * @OA\Property(property="created_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
  */
-class UserGymMembershipTransformer extends Transformer
+class UserGymMembershipFreezeTransformer extends Transformer
 {
-    public function toArray(UserGymMembership $model): array
+    public function toArray(UserGymMembershipFreeze $model): array
     {
         return [
             'id' => $model->id,
-            'user_id' => $model->user_id,
-            'gym_id' => $model->gym_id,
-            'gym_membership_id' => $model->gym_membership_id,
-            'name' => $model->name,
             'day_quantity' => $model->day_quantity,
-            'freeze_day_quantity' => $model->freeze_day_quantity,
-            'works_from' => $model->works_from,
-            'works_to' => $model->works_to,
-            'training_quantity' => $model->training_quantity,
-            'price' => $model->price,
-            'status' => $model->status,
             'date_start' => $model->date_start,
             'date_end' => $model->date_end,
             'created_at' => $model->created_at->toDateTimeString(),
             'updated_at' => $model->updated_at->toDateTimeString(),
-            'freezes' => new UserGymMembershipFreezeTransformer($model->freezes)
         ];
     }
 }

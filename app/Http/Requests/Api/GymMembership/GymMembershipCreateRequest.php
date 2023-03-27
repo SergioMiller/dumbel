@@ -38,9 +38,9 @@ final class GymMembershipCreateRequest extends FormRequest
                 Rule::exists('gyms', 'id')->where('user_id', $this->user()->id)
             ],
             'name' => ['required', 'string', 'max:255'],
-            'day_quantity' => ['required', 'integer'],
-            'freeze_day_quantity' => ['nullable', 'integer', 'lt:day_quantity'],
-            'works_from' => ['required', 'integer', 'min:0', 'max:24'],
+            'day_quantity' => ['required', 'integer', 'min:1'],
+            'freeze_day_quantity' => ['nullable', 'integer', 'min:0', 'lt:day_quantity'],
+            'works_from' => ['required', 'integer', 'min:0', 'max:24', 'lt:works_to'],
             'works_to' => ['required', 'integer', 'min:0', 'max:24'],
             'training_quantity' => ['nullable', 'integer'],
             'price' => ['integer', 'nullable'],

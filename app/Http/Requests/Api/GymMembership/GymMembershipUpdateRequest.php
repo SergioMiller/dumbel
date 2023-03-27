@@ -31,9 +31,9 @@ final class GymMembershipUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'day_quantity' => ['required', 'integer', 'max:31'],
-            'freeze_day_quantity' => ['nullable', 'integer', 'lt:day_quantity'],
-            'works_from' => ['required', 'integer', 'min:0', 'max:24'],
+            'day_quantity' => ['required', 'integer', 'min:1'],
+            'freeze_day_quantity' => ['nullable', 'integer', 'min:1', 'lt:day_quantity'],
+            'works_from' => ['required', 'integer', 'min:0', 'max:24', 'lt:works_to'],
             'works_to' => ['required', 'integer', 'min:0', 'max:24'],
             'training_quantity' => ['nullable', 'integer'],
             'price' => ['integer', 'nullable'],

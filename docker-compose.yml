@@ -2,6 +2,7 @@ version: '3'
 
 services:
     nginx:
+        container_name: nginx
         build:
             context: .
             dockerfile: docker/nginx/Dockerfile
@@ -19,6 +20,7 @@ services:
             - app
 
     app:
+        container_name: app
         build:
             context: .
             dockerfile: docker/php/Dockerfile
@@ -49,6 +51,7 @@ services:
             - dumbel
 
     postgres:
+        container_name: postgres
         image: postgres
         volumes:
             - postgres_data:/var/lib/postgresql/data:cached
@@ -64,6 +67,7 @@ services:
             - dumbel
 
     redis:
+        container_name: redis
         image: redis:latest
         volumes:
             - ./docker/redis:/bitnami/redis/data

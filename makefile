@@ -24,16 +24,16 @@ db-seed:
 
 .PHONY: optimize
 optimize:
-		docker-compose exec app bash -lc 'php artisan optimize'
+		docker compose exec app bash -lc 'php artisan optimize'
 
 .PHONY: swagger
 swagger:
-	docker-compose exec app bash -lc './vendor/bin/openapi ./app -o ./storage/app'
+		docker compose exec app bash -lc './vendor/bin/openapi ./app -o ./storage/app'
 
 .PHONY: app
 app:
-		docker-compose exec app bash
+		docker compose exec app bash
 
 .PHONY: php-cs-fixer
 php-cs-fixer:
-		docker-compose exec app bash -lc 'php-cs-fixer fix app/ --allow-risky=yes'
+		docker compose exec app bash -lc 'php-cs-fixer fix app/ --allow-risky=yes'
