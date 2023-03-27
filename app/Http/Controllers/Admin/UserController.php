@@ -8,17 +8,22 @@ use App\Filters\Admin\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserCreateRequest;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
+use App\Models\Barcode;
 use App\Repository\UserRepository;
 use App\Services\Admin\UserService;
+use App\Services\BarcodeGeneratorService;
 use App\Tables\UserTable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 final class UserController extends Controller
 {
-    public function __construct(private readonly UserService $userService, private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly UserRepository $userRepository
+    ) {
     }
 
     public function index(Request $request): View
@@ -53,7 +58,9 @@ final class UserController extends Controller
 
         abort_if(null === $model, 404);
 
-        return view('admin.user.edit', ['user' => $model]);
+        return view('admin.user.edit', [
+            'user' => $model,
+        ]);
     }
 
     public function update(int $id, UserUpdateRequest $request): RedirectResponse
@@ -70,5 +77,20 @@ final class UserController extends Controller
         abort_if(null === $model, 404);
 
         return redirect()->to(route('user.index'))->with('success', 'Successfully.');
+    }
+
+    public function barcode(int $id, BarcodeGeneratorService $barcodeGeneratorService): Response
+    {
+        /**
+         * @var Barcode $barcode
+         */
+        $barcode = Barcode::query()->where('id', $id)->first();
+
+        abort_if(null === $barcode, 404);
+
+        $response = new Response($barcodeGeneratorService->getFilePng($barcode->code, $barcode->encoding), 200);
+        $response->header('Content-Type', 'image/png');
+
+        return $response;
     }
 }

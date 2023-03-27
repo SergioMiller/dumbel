@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Library\Table\Attributes;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ImageAttributeAbstract extends AttributeAbstract implements AttributeInterface
+{
+    private string $route;
+
+    private string $parameter;
+
+    private ?int $width = null;
+
+    public function __construct(array $data)
+    {
+        $this->route = $data['image']['route'];
+        $this->parameter = $data['image']['parameter'];
+        $this->width = $data['image']['width'];
+
+        parent::__construct($data);
+    }
+
+    public function render(Model $model, string $attribute): ?string
+    {
+        $parameter = $this->parameter;
+
+        if ($model->$parameter === null) {
+            return '<span class="text-danger">-</span>';
+        }
+
+        if (null !== $this->width) {
+            $width = 'width: 100px;';
+        } else {
+            $width = null;
+        }
+
+        return "<img src='" . route($this->route, $model->$parameter) . "' style='$width'>";
+    }
+}

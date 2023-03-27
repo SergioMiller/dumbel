@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\UserStatusEnum;
+use App\Models\Barcode;
 use App\Models\Gym;
 use App\Models\GymMembership;
 use App\Models\User;
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
                         GymMembership::factory()->count(6)
                     )->count(3)
                 )
+                ->has(Barcode::factory()->count(1))
                 ->create();
         }
     }

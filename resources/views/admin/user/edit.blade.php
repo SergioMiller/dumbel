@@ -21,6 +21,20 @@
                     <div class="card-body">
                         @csrf
                         @method('PUT')
+                        @foreach($user->barcodes as $barcode)
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Штрихкод</label>
+                                <div class="col-sm-10 text-right">
+                                    @if($barcode->gym_id)
+                                        <a href="{{ route('gym.edit', $barcode->gym_id) }}">
+                                            {{ $barcode->gym->name }}
+                                        </a>
+                                    @endif
+                                    <img src="{{ route('user.barcode', $barcode->id) }}" alt="Штрихкод">
+                                </div>
+                            </div>
+                        @endforeach
+
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Імʼя <span class="text-danger">*</span></label>
                             <div class="col-sm-10">

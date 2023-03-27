@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BarcodeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GymController;
 use App\Http\Controllers\Admin\UserController;
@@ -30,8 +31,13 @@ Route::group(['middleware' => 'auth'], static function () {
     Route::get('/swagger/openapi.yaml', [SwaggerController::class, 'openapi'])->name('openapi');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('user', UserController::class)->except('show')->parameter('user', 'id');
+    Route::get('/user/barcode/{id}', [UserController::class, 'barcode'])->name('user.barcode');
+
     Route::resource('gym', GymController::class)->except('show')->parameter('user', 'id');
     Route::get('/gym/gym-membership/{id}', [GymMembershipController::class, 'edit'])->name('gym-membership.edit');
     Route::put('/gym/gym-membership/{id}', [GymMembershipController::class, 'update'])->name('gym-membership.update');
+
+    Route::get('/barcode', [BarcodeController::class, 'index'])->name('barcode.index');
 });

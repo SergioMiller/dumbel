@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,6 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $status
  * @property string $birthday
  * @property string $password
+ * @property Barcode[]|Collection $barcodes
  */
 class User extends Authenticatable
 {
@@ -52,5 +54,10 @@ class User extends Authenticatable
     public function gyms(): HasMany
     {
         return $this->hasMany(Gym::class)->orderByDesc('created_at');
+    }
+
+    public function barcodes(): HasMany
+    {
+        return $this->hasMany(Barcode::class)->orderByDesc('created_at');
     }
 }

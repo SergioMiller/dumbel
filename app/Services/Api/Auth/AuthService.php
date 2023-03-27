@@ -2,17 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Auth;
+namespace App\Services\Api\Auth;
 
+use App\Enums\BarcodeTypeEnum;
 use App\Enums\UserStatusEnum;
 use App\Exceptions\PasswordDoesNotMatchException;
 use App\Exceptions\UserNotFoundException;
+use App\Models\Barcode;
 use App\Models\User;
+use App\Services\BarcodeService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
+    public function __construct(private readonly BarcodeService $barcodeService)
+    {
+    }
+
     /**
      * @throws PasswordDoesNotMatchException
      * @throws UserNotFoundException
@@ -50,9 +57,23 @@ class AuthService
         $user = new User($data);
         $user->status = UserStatusEnum::ACTIVE->value;
         $user->save();
-        #TODO:create client card
+
+        $this->createBarcode($user);
+
         DB::commit();
 
         return $this->generateApiToken($user, $data['device']);
+    }
+
+    private function createBarcode(User $user): Barcode
+    {
+        $barcode = new Barcode();
+        $barcode->user_id = $user->id;
+        $barcode->code = $this->barcodeService->generate();
+        $barcode->encoding = 'EAN8';
+        $barcode->type = BarcodeTypeEnum::SYSTEM->value;
+        $barcode->save();
+
+        return $barcode;
     }
 }

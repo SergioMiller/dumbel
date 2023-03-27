@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Library\Response;
-use App\Services\Auth\AuthService;
+use App\Services\Api\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 

@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('barcode.index') }}" class="nav-link {{ request()->routeIs('barcode.index') ? 'active' : '' }}">
                         <i class="fas fa-barcode"></i>
                         <p>Картки клієнтів</p>
                     </a>
