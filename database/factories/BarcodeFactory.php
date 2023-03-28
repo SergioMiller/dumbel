@@ -19,7 +19,7 @@ class BarcodeFactory extends Factory
         return [
             'code'     => $barcodeService->generate(),
             'encoding' => 'EAN8',
-            'type'     => BarcodeTypeEnum::SYSTEM->value,
+            'type'     => BarcodeTypeEnum::DEFAULT->value,
         ];
     }
 }

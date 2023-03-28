@@ -57,8 +57,8 @@ class BarcodeTable extends TableAbstract
                 'name' => 'Тип',
                 'sortable' => true,
                 'labels' => [
-                    BarcodeTypeEnum::SYSTEM->value => [
-                        'name' => 'System',
+                    BarcodeTypeEnum::DEFAULT->value => [
+                        'name' => 'Default',
                         'label' => 'success',
                     ],
                     BarcodeTypeEnum::GYM->value => [

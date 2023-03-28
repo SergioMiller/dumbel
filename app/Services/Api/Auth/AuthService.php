@@ -71,7 +71,7 @@ class AuthService
         $barcode->user_id = $user->id;
         $barcode->code = $this->barcodeService->generate();
         $barcode->encoding = 'EAN8';
-        $barcode->type = BarcodeTypeEnum::SYSTEM->value;
+        $barcode->type = BarcodeTypeEnum::DEFAULT->value;
         $barcode->save();
 
         return $barcode;

@@ -10,6 +10,6 @@ enum BarcodeTypeEnum: string
 {
     use EnumToArray;
 
-    case SYSTEM = 'system';
+    case DEFAULT = 'default';
     case GYM = 'gym';
 }
