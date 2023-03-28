@@ -4,22 +4,30 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class PhoneNumberRule implements Rule
+class PhoneNumberRule implements ValidationRule
 {
     private string $value;
 
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (null === $value) {
-            return true;
+            return;
         }
 
+        if ($this->isInvalid($value)) {
+            $fail("Phone $this->value is invalid.");
+        }
+    }
+
+    private function isInvalid(mixed $value): bool
+    {
         $this->value = (string) $value;
         $len = strlen((string) $value);
 
-        return !(
+        return (
             ($len < 9) ||
             ($len > 15) ||
             !preg_match(
@@ -27,10 +35,5 @@ class PhoneNumberRule implements Rule
                 (string) $value
             )
         );
-    }
-
-    public function message(): string
-    {
-        return __('errors.rules.phone_number.phone_is_not_valid', ['phone' => $this->value]);
     }
 }
