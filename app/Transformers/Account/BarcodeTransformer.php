@@ -28,7 +28,7 @@ class BarcodeTransformer extends Transformer
             'encoding' => $model->encoding,
             'type' => $model->type,
             'image_url' => route('api.barcode.get', $model->id),
-            'created_at' => $model->created_at,
+            'created_at' => $model->created_at->toDateTimeString(),
         ];
     }
 }
