@@ -12,13 +12,13 @@ class ImageAttributeAbstract extends AttributeAbstract implements AttributeInter
 
     private string $parameter;
 
-    private ?int $width = null;
+    private ?int $width;
 
     public function __construct(array $data)
     {
         $this->route = $data['image']['route'];
         $this->parameter = $data['image']['parameter'];
-        $this->width = $data['image']['width'];
+        $this->width = $data['image']['width'] ?? null;
 
         parent::__construct($data);
     }
