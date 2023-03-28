@@ -16,7 +16,7 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="lastname", type="string", example="Dou"),
  * @OA\Property(property="phone", type="integer", example="380987654321"),
  * @OA\Property(property="email", type="string", format="email", example="email@email.email"),
- * @OA\Property(property="birthday", type="string", format="date", example="10-10-2020"),
+ * @OA\Property(property="birthday", type="string", format="date", example="2023-12-31"),
  */
 class UserTransformer extends Transformer
 {

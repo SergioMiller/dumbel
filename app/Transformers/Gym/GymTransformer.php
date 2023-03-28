@@ -17,8 +17,8 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="email", type="string", format="email", example="email@email.email"),
  * @OA\Property(property="address", type="string", example="Cecelia Havens, 456 White Finch St.,North Augusta, SC 29860"),
  * @OA\Property(property="status", type="string", example="active"),
- * @OA\Property(property="created_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
- * @OA\Property(property="updated_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
+ * @OA\Property(property="created_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
+ * @OA\Property(property="updated_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
  * @OA\Property(property="trainers", type="array", @OA\Items(ref="#/components/schemas/TrainerTransformer")),
  * @OA\Property(property="managers", type="array", @OA\Items(ref="#/components/schemas/ManagerTransformer")),
  */

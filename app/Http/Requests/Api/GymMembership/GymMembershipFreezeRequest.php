@@ -16,8 +16,8 @@ use OpenApi\Annotations as OA;
  *     required={"user_gym_membership_id", "date_start", "date_end"},
  *
  *     @OA\Property(property="user_gym_membership_id", type="integer", example="1"),
- *     @OA\Property(property="date_start", type="string", format="datetime", example="10-10-2020"),
- *     @OA\Property(property="date_end", type="string", format="datetime", example="10-10-2020"),
+ *     @OA\Property(property="date_start", type="string", format="datetime", example="2023-12-31"),
+ *     @OA\Property(property="date_end", type="string", format="datetime", example="2023-12-31"),
  * )
  */
 final class GymMembershipFreezeRequest extends FormRequest

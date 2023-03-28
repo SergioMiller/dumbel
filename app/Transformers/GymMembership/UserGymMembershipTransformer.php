@@ -22,9 +22,10 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="training_quantity", type="integer", example="12"),
  * @OA\Property(property="price", type="integer", example="720"),
  * @OA\Property(property="status", type="string", example="active"),
- * @OA\Property(property="date_start", type="string", format="datetime", example="10-10-2020"),
- * @OA\Property(property="date_end", type="string", format="datetime", example="10-10-2020"),
- * @OA\Property(property="created_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
+ * @OA\Property(property="date_start", type="string", format="datetime", example="2023-12-31"),
+ * @OA\Property(property="date_end", type="string", format="datetime", example="2023-12-31"),
+ * @OA\Property(property="created_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
+ * @OA\Property(property="freezes", type="array", @OA\Items(ref="#/components/schemas/UserGymMembershipFreezeTransformer")),
  */
 class UserGymMembershipTransformer extends Transformer
 {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BarcodeController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GymController;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
+
+Route::get('/barcode/{id}', [BarcodeController::class, 'barcode'])->name('api.barcode.get');
 
 Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::get('/account', [AccountController::class, 'get']);

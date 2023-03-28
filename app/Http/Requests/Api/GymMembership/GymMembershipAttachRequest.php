@@ -16,7 +16,7 @@ use OpenApi\Annotations as OA;
  *
  *     @OA\Property(property="user_id", type="integer", example="1"),
  *     @OA\Property(property="gym_membership_id", type="integer", example="1"),
- *     @OA\Property(property="date_start", type="string", format="datetime", example="10-10-2020"),
+ *     @OA\Property(property="date_start", type="string", format="datetime", example="2023-12-31"),
  * )
  */
 final class GymMembershipAttachRequest extends FormRequest

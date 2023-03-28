@@ -20,8 +20,8 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="works_to", type="integer", example="21"),
  * @OA\Property(property="training_quantity", type="integer", example="12"),
  * @OA\Property(property="price", type="integer", example="800"),
- * @OA\Property(property="created_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
- * @OA\Property(property="updated_at", type="string", format="datetime", example="10-10-2020 00:00:00"),
+ * @OA\Property(property="created_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
+ * @OA\Property(property="updated_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
  */
 class GymMembershipTransformer extends Transformer
 {

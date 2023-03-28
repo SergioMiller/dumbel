@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Exceptions\FreezeDaysAvailableLimitExceededException;
+use App\Exceptions\FreezeDaysIncorrectFrameException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Account\AccountUpdateRequest;
 use App\Http\Requests\Api\GymMembership\GymMembershipAttachRequest;
@@ -412,6 +413,7 @@ final class GymMembershipController extends Controller
      *
      * @throws AuthorizationException
      * @throws FreezeDaysAvailableLimitExceededException
+     * @throws FreezeDaysIncorrectFrameException
      */
     public function freeze(GymMembershipFreezeRequest $request): JsonResponse
     {
