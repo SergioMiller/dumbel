@@ -159,7 +159,7 @@
                 </form>
             </div>
 
-            @if($gym->trainers->isNotEmpty())
+            @if($gym->employeePivot->isNotEmpty())
                 @include('admin.gym._employees', ['employees' => $gym->employeePivot])
             @endif
 
