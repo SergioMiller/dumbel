@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\GymEmployeePositionEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Gym\GymCreateRequest;
+use App\Http\Requests\Api\Gym\GymEmployeeRemoveRequest;
 use App\Http\Requests\Api\Gym\GymUpdateRequest;
-use App\Http\Requests\Api\Gym\ManagerAddRequest;
-use App\Http\Requests\Api\Gym\ManagerRemoveRequest;
-use App\Http\Requests\Api\Gym\TrainerAddRequest;
-use App\Http\Requests\Api\Gym\TrainerRemoveRequest;
+use App\Http\Requests\Api\Gym\GymEmployeeAddRequest;
 use App\Library\Response;
 use App\Repository\GymRepository;
+use App\Services\Api\Gym\Dto\EmployeeRemoveDto;
 use App\Services\Api\Gym\Dto\GymCreateDto;
 use App\Services\Api\Gym\Dto\GymUpdateDto;
-use App\Services\Api\Gym\Dto\ManagerAddDto;
-use App\Services\Api\Gym\Dto\ManagerRemoveDto;
-use App\Services\Api\Gym\Dto\TrainerAddDto;
-use App\Services\Api\Gym\Dto\TrainerRemoveDto;
+use App\Services\Api\Gym\Dto\EmployeeAddDto;
 use App\Services\Api\Gym\GymService;
 use App\Transformers\Gym\GymTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -143,7 +140,7 @@ final class GymController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/gym/{id}/update",
+     *     path="/api/v1/gym/{id}",
      *     description="Update gym.",
      *     tags={"Gym"},
      *     security={
@@ -256,8 +253,8 @@ final class GymController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/v1/gym/trainer/add",
-     *     description="Trainer add.",
+     *     path="/api/v1/gym/employee",
+     *     description="Emploee add.",
      *     tags={"Gym"},
      *     security={
      *         {"bearerAuth" : {}}
@@ -265,7 +262,7 @@ final class GymController extends Controller
      *
      *     @OA\RequestBody(
      *
-     *         @OA\JsonContent(ref="#/components/schemas/TrainerAddRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/GymEmployeeAddRequest")
      *     ),
      *
      *     @OA\Response(
@@ -284,21 +281,26 @@ final class GymController extends Controller
      *     )
      * )
      *
-     * @param TrainerAddRequest $request
+     * @param GymEmployeeAddRequest $request
      *
      * @return JsonResponse
      */
-    public function trainerAdd(TrainerAddRequest $request): JsonResponse
+    public function employeeAdd(GymEmployeeAddRequest $request): JsonResponse
     {
-        $this->gymService->trainerAdd(TrainerAddDto::fromArray($request->validated()));
+        $this->gymService->employeeAdd(
+            (new EmployeeAddDto)
+                ->setGymId((int) $request->header('authorization-gym-id'))
+                ->setUserId($request->get('user_id'))
+                ->setPosition(GymEmployeePositionEnum::from($request->get('position')))
+        );
 
         return Response::success();
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/gym/trainer/remove",
-     *     description="Trainer remove.",
+     *     path="/api/v1/gym/emploee",
+     *     description="Emploee remove.",
      *     tags={"Gym"},
      *     security={
      *         {"bearerAuth" : {}}
@@ -306,7 +308,7 @@ final class GymController extends Controller
      *
      *     @OA\RequestBody(
      *
-     *         @OA\JsonContent(ref="#/components/schemas/TrainerRemoveRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/GymEmployeeRemoveRequest")
      *     ),
      *
      *     @OA\Response(
@@ -325,95 +327,18 @@ final class GymController extends Controller
      *     )
      * )
      *
-     * @param TrainerRemoveRequest $request
+     * @param GymEmployeeRemoveRequest $request
      *
      * @return JsonResponse
      */
-    public function trainerRemove(TrainerRemoveRequest $request): JsonResponse
+    public function employeeRemove(GymEmployeeRemoveRequest $request): JsonResponse
     {
-        $this->gymService->trainerRemove(TrainerRemoveDto::fromArray($request->validated()));
-
-        return Response::success();
-    }
-
-    /**
-     * @OA\Post(
-     *     path="/api/v1/gym/manager/add",
-     *     description="Manager add.",
-     *     tags={"Gym"},
-     *     security={
-     *         {"bearerAuth" : {}}
-     *     },
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/ManagerAddRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *
-     *             @OA\Schema(
-     *                 allOf={
-     *                     @OA\Schema(ref="#/components/schemas/Response"),
-     *                 }
-     *             )
-     *         )
-     *     )
-     * )
-     *
-     * @param ManagerAddRequest $request
-     *
-     * @return JsonResponse
-     */
-    public function managerAdd(ManagerAddRequest $request): JsonResponse
-    {
-        $this->gymService->managerAdd(ManagerAddDto::fromArray($request->validated()));
-
-        return Response::success();
-    }
-
-    /**
-     * @OA\Delete(
-     *     path="/api/v1/gym/manager/remove",
-     *     description="Manager remove.",
-     *     tags={"Gym"},
-     *     security={
-     *         {"bearerAuth" : {}}
-     *     },
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/ManagerRemoveRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *
-     *             @OA\Schema(
-     *                 allOf={
-     *                     @OA\Schema(ref="#/components/schemas/Response"),
-     *                 }
-     *             )
-     *         )
-     *     )
-     * )
-     *
-     * @param ManagerRemoveRequest $request
-     *
-     * @return JsonResponse
-     */
-    public function managerRemove(ManagerRemoveRequest $request): JsonResponse
-    {
-        $this->gymService->managerRemove(ManagerRemoveDto::fromArray($request->validated()));
+        $this->gymService->employeeRemove(
+            (new EmployeeRemoveDto())
+                ->setGymId((int) $request->header('authorization-gym-id'))
+                ->setUserId($request->get('user_id'))
+                ->setPosition(GymEmployeePositionEnum::from($request->get('position')))
+        );
 
         return Response::success();
     }

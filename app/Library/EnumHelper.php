@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Library;
 
-trait EnumToArray
+trait EnumHelper
 {
     public static function names(): array
     {

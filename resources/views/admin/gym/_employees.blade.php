@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-footer">
-        <strong>{{ __('Тренери') }}</strong>
+        <strong>{{ __('Працівники') }}</strong>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -9,18 +9,20 @@
                 <th>ІД</th>
                 <th>Імя</th>
                 <th>Телефон</th>
+                <th>Посада</th>
                 <th style="width: 0;" class="text-right"></th>
             </tr>
             </thead>
             <tbody>
-            @foreach($trainers as $trainer)
+            @foreach($employees as $employee)
                 <tr>
-                    <td>{{ $trainer->id }}</td>
-                    <td>{{ $trainer->name }} {{ $trainer->lastname }}</td>
-                    <td>{{ $trainer->phone }}</td>
+                    <td>{{ $employee->user_id }}</td>
+                    <td>{{ $employee->user->name }} {{ $employee->user->lastname }}</td>
+                    <td>{{ $employee->user->phone }}</td>
+                    <td><label class="badge badge-primary">{{ $employee->position }}</label></td>
                     <td>
                         <a class="btn btn-sm btn-inverse icofont icofont-pencil-alt-2"
-                           href="{{ route('user.edit', $trainer->id) }}">
+                           href="{{ route('user.edit', $employee->user_id) }}">
                         </a>
                     </td>
                 </tr>

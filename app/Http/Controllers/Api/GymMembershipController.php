@@ -148,7 +148,7 @@ final class GymMembershipController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/v1/gym-membership/{id}/update",
+     *     path="/api/v1/gym-membership/{id}",
      *     description="Gym membership update.",
      *     tags={"Gym membership"},
      *     security={

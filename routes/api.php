@@ -34,17 +34,15 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::get('/gym/{id}', [GymController::class, 'get']);
 
     Route::middleware(HasGymAccessMiddleware::class)->group(function () {
-        Route::put('/gym/{id}/update', [GymController::class, 'update']);
+        Route::put('/gym/{id}', [GymController::class, 'update']);
         Route::get('/gym/list/own', [GymController::class, 'listOwn']);
 
-        Route::post('/gym/trainer/add', [GymController::class, 'trainerAdd']);
-        Route::delete('/gym/trainer/remove', [GymController::class, 'trainerRemove']);
-        Route::post('/gym/manager/add', [GymController::class, 'managerAdd']);
-        Route::delete('/gym/manager/remove', [GymController::class, 'managerRemove']);
+        Route::post('/gym/employee', [GymController::class, 'employeeAdd']);
+        Route::delete('/gym/employee', [GymController::class, 'employeeRemove']);
 
         Route::post('/gym-membership/create', [GymMembershipController::class, 'create']);
         Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
-        Route::put('/gym-membership/{id}/update', [GymMembershipController::class, 'update']);
+        Route::put('/gym-membership/{id}', [GymMembershipController::class, 'update']);
         Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
         Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
         Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);

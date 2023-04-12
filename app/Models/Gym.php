@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\GymEmployeePositionEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -55,13 +56,25 @@ class Gym extends Model
         return $this->hasMany(GymMembership::class);
     }
 
+    public function employeePivot(): HasMany
+    {
+        return $this->hasMany(GymEmployee::class);
+    }
+
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'gym_employees');
+    }
+
     public function trainers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'gym_trainer');
+        return $this->belongsToMany(User::class, 'gym_employees')
+            ->where('gym_employees.position', GymEmployeePositionEnum::TRAINER->value);
     }
 
     public function managers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'gym_manager');
+        return $this->belongsToMany(User::class, 'gym_employees')
+            ->where('gym_employees.position', GymEmployeePositionEnum::MANAGER->value);
     }
 }

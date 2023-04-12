@@ -19,8 +19,8 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="status", type="string", example="active"),
  * @OA\Property(property="created_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
  * @OA\Property(property="updated_at", type="string", format="datetime", example="2023-12-31 00:00:00"),
- * @OA\Property(property="trainers", type="array", @OA\Items(ref="#/components/schemas/TrainerTransformer")),
- * @OA\Property(property="managers", type="array", @OA\Items(ref="#/components/schemas/ManagerTransformer")),
+ * @OA\Property(property="trainers", type="array", @OA\Items(ref="#/components/schemas/EmployeeTransformer")),
+ * @OA\Property(property="managers", type="array", @OA\Items(ref="#/components/schemas/EmployeeTransformer")),
  */
 class GymTransformer extends Transformer
 {
@@ -36,8 +36,8 @@ class GymTransformer extends Transformer
             'status' => $gym->status,
             'created_at' => $gym->created_at->toDateTimeString(),
             'updated_at' => $gym->updated_at->toDateTimeString(),
-            'trainers' => new TrainerTransformer($gym->trainers),
-            'managers' => new ManagerTransformer($gym->managers),
+            'trainers' => new EmployeeTransformer($gym->trainers),
+            'managers' => new EmployeeTransformer($gym->managers),
         ];
     }
 }

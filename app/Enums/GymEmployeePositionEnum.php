@@ -6,10 +6,10 @@ namespace App\Enums;
 
 use App\Library\EnumHelper;
 
-enum BarcodeTypeEnum: string
+enum GymEmployeePositionEnum: string
 {
     use EnumHelper;
 
-    case DEFAULT = 'default';
-    case GYM = 'gym';
+    case TRAINER = 'trainer';
+    case MANAGER = 'manager';
 }

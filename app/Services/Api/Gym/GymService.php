@@ -6,15 +6,13 @@ namespace App\Services\Api\Gym;
 
 use App\Enums\GymStatusEnum;
 use App\Models\Gym;
-use App\Models\GymManager;
-use App\Models\GymTrainer;
+use App\Models\GymEmployee;
 use App\Models\User;
+use App\Services\Api\Gym\Dto\EmployeeRemoveDto;
 use App\Services\Api\Gym\Dto\GymCreateDto;
 use App\Services\Api\Gym\Dto\GymUpdateDto;
-use App\Services\Api\Gym\Dto\ManagerAddDto;
-use App\Services\Api\Gym\Dto\ManagerRemoveDto;
-use App\Services\Api\Gym\Dto\TrainerAddDto;
-use App\Services\Api\Gym\Dto\TrainerRemoveDto;
+use App\Services\Api\Gym\Dto\EmployeeAddDto;
+use Carbon\Carbon;
 
 class GymService
 {
@@ -36,23 +34,20 @@ class GymService
         return $gym->fresh();
     }
 
-    public function trainerAdd(TrainerAddDto $data): int
+    public function employeeAdd(EmployeeAddDto $data): int
     {
-        return GymTrainer::query()->insertOrIgnore($data->toArray());
+        return GymEmployee::query()->insertOrIgnore(array_merge(
+            $data->toArray(),
+            ['created_at' => Carbon::now()->toDateTimeString()]
+        ));
     }
 
-    public function trainerRemove(TrainerRemoveDto $data): int
+    public function employeeRemove(EmployeeRemoveDto $data): int
     {
-        return GymTrainer::query()->where($data->toArray())->delete();
-    }
-
-    public function managerAdd(ManagerAddDto $data): int
-    {
-        return GymManager::query()->insertOrIgnore($data->toArray());
-    }
-
-    public function managerRemove(ManagerRemoveDto $data): int
-    {
-        return GymManager::query()->where($data->toArray())->delete();
+        return GymEmployee::query()
+            ->where('gym_id', $data->getGymId())
+            ->where('user_id', $data->getUserId())
+            ->where('position', $data->getPosition())
+            ->delete();
     }
 }
