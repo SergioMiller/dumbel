@@ -6,10 +6,11 @@ namespace App\Transformers\User;
 
 use App\Library\Transformer;
 use App\Models\User;
+use App\Transformers\GymMembership\UserGymMembershipTransformer;
 use OpenApi\Annotations as OA;
 
 /**
- * @OA\Schema(schema="UserTransformer")
+ * @OA\Schema(schema="UserInfoTransformer")
  *
  * @OA\Property(property="id", type="integer", example="1"),
  * @OA\Property(property="name", type="string", example="Joh"),
@@ -18,8 +19,9 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="email", type="string", format="email", example="email@email.email"),
  * @OA\Property(property="birthday", type="string", format="date", example="2023-12-31"),
  * @OA\Property(property="barcodes", type="array", @OA\Items(ref="#/components/schemas/UserBarcodeTransformer")),
+ * @OA\Property(property="gym_memberships", type="array", @OA\Items(ref="#/components/schemas/UserGymMembershipTransformer")),
  */
-class UserTransformer extends Transformer
+class UserInfoTransformer extends Transformer
 {
     public function toArray(User $model): array
     {
@@ -31,6 +33,7 @@ class UserTransformer extends Transformer
             'email' => $model->email,
             'birthday' => $model->birthday,
             'barcodes' => new BarcodeTransformer($model->barcodes),
+            'gym_memberships' => new UserGymMembershipTransformer($model->gymMemberships),
         ];
     }
 }

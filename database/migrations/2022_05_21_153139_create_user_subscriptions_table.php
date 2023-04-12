@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('user_gym_memberships', static function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('gym_id');
-            $table->bigInteger('administrator_id');
+            $table->bigInteger('user_id')->index();
+            $table->bigInteger('gym_id')->index();
+            $table->bigInteger('administrator_id')->index();
 
             $table->string('name');
             $table->integer('day_quantity');

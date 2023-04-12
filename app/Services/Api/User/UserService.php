@@ -20,9 +20,8 @@ class UserService
         DB::beginTransaction();
         $user = new User($data->toArray());
         $user->save();
-        #TODO:create client card
-
         $this->barcodeService->generate();
+
         DB::commit();
 
         return $user;

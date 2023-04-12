@@ -65,6 +65,7 @@ class AuthService
         return $this->generateApiToken($user, $data['device']);
     }
 
+    #TODO:move to events UserCreated
     private function createBarcode(User $user): Barcode
     {
         $barcode = new Barcode();

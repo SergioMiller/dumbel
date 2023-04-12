@@ -26,11 +26,7 @@ final class TrainerRemoveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gym_id' => [
-                'required',
-                'integer',
-                Rule::exists('gyms', 'id')->where('user_id', $this->user()->id)
-            ],
+            'gym_id' => ['required', 'integer', Rule::exists('gyms', 'id')],
             'user_id' => ['required', 'integer', Rule::exists('users', 'id')],
         ];
     }

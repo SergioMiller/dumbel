@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GymController;
 use App\Http\Controllers\Api\GymMembershipController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Middleware\HasGymAccessMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,21 +32,25 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
 
     Route::post('/gym/create', [GymController::class, 'create']);
     Route::get('/gym/{id}', [GymController::class, 'get']);
-    Route::put('/gym/{id}/update', [GymController::class, 'update']);
-    Route::get('/gym/list/own', [GymController::class, 'listOwn']);
 
-    Route::post('/gym/trainer/add', [GymController::class, 'trainerAdd']);
-    Route::delete('/gym/trainer/remove', [GymController::class, 'trainerRemove']);
-    Route::post('/gym/manager/add', [GymController::class, 'managerAdd']);
-    Route::delete('/gym/manager/remove', [GymController::class, 'managerRemove']);
+    Route::middleware(HasGymAccessMiddleware::class)->group(function () {
+        Route::put('/gym/{id}/update', [GymController::class, 'update']);
+        Route::get('/gym/list/own', [GymController::class, 'listOwn']);
 
-    Route::post('/gym-membership/create', [GymMembershipController::class, 'create']);
-    Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
-    Route::put('/gym-membership/{id}/update', [GymMembershipController::class, 'update']);
-    Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
-    Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
-    Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);
-    Route::post('/gym-membership/freeze', [GymMembershipController::class, 'freeze']);
+        Route::post('/gym/trainer/add', [GymController::class, 'trainerAdd']);
+        Route::delete('/gym/trainer/remove', [GymController::class, 'trainerRemove']);
+        Route::post('/gym/manager/add', [GymController::class, 'managerAdd']);
+        Route::delete('/gym/manager/remove', [GymController::class, 'managerRemove']);
+
+        Route::post('/gym-membership/create', [GymMembershipController::class, 'create']);
+        Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
+        Route::put('/gym-membership/{id}/update', [GymMembershipController::class, 'update']);
+        Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
+        Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
+        Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);
+        Route::post('/gym-membership/freeze', [GymMembershipController::class, 'freeze']);
+    });
 
     Route::post('/user/create', [UserController::class, 'create']);
+    Route::get('/user/{barcode}', [UserController::class, 'getByBarcode'])->middleware(HasGymAccessMiddleware::class);
 });

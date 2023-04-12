@@ -17,7 +17,7 @@ use OpenApi\Annotations as OA;
  * @OA\Property(property="phone", type="integer", example="380987654321"),
  * @OA\Property(property="email", type="string", format="email", example="email@email.email"),
  * @OA\Property(property="birthday", type="string", format="date", example="2023-12-31"),
- * @OA\Property(property="barcodes", type="array", @OA\Items(ref="#/components/schemas/BarcodeTransformer")),
+ * @OA\Property(property="barcodes", type="array", @OA\Items(ref="#/components/schemas/AccountBarcodeTransformer")),
  */
 class AccountTransformer extends Transformer
 {

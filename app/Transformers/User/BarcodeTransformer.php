@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\Account;
+namespace App\Transformers\User;
 
 use App\Library\Transformer;
 use App\Models\Barcode;
 use OpenApi\Annotations as OA;
 
 /**
- * @OA\Schema(schema="AccountBarcodeTransformer")
+ * @OA\Schema(schema="UserBarcodeTransformer")
  *
  * @OA\Property(property="id", type="integer", example="1"),
  * @OA\Property(property="code", type="string", example="0000000"),

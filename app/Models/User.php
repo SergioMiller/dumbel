@@ -21,7 +21,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $status
  * @property string $birthday
  * @property string $password
- * @property Barcode[]|Collection $barcodes
+ * @property-read Barcode[]|Collection $barcodes
+ * @property-read UserGymMembership[]|Collection $gymMemberships
  */
 class User extends Authenticatable
 {
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function barcodes(): HasMany
     {
         return $this->hasMany(Barcode::class)->orderByDesc('created_at');
+    }
+
+    public function gymMemberships(): HasMany
+    {
+        return $this->hasMany(UserGymMembership::class)->orderBy('id');
     }
 }
