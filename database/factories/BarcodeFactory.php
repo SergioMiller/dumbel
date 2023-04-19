@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Database\Factories;
 
@@ -17,9 +18,9 @@ class BarcodeFactory extends Factory
         $barcodeService = App::make(BarcodeService::class);
 
         return [
-            'code'     => $barcodeService->generate(),
+            'code' => $barcodeService->generate(),
             'encoding' => 'EAN8',
-            'type'     => BarcodeTypeEnum::DEFAULT->value,
+            'type' => BarcodeTypeEnum::DEFAULT->value,
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use App\Enums\GymStatusEnum;
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +17,7 @@ return new class extends Migration {
             $table->bigInteger('phone')->nullable();
             $table->string('email', 512)->nullable();
             $table->string('address', 512)->nullable();
-            $table->string('status',32)->default(GymStatusEnum::MODERATION->value);
+            $table->string('status', 32)->default(GymStatusEnum::MODERATION->value);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();

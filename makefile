@@ -36,4 +36,4 @@ app:
 
 .PHONY: php-cs-fixer
 php-cs-fixer:
-		docker compose exec app bash -lc 'php-cs-fixer fix app/ --allow-risky=yes' && docker compose exec app bash -lc 'php-cs-fixer fix config/ --allow-risky=yes' && docker compose exec app bash -lc 'php-cs-fixer fix routes/ --allow-risky=yes'
+		docker compose exec app bash -lc 'php-cs-fixer fix app/ config/ routes/ database/ lang/ --config=/var/www/html/.php-cs-fixer.php --allow-risky=yes'
