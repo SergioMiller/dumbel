@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\UserCreateRequest;
 use App\Library\Response;
-use App\Repository\GymRepository;
 use App\Repository\UserRepository;
 use App\Services\Api\User\Dto\UserCreateDto;
 use App\Services\Api\User\UserService;
@@ -22,7 +21,6 @@ final class UserController extends Controller
     public function __construct(
         private readonly UserService $userService,
         private readonly UserRepository $userRepository,
-        private readonly GymRepository $gymRepository,
     ) {
     }
 
@@ -78,13 +76,21 @@ final class UserController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/api/v1/user/{barcode}",
      *     description="Get user by barcode.",
      *     tags={"User"},
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
+     *     @OA\Parameter(
+     *         name="AUTHORIZATION-GYM-ID",
+     *         in="header",
+     *         required=true,
+     *
+     *         @OA\Schema(type="int")
+     *     ),
      *
      *     @OA\Parameter(
      *         name="barcode",

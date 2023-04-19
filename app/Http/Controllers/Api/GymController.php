@@ -155,6 +155,14 @@ final class GymController extends Controller
      *         @OA\Schema(type="int")
      *     ),
      *
+     *     @OA\Parameter(
+     *         name="AUTHORIZATION-GYM-ID",
+     *         in="header",
+     *         required=true,
+     *
+     *         @OA\Schema(type="int")
+     *     ),
+     *
      *     @OA\RequestBody(
      *
      *         @OA\JsonContent(ref="#/components/schemas/GymUpdateRequest")
@@ -260,6 +268,14 @@ final class GymController extends Controller
      *         {"bearerAuth" : {}}
      *     },
      *
+     *     @OA\Parameter(
+     *         name="AUTHORIZATION-GYM-ID",
+     *         in="header",
+     *         required=true,
+     *
+     *         @OA\Schema(type="int")
+     *     ),
+     *
      *     @OA\RequestBody(
      *
      *         @OA\JsonContent(ref="#/components/schemas/GymEmployeeAddRequest")
@@ -305,6 +321,14 @@ final class GymController extends Controller
      *     security={
      *         {"bearerAuth" : {}}
      *     },
+     *
+     *     @OA\Parameter(
+     *         name="AUTHORIZATION-GYM-ID",
+     *         in="header",
+     *         required=true,
+     *
+     *         @OA\Schema(type="int")
+     *     ),
      *
      *     @OA\RequestBody(
      *

@@ -32,22 +32,22 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
 
     Route::post('/gym/create', [GymController::class, 'create']);
     Route::get('/gym/{id}', [GymController::class, 'get']);
+    Route::get('/gym/list/own', [GymController::class, 'listOwn']);
 
     Route::middleware(HasGymAccessMiddleware::class)->group(function () {
         Route::put('/gym/{id}', [GymController::class, 'update']);
-        Route::get('/gym/list/own', [GymController::class, 'listOwn']);
 
         Route::post('/gym/employee', [GymController::class, 'employeeAdd']);
         Route::delete('/gym/employee', [GymController::class, 'employeeRemove']);
-
-        Route::post('/gym-membership/create', [GymMembershipController::class, 'create']);
-        Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
-        Route::put('/gym-membership/{id}', [GymMembershipController::class, 'update']);
-        Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
-        Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
-        Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);
-        Route::post('/gym-membership/freeze', [GymMembershipController::class, 'freeze']);
     });
+
+    Route::post('/gym-membership/create', [GymMembershipController::class, 'create']);
+    Route::get('/gym-membership/{id}', [GymMembershipController::class, 'get']);
+    Route::put('/gym-membership/{id}', [GymMembershipController::class, 'update']);
+    Route::get('/gym-membership/{gym_id}/list', [GymMembershipController::class, 'listByGym']);
+    Route::post('/gym-membership/attach', [GymMembershipController::class, 'gymMembershipAttach']);
+    Route::get('/gym-membership/active', [GymMembershipController::class, 'gymMembershipActive']);
+    Route::post('/gym-membership/freeze', [GymMembershipController::class, 'freeze']);
 
     Route::post('/user/create', [UserController::class, 'create']);
     Route::get('/user/{barcode}', [UserController::class, 'getByBarcode'])->middleware(HasGymAccessMiddleware::class);
