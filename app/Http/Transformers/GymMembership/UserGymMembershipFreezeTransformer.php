@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\GymMembership;
+namespace App\Http\Transformers\GymMembership;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\UserGymMembershipFreeze;
 use OpenApi\Annotations as OA;
 
@@ -19,15 +19,15 @@ use OpenApi\Annotations as OA;
  */
 class UserGymMembershipFreezeTransformer extends Transformer
 {
-    public function toArray(UserGymMembershipFreeze $model): array
+    public function toArray(UserGymMembershipFreeze $entity): array
     {
         return [
-            'id' => $model->id,
-            'day_quantity' => $model->day_quantity,
-            'date_start' => $model->date_start,
-            'date_end' => $model->date_end,
-            'created_at' => $model->created_at->toDateTimeString(),
-            'updated_at' => $model->updated_at->toDateTimeString(),
+            'id' => $entity->id,
+            'day_quantity' => $entity->day_quantity,
+            'date_start' => $entity->date_start,
+            'date_end' => $entity->date_end,
+            'created_at' => $entity->created_at->toDateTimeString(),
+            'updated_at' => $entity->updated_at->toDateTimeString(),
         ];
     }
 }

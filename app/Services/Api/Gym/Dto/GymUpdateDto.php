@@ -10,11 +10,11 @@ final class GymUpdateDto implements Arrayable
 {
     private readonly string $name;
 
-    private readonly ?string $description;
+    private readonly string|null $description;
 
-    private readonly ?int $phone;
+    private readonly int|null $phone;
 
-    private readonly ?string $email;
+    private readonly string|null $email;
 
     private readonly string $address;
 

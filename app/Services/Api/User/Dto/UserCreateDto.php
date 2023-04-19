@@ -12,11 +12,11 @@ final class UserCreateDto implements Arrayable
 
     private readonly string $lastname;
 
-    private readonly ?int $phone;
+    private readonly int|null $phone;
 
-    private readonly ?string $email;
+    private readonly string|null $email;
 
-    private readonly ?string $birthday;
+    private readonly string|null $birthday;
 
     public static function fromArray(array $data): self
     {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\User;
+namespace App\Http\Transformers\User;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\User;
-use App\Transformers\GymMembership\UserGymMembershipTransformer;
+use App\HttpTransformers\GymMembership\UserGymMembershipTransformer;
 use OpenApi\Annotations as OA;
 
 /**
@@ -23,17 +23,17 @@ use OpenApi\Annotations as OA;
  */
 class UserInfoTransformer extends Transformer
 {
-    public function toArray(User $model): array
+    public function toArray(User $entity): array
     {
         return [
-            'id' => $model->id,
-            'name' => $model->name,
-            'lastname' => $model->lastname,
-            'phone' => $model->phone,
-            'email' => $model->email,
-            'birthday' => $model->birthday,
-            'barcodes' => new BarcodeTransformer($model->barcodes),
-            'gym_memberships' => new UserGymMembershipTransformer($model->gymMemberships),
+            'id' => $entity->id,
+            'name' => $entity->name,
+            'lastname' => $entity->lastname,
+            'phone' => $entity->phone,
+            'email' => $entity->email,
+            'birthday' => $entity->birthday,
+            'barcodes' => new BarcodeTransformer($entity->barcodes),
+            'gym_memberships' => new UserGymMembershipTransformer($entity->gymMemberships),
         ];
     }
 }

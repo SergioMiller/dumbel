@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\GymMembership;
+namespace App\Http\Transformers\GymMembership;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\GymMembership;
 use OpenApi\Annotations as OA;
 
@@ -25,20 +25,20 @@ use OpenApi\Annotations as OA;
  */
 class GymMembershipTransformer extends Transformer
 {
-    public function toArray(GymMembership $gymMembership): array
+    public function toArray(GymMembership $entity): array
     {
         return [
-            'id' => $gymMembership->id,
-            'gym_id' => $gymMembership->gym_id,
-            'name' => $gymMembership->name,
-            'day_quantity' => $gymMembership->day_quantity,
-            'freeze_day_quantity' => $gymMembership->freeze_day_quantity,
-            'works_from' => $gymMembership->works_from,
-            'works_to' => $gymMembership->works_to,
-            'training_quantity' => $gymMembership->training_quantity,
-            'price' => $gymMembership->price,
-            'created_at' => $gymMembership->created_at->toDateTimeString(),
-            'updated_at' => $gymMembership->updated_at->toDateTimeString(),
+            'id' => $entity->id,
+            'gym_id' => $entity->gym_id,
+            'name' => $entity->name,
+            'day_quantity' => $entity->day_quantity,
+            'freeze_day_quantity' => $entity->freeze_day_quantity,
+            'works_from' => $entity->works_from,
+            'works_to' => $entity->works_to,
+            'training_quantity' => $entity->training_quantity,
+            'price' => $entity->price,
+            'created_at' => $entity->created_at->toDateTimeString(),
+            'updated_at' => $entity->updated_at->toDateTimeString(),
         ];
     }
 }

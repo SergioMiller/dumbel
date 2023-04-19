@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GymController;
 use App\Http\Controllers\Api\GymMembershipController;
+use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Middleware\HasGymAccessMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,6 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
 
     Route::post('/user/create', [UserController::class, 'create']);
     Route::get('/user/{barcode}', [UserController::class, 'getByBarcode'])->middleware(HasGymAccessMiddleware::class);
+
+    Route::post('/training', [TrainingController::class, 'create'])->middleware(HasGymAccessMiddleware::class);
 });

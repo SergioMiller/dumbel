@@ -17,7 +17,7 @@ use App\Services\Api\Gym\Dto\GymCreateDto;
 use App\Services\Api\Gym\Dto\GymUpdateDto;
 use App\Services\Api\Gym\Dto\EmployeeAddDto;
 use App\Services\Api\Gym\GymService;
-use App\Transformers\Gym\GymTransformer;
+use App\Http\Transformers\Gym\GymTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

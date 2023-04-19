@@ -15,17 +15,17 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('gym_id');
             $table->foreignId('user_id');
-            $table->foreignId('user_gym_membership_id')->nullable();
+            $table->foreignId('gym_membership_id')->nullable();
             $table->foreignId('trainer_id')->nullable();
             $table->foreignId('manager_id');
+            $table->integer('locker_number')->nullable();
             $table->dateTime('started_at');
             $table->dateTime('finished_at')->nullable();
-            $table->integer('locker_number')->nullable();
             $table->timestamps();
 
             $table->foreign('gym_id')->references('id')->on('gyms');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('user_gym_membership_id')->references('id')->on('user_gym_memberships');
+            $table->foreign('gym_membership_id')->references('id')->on('user_gym_memberships');
             $table->foreign('trainer_id')->references('id')->on('users');
             $table->foreign('manager_id')->references('id')->on('users');
         });

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\Account;
+namespace App\Http\Transformers\Account;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\User;
 use OpenApi\Annotations as OA;
 
@@ -21,16 +21,16 @@ use OpenApi\Annotations as OA;
  */
 class AccountTransformer extends Transformer
 {
-    public function toArray(User $model): array
+    public function toArray(User $entity): array
     {
         return [
-            'id' => $model->id,
-            'name' => $model->name,
-            'lastname' => $model->lastname,
-            'phone' => $model->phone,
-            'email' => $model->email,
-            'birthday' => $model->birthday,
-            'barcodes' => new BarcodeTransformer($model->barcodes),
+            'id' => $entity->id,
+            'name' => $entity->name,
+            'lastname' => $entity->lastname,
+            'phone' => $entity->phone,
+            'email' => $entity->email,
+            'birthday' => $entity->birthday,
+            'barcodes' => new BarcodeTransformer($entity->barcodes),
         ];
     }
 }

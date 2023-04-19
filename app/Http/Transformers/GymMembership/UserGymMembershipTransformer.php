@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\GymMembership;
+namespace App\Http\Transformers\GymMembership;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\UserGymMembership;
 use OpenApi\Annotations as OA;
 
@@ -29,26 +29,26 @@ use OpenApi\Annotations as OA;
  */
 class UserGymMembershipTransformer extends Transformer
 {
-    public function toArray(UserGymMembership $model): array
+    public function toArray(UserGymMembership $entity): array
     {
         return [
-            'id' => $model->id,
-            'user_id' => $model->user_id,
-            'gym_id' => $model->gym_id,
-            'gym_membership_id' => $model->gym_membership_id,
-            'name' => $model->name,
-            'day_quantity' => $model->day_quantity,
-            'freeze_day_quantity' => $model->freeze_day_quantity,
-            'works_from' => $model->works_from,
-            'works_to' => $model->works_to,
-            'training_quantity' => $model->training_quantity,
-            'price' => $model->price,
-            'status' => $model->status,
-            'date_start' => $model->date_start,
-            'date_end' => $model->date_end,
-            'created_at' => $model->created_at->toDateTimeString(),
-            'updated_at' => $model->updated_at->toDateTimeString(),
-            'freezes' => new UserGymMembershipFreezeTransformer($model->freezes)
+            'id' => $entity->id,
+            'user_id' => $entity->user_id,
+            'gym_id' => $entity->gym_id,
+            'gym_membership_id' => $entity->gym_membership_id,
+            'name' => $entity->name,
+            'day_quantity' => $entity->day_quantity,
+            'freeze_day_quantity' => $entity->freeze_day_quantity,
+            'works_from' => $entity->works_from,
+            'works_to' => $entity->works_to,
+            'training_quantity' => $entity->training_quantity,
+            'price' => $entity->price,
+            'status' => $entity->status,
+            'date_start' => $entity->date_start,
+            'date_end' => $entity->date_end,
+            'created_at' => $entity->created_at->toDateTimeString(),
+            'updated_at' => $entity->updated_at->toDateTimeString(),
+            'freezes' => new UserGymMembershipFreezeTransformer($entity->freezes)
         ];
     }
 }

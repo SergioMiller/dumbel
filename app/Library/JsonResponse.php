@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Library;
 
+use App\Library\Transformer\Transformer;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use InvalidArgumentException;

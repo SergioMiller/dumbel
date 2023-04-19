@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Library;
+namespace App\Library\Transformer;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
-abstract class Transformer
+abstract class Transformer implements TransformerInterface
 {
     protected $data;
 

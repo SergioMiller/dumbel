@@ -14,15 +14,15 @@ final class GymMembershipCreateDto implements Arrayable
 
     private readonly int $day_quantity;
 
-    private readonly ?int $freeze_day_quantity;
+    private readonly int|null $freeze_day_quantity;
 
     private readonly int $works_from;
 
     private readonly int $works_to;
 
-    private readonly ?int $training_quantity;
+    private readonly int|null $training_quantity;
 
-    private readonly ?int $price;
+    private readonly int|null $price;
 
     public static function fromArray(array $data): self
     {

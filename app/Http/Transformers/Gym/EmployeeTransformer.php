@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\Gym;
+namespace App\Http\Transformers\Gym;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\User;
 use OpenApi\Annotations as OA;
 
@@ -18,13 +18,13 @@ use OpenApi\Annotations as OA;
  */
 class EmployeeTransformer extends Transformer
 {
-    public function toArray(User $model): array
+    public function toArray(User $entity): array
     {
         return [
-            'id' => $model->id,
-            'name' => $model->name,
-            'lastname' => $model->lastname,
-            'created_at' => $model->created_at->toDateTimeString(),
+            'id' => $entity->id,
+            'name' => $entity->name,
+            'lastname' => $entity->lastname,
+            'created_at' => $entity->created_at->toDateTimeString(),
         ];
     }
 }

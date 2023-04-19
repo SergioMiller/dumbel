@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\Auth;
+namespace App\Http\Transformers\Auth;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\User;
 use OpenApi\Annotations as OA;
 
@@ -19,14 +19,14 @@ use OpenApi\Annotations as OA;
  */
 class AuthAccountTransformer extends Transformer
 {
-    public function toArray(User $user): array
+    public function toArray(User $entity): array
     {
         return [
-            'name' => $user->name,
-            'lastname' => $user->lastname,
-            'phone' => $user->phone,
-            'email' => $user->email,
-            'birthday' => $user->birthday,
+            'name' => $entity->name,
+            'lastname' => $entity->lastname,
+            'phone' => $entity->phone,
+            'email' => $entity->email,
+            'birthday' => $entity->birthday,
         ];
     }
 }

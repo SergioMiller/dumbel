@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transformers\Account;
+namespace App\Http\Transformers\Account;
 
-use App\Library\Transformer;
+use App\Library\Transformer\Transformer;
 use App\Models\Barcode;
 use OpenApi\Annotations as OA;
 
@@ -20,15 +20,15 @@ use OpenApi\Annotations as OA;
  */
 class BarcodeTransformer extends Transformer
 {
-    public function toArray(Barcode $model): array
+    public function toArray(Barcode $entity): array
     {
         return [
-            'id' => $model->id,
-            'code' => $model->code,
-            'encoding' => $model->encoding,
-            'type' => $model->type,
-            'image_url' => route('api.barcode.get', $model->id),
-            'created_at' => $model->created_at->toDateTimeString(),
+            'id' => $entity->id,
+            'code' => $entity->code,
+            'encoding' => $entity->encoding,
+            'type' => $entity->type,
+            'image_url' => route('api.barcode.get', $entity->id),
+            'created_at' => $entity->created_at->toDateTimeString(),
         ];
     }
 }
