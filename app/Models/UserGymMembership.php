@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 /**
  * @property int $id
@@ -30,9 +32,10 @@ use Illuminate\Support\Collection;
  * @property string|Carbon $created_at
  * @property string|Carbon $updated_at
  */
-class UserGymMembership extends Model
+class UserGymMembership extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
 
     protected $fillable = [
         'user_id',

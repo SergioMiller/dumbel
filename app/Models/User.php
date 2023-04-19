@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 /**
  * @property int $id
@@ -26,11 +28,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read Barcode[]|Collection $barcodes
  * @property-read UserGymMembership[]|Collection $gymMemberships
  */
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use AuditableTrait;
 
     protected $fillable = [
         'phone',

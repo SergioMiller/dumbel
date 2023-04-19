@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 /**
  * @property integer $id
@@ -23,9 +25,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|Carbon $updated_at
  * @property Gym $gym
  */
-class GymMembership extends Model
+class GymMembership extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
 
     protected $fillable = [
         'gym_id',

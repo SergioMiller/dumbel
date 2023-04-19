@@ -6,6 +6,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 /**
  * @property int $id
@@ -16,9 +18,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|string $created_at
  * @property Carbon|string $updated_at
  */
-class UserGymMembershipFreeze extends Model
+class UserGymMembershipFreeze extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
 
     protected $fillable = [
         'user_gym_membership_id',

@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 /**
  * @property int $id
@@ -27,9 +29,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property User[]|Collection $trainers
  * @property User[]|Collection $managers
  */
-class Gym extends Model
+class Gym extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
 
     protected $fillable = [
         'user_id',

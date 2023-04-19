@@ -37,7 +37,7 @@ services:
             - ./routes/:/var/www/routes
             - ./storage/:/var/www/storage
             - ./tests/:/var/www/tests
-#            - ./vendor/:/var/www/vendor
+            - ./vendor/:/var/www/vendor
             - ./composer.json:/var/www/composer.json
             - ./composer.lock:/var/www/composer.lock
             - ./artisan:/var/www/artisan
