@@ -17,9 +17,9 @@ class LabelAttributeAbstract extends AttributeAbstract implements AttributeInter
         parent::__construct($data);
     }
 
-    public function render(Model $model, string $attribute): ?string
+    public function render(Model $entity, string $attribute): ?string
     {
-        $value = $model->$attribute;
+        $value = $entity->$attribute;
         $label = $this->labels[$value]['label'] ?? 'primary';
         $value = $this->labels[$value]['name'] ?? Str::title($value);
 

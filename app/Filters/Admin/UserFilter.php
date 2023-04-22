@@ -9,7 +9,7 @@ use App\Models\User;
 
 class UserFilter extends Filter
 {
-    protected string $model = User::class;
+    protected string $entity = User::class;
 
     protected function name(string $value): void
     {

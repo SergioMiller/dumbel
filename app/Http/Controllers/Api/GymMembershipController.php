@@ -85,9 +85,9 @@ final class GymMembershipController extends Controller
      */
     public function create(GymMembershipCreateRequest $request): JsonResponse
     {
-        $model = $this->gymMembershipService->create(GymMembershipCreateDto::fromArray($request->validated()));
+        $entity = $this->gymMembershipService->create(GymMembershipCreateDto::fromArray($request->validated()));
 
-        return Response::success(new GymMembershipTransformer($model));
+        return Response::success(new GymMembershipTransformer($entity));
     }
 
     /**
@@ -139,11 +139,11 @@ final class GymMembershipController extends Controller
      */
     public function get(int $id): JsonResponse
     {
-        $model = $this->gymMembershipRepository->getById($id);
+        $entity = $this->gymMembershipRepository->getById($id);
 
-        abort_if(null === $model, 404, 'Not found.');
+        abort_if(null === $entity, 404);
 
-        return Response::success(new GymMembershipTransformer($model));
+        return Response::success(new GymMembershipTransformer($entity));
     }
 
     /**
@@ -203,15 +203,15 @@ final class GymMembershipController extends Controller
      */
     public function update(int $id, GymMembershipUpdateRequest $request): JsonResponse
     {
-        $model = $this->gymMembershipRepository->getById($id);
+        $entity = $this->gymMembershipRepository->getById($id);
 
-        abort_if(null === $model, 404, 'Not found.');
+        abort_if(null === $entity, 404);
 
-        $this->authorize('update', $model);
+        $this->authorize('update', $entity);
 
-        $model = $this->gymMembershipService->update($model, GymMembershipUpdateDto::fromArray($request->validated()));
+        $entity = $this->gymMembershipService->update($entity, GymMembershipUpdateDto::fromArray($request->validated()));
 
-        return Response::success(new GymMembershipTransformer($model));
+        return Response::success(new GymMembershipTransformer($entity));
     }
 
     /**
@@ -262,9 +262,9 @@ final class GymMembershipController extends Controller
      */
     public function listByGym(int $id): JsonResponse
     {
-        $model = $this->gymMembershipRepository->getListByGymId($id);
+        $entity = $this->gymMembershipRepository->getListByGymId($id);
 
-        return Response::success(new GymMembershipTransformer($model));
+        return Response::success(new GymMembershipTransformer($entity));
     }
 
     /**
@@ -313,12 +313,12 @@ final class GymMembershipController extends Controller
      */
     public function gymMembershipAttach(GymMembershipAttachRequest $request): JsonResponse
     {
-        $model = $this->userGymMembershipService->gymMembershipAttach(
+        $entity = $this->userGymMembershipService->gymMembershipAttach(
             $request->user(),
             UserGymMembershipAttachDto::fromArray($request->validated())
         );
 
-        return Response::success(new UserGymMembershipTransformer($model));
+        return Response::success(new UserGymMembershipTransformer($entity));
     }
 
     /**
@@ -362,9 +362,9 @@ final class GymMembershipController extends Controller
      */
     public function gymMembershipActive(Request $request): JsonResponse
     {
-        $models = $this->userGymMembershipRepository->getActiveForUser($request->user()->id);
+        $entitys = $this->userGymMembershipRepository->getActiveForUser($request->user()->id);
 
-        return Response::success(new UserGymMembershipTransformer($models));
+        return Response::success(new UserGymMembershipTransformer($entitys));
     }
 
     /**
@@ -417,19 +417,19 @@ final class GymMembershipController extends Controller
      */
     public function freeze(GymMembershipFreezeRequest $request): JsonResponse
     {
-        $model = $this->userGymMembershipRepository->getById($request->get('user_gym_membership_id'));
+        $entity = $this->userGymMembershipRepository->getById($request->get('user_gym_membership_id'));
 
-        if (null === $model) {
+        if (null === $entity) {
             throw new NotFoundHttpException();
         }
 
-        $this->authorize('freeze', $model);
+        $this->authorize('freeze', $entity);
 
-        $model = $this->userGymMembershipService->freeze(
-            $model,
+        $entity = $this->userGymMembershipService->freeze(
+            $entity,
             UserGymMembershipFreezeDto::fromArray($request->toArray())
         );
 
-        return Response::success(new UserGymMembershipTransformer($model));
+        return Response::success(new UserGymMembershipTransformer($entity));
     }
 }

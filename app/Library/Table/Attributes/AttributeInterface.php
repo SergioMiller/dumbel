@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 interface AttributeInterface
 {
-    public function render(Model $model, string $attribute);
+    public function render(Model $entity, string $attribute);
 }

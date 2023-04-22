@@ -42,25 +42,25 @@ class UserGymMembershipService
             throw new NotFoundHttpException('Gym membership not found.');
         }
 
-        $model = new UserGymMembership();
-        $model->user_id = $user->id;
-        $model->gym_id = $gymMembership->gym_id;
-        $model->gym_membership_id = $gymMembership->id;
-        $model->administrator_id = $administrator->id;
-        $model->name = $gymMembership->name;
-        $model->day_quantity = $gymMembership->day_quantity;
-        $model->freeze_day_quantity = $gymMembership->freeze_day_quantity;
-        $model->works_from = $gymMembership->works_from;
-        $model->works_to = $gymMembership->works_to;
-        $model->training_quantity = $gymMembership->training_quantity;
-        $model->price = $gymMembership->price;
-        $model->status = GymMembershipStatusEnum::ACTIVE->value;
-        $model->date_start = $data->getDateStart()->toDateString();
-        $model->created_at = Carbon::now()->toDateTimeString();
+        $entity = new UserGymMembership();
+        $entity->user_id = $user->id;
+        $entity->gym_id = $gymMembership->gym_id;
+        $entity->gym_membership_id = $gymMembership->id;
+        $entity->administrator_id = $administrator->id;
+        $entity->name = $gymMembership->name;
+        $entity->day_quantity = $gymMembership->day_quantity;
+        $entity->freeze_day_quantity = $gymMembership->freeze_day_quantity;
+        $entity->works_from = $gymMembership->works_from;
+        $entity->works_to = $gymMembership->works_to;
+        $entity->training_quantity = $gymMembership->training_quantity;
+        $entity->price = $gymMembership->price;
+        $entity->status = GymMembershipStatusEnum::ACTIVE->value;
+        $entity->date_start = $data->getDateStart()->toDateString();
+        $entity->created_at = Carbon::now()->toDateTimeString();
 
-        $model->save();
+        $entity->save();
 
-        return $model;
+        return $entity;
     }
 
     /**
@@ -96,12 +96,12 @@ class UserGymMembershipService
             }
         });
 
-        $model = new UserGymMembershipFreeze();
-        $model->user_gym_membership_id = $data->getUserGymMembershipId();
-        $model->date_start = $data->getDateStart();
-        $model->date_end = $data->getDateEnd();
-        $model->day_quantity = $diffInDays;
-        $model->save();
+        $entity = new UserGymMembershipFreeze();
+        $entity->user_gym_membership_id = $data->getUserGymMembershipId();
+        $entity->date_start = $data->getDateStart();
+        $entity->date_end = $data->getDateEnd();
+        $entity->day_quantity = $diffInDays;
+        $entity->save();
 
         $dateToday = Carbon::today();
 

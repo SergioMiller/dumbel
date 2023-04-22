@@ -12,7 +12,7 @@ abstract class Filter
 {
     protected object $params;
 
-    protected string $model;
+    protected string $entity;
 
     protected Builder $builder;
 
@@ -23,7 +23,7 @@ abstract class Filter
     public function __construct(object $params, ?User $user = null)
     {
         $this->params = $params;
-        $this->builder = app($this->model)->newQuery();
+        $this->builder = app($this->entity)->newQuery();
         $this->table = $this->builder->getModel()->getTable();
         $this->user = $user;
     }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class BarcodeFilter extends Filter
 {
-    protected string $model = Barcode::class;
+    protected string $entity = Barcode::class;
 
     public function search(): Filter
     {

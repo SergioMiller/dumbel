@@ -17,12 +17,12 @@ class DatetimeAttributeAbstract extends AttributeAbstract implements AttributeIn
         parent::__construct($data);
     }
 
-    public function render(Model $model, string $attribute): ?string
+    public function render(Model $entity, string $attribute): ?string
     {
         /**
          * @var null|Carbon $value
          */
-        $value = $model->$attribute;
+        $value = $entity->$attribute;
 
         if (null === $value) {
             return null;

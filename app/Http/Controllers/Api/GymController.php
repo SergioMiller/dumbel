@@ -77,9 +77,9 @@ final class GymController extends Controller
      */
     public function create(GymCreateRequest $request): JsonResponse
     {
-        $gym = $this->gymService->create($request->user(), GymCreateDto::fromArray($request->validated()));
+        $entity = $this->gymService->create($request->user(), GymCreateDto::fromArray($request->validated()));
 
-        return Response::success(new GymTransformer($gym));
+        return Response::success(new GymTransformer($entity));
     }
 
     /**
@@ -131,11 +131,11 @@ final class GymController extends Controller
      */
     public function get(int $id): JsonResponse
     {
-        $model = $this->gymRepository->getById($id);
+        $entity = $this->gymRepository->getById($id);
 
-        abort_if(null === $model, 404, 'Not found.');
+        abort_if(null === $entity, 404);
 
-        return Response::success(new GymTransformer($model));
+        return Response::success(new GymTransformer($entity));
     }
 
     /**
@@ -203,15 +203,15 @@ final class GymController extends Controller
      */
     public function update(int $id, GymUpdateRequest $request): JsonResponse
     {
-        $model = $this->gymRepository->getById($id);
+        $entity = $this->gymRepository->getById($id);
 
-        $this->authorize('update', $model);
+        $this->authorize('update', $entity);
 
-        abort_if(null === $model, 404, 'Not found.');
+        abort_if(null === $entity, 404, 'Not found.');
 
-        $model = $this->gymService->update($model, GymUpdateDto::fromArray($request->validated()));
+        $entity = $this->gymService->update($entity, GymUpdateDto::fromArray($request->validated()));
 
-        return Response::success(new GymTransformer($model));
+        return Response::success(new GymTransformer($entity));
     }
 
     /**

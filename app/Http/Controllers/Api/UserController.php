@@ -70,9 +70,9 @@ final class UserController extends Controller
      */
     public function create(UserCreateRequest $request): JsonResponse
     {
-        $user = $this->userService->create(UserCreateDto::fromArray($request->validated()));
+        $entity = $this->userService->create(UserCreateDto::fromArray($request->validated()));
 
-        return Response::success(new UserTransformer($user));
+        return Response::success(new UserTransformer($entity));
     }
 
     /**
@@ -133,10 +133,10 @@ final class UserController extends Controller
      */
     public function getByBarcode(string $barcode, Request $request): JsonResponse
     {
-        $user = $this->userRepository->getByBarcodeForGym($barcode, (int) $request->header('authorization-gym-id'));
+        $entity = $this->userRepository->getByBarcodeForGym($barcode, (int) $request->header('authorization-gym-id'));
 
-        abort_if(null === $user, 404);
+        abort_if(null === $entity, 404);
 
-        return Response::success(new UserInfoTransformer($user));
+        return Response::success(new UserInfoTransformer($entity));
     }
 }

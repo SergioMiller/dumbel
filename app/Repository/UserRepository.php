@@ -13,23 +13,23 @@ class UserRepository
 {
     public function store(array $data): User
     {
-        $model = new User($data);
+        $entity = new User($data);
 
-        $model->save();
+        $entity->save();
 
-        return $model;
+        return $entity;
     }
 
     public function update(int $id, array $data): User
     {
         /**
-         * @var User $model
+         * @var User $entity
          */
-        $model = User::query()->where('id', $id)->firstOrFail();
+        $entity = User::query()->where('id', $id)->firstOrFail();
 
-        $model->update($data);
+        $entity->update($data);
 
-        return $model->fresh();
+        return $entity->fresh();
     }
 
     public function getById(int $id): User|null

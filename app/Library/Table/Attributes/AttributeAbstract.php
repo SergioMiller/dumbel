@@ -36,9 +36,9 @@ abstract class AttributeAbstract
         return $this->name;
     }
 
-    public function getValue(Model $model): ?string
+    public function getValue(Model $entity): ?string
     {
-        return $this->render($model, $this->attribute);
+        return $this->render($entity, $this->attribute);
     }
 
     public function isSortable(): bool

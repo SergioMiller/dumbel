@@ -23,11 +23,11 @@ class ImageAttributeAbstract extends AttributeAbstract implements AttributeInter
         parent::__construct($data);
     }
 
-    public function render(Model $model, string $attribute): ?string
+    public function render(Model $entity, string $attribute): ?string
     {
         $parameter = $this->parameter;
 
-        if ($model->$parameter === null) {
+        if ($entity->$parameter === null) {
             return '<span class="text-danger">-</span>';
         }
 
@@ -37,6 +37,6 @@ class ImageAttributeAbstract extends AttributeAbstract implements AttributeInter
             $width = null;
         }
 
-        return "<img src='" . route($this->route, $model->$parameter) . "' style='$width'>";
+        return "<img src='" . route($this->route, $entity->$parameter) . "' style='$width'>";
     }
 }

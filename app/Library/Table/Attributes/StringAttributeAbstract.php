@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class StringAttributeAbstract extends AttributeAbstract implements AttributeInterface
 {
-    public function render(Model $model, string $attribute): ?string
+    public function render(Model $entity, string $attribute): ?string
     {
-        return (string) $model->$attribute;
+        return (string) $entity->$attribute;
     }
 }

@@ -12,17 +12,17 @@ class GymMembershipService
 {
     public function create(GymMembershipCreateDto $data): GymMembership
     {
-        $model = new GymMembership($data->toArray());
+        $entity = new GymMembership($data->toArray());
 
-        $model->save();
+        $entity->save();
 
-        return $model;
+        return $entity;
     }
 
-    public function update(GymMembership $model, GymMembershipUpdateDto $data): GymMembership
+    public function update(GymMembership $entity, GymMembershipUpdateDto $data): GymMembership
     {
-        $model->update($data->toArray());
+        $entity->update($data->toArray());
 
-        return $model->fresh();
+        return $entity->fresh();
     }
 }

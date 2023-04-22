@@ -21,17 +21,17 @@ final class GymMembershipController extends Controller
 
     public function edit(int $id): View
     {
-        $model = $this->gymMembershipRepository->getById($id);
+        $entity = $this->gymMembershipRepository->getById($id);
 
-        abort_if(null === $model, 404);
+        abort_if(null === $entity, 404);
 
-        return view('admin.gym-membership.edit', ['membership' => $model]);
+        return view('admin.gym-membership.edit', ['membership' => $entity]);
     }
 
     public function update(int $id, GymMembershipUpdateRequest $request): RedirectResponse
     {
-        $model = $this->gymMembershipService->update($id, $request->validated());
+        $entity = $this->gymMembershipService->update($id, $request->validated());
 
-        return redirect()->to(route('gym-membership.edit', $model->id))->with('success', 'Successfully.');
+        return redirect()->to(route('gym-membership.edit', $entity->id))->with('success', 'Successfully.');
     }
 }

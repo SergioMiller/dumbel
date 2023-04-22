@@ -53,15 +53,15 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($paginator as $model)
+            @foreach($paginator as $entity)
                 <tr>
                     @foreach($attributes as $attribute)
-                        <td>{!! $attribute->getValue($model) !!}</td>
+                        <td>{!! $attribute->getValue($entity) !!}</td>
                     @endforeach
                     <td>
-                        @if($table->actions($model) !== [])
+                        @if($table->actions($entity) !== [])
 
-                            @foreach($table->actions($model) as $action)
+                            @foreach($table->actions($entity) as $action)
                                 <a class="{{ $action['class'] }}" href="{{ $action['route'] }}">
                                     @isset($action['icon'])
                                         {!! $action['icon'] !!}

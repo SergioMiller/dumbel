@@ -20,14 +20,14 @@ class LinkAttributeAbstract extends AttributeAbstract implements AttributeInterf
         parent::__construct($data);
     }
 
-    public function render(Model $model, string $attribute): ?string
+    public function render(Model $entity, string $attribute): ?string
     {
         $parameter = $this->parameter;
 
-        if ($model->$parameter === null) {
+        if ($entity->$parameter === null) {
             return '<span class="text-danger">-</span>';
         }
 
-        return "<a href='" . route($this->route, $model->$parameter) . "'>" . $model->$attribute . '</a>';
+        return "<a href='" . route($this->route, $entity->$parameter) . "'>" . $entity->$attribute . '</a>';
     }
 }

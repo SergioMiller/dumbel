@@ -10,24 +10,24 @@ use Illuminate\Support\Collection;
 
 class GymRepository
 {
-    public function __construct(private readonly Gym $model)
+    public function __construct(private readonly Gym $entity)
     {
     }
 
     public function getById(int $id): Gym|null
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->model::query()->where('id', $id)->first();
+        return $this->entity::query()->where('id', $id)->first();
     }
 
     public function getByUserId(int $id): Collection
     {
-        return $this->model::query()->where('user_id', $id)->with(['trainers', 'managers'])->get();
+        return $this->entity::query()->where('user_id', $id)->with(['trainers', 'managers'])->get();
     }
 
     public function userHasAccess(int $gymId, int $userId): bool
     {
-        $isGymOwner = $this->model::query()
+        $isGymOwner = $this->entity::query()
             ->where('id', $gymId)
             ->where('user_id', $userId)
             ->exists();

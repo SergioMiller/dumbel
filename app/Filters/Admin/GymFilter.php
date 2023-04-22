@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class GymFilter extends Filter
 {
-    protected string $model = Gym::class;
+    protected string $entity = Gym::class;
 
     public function search(): Filter
     {

@@ -41,36 +41,36 @@ final class GymController extends Controller
 
     public function store(GymCreateRequest $request): RedirectResponse
     {
-        $model = new Gym($request->validated());
+        $entity = new Gym($request->validated());
 
-        $model->save();
+        $entity->save();
 
-        return redirect()->to(route('gym.edit', $model->id))->with('success', 'Successfully.');
+        return redirect()->to(route('gym.edit', $entity->id))->with('success', 'Successfully.');
     }
 
     public function edit(int $id): View
     {
-        /** @var Gym $gym */
-        $model = Gym::query()->where('id', $id)->first();
+        /** @var Gym $entity */
+        $entity = Gym::query()->where('id', $id)->first();
 
-        abort_if(null === $model, 404);
+        abort_if(null === $entity, 404);
 
         return view('admin.gym.edit', [
-            'gym' => $model,
-            'memberships' => GymMembership::query()->where('gym_id', $model->id)->paginate(5),
+            'gym' => $entity,
+            'memberships' => GymMembership::query()->where('gym_id', $entity->id)->paginate(5),
             'users' => User::query()->get()
         ]);
     }
 
     public function update(int $id, GymUpdateRequest $request): RedirectResponse
     {
-        $model = Gym::query()->where('id', $id)->first();
+        $entity = Gym::query()->where('id', $id)->first();
 
-        abort_if(null === $model, 404);
+        abort_if(null === $entity, 404);
 
-        $model->update($request->validated());
+        $entity->update($request->validated());
 
-        return redirect()->to(route('gym.edit', $model->id))->with('success', 'Successfully.');
+        return redirect()->to(route('gym.edit', $entity->id))->with('success', 'Successfully.');
     }
 
     public function destroy($id)

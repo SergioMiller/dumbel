@@ -47,34 +47,34 @@ final class UserController extends Controller
 
     public function store(UserCreateRequest $request): RedirectResponse
     {
-        $model = $this->userService->store($request->validated());
+        $entity = $this->userService->store($request->validated());
 
-        return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
+        return redirect()->to(route('user.edit', $entity->id))->with('success', 'Successfully.');
     }
 
     public function edit(int $id): View
     {
-        $model = $this->userRepository->getById($id);
+        $entity = $this->userRepository->getById($id);
 
-        abort_if(null === $model, 404);
+        abort_if(null === $entity, 404);
 
         return view('admin.user.edit', [
-            'user' => $model,
+            'user' => $entity,
         ]);
     }
 
     public function update(int $id, UserUpdateRequest $request): RedirectResponse
     {
-        $model = $this->userService->update($id, $request->validated());
+        $entity = $this->userService->update($id, $request->validated());
 
-        return redirect()->to(route('user.edit', $model->id))->with('success', 'Successfully.');
+        return redirect()->to(route('user.edit', $entity->id))->with('success', 'Successfully.');
     }
 
     public function destroy($id): RedirectResponse
     {
-        $model = $this->userRepository->getById($id);
+        $entity = $this->userRepository->getById($id);
 
-        abort_if(null === $model, 404);
+        abort_if(null === $entity, 404);
 
         return redirect()->to(route('user.index'))->with('success', 'Successfully.');
     }
