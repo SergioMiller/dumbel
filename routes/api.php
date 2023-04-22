@@ -54,4 +54,5 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
     Route::get('/user/{barcode}', [UserController::class, 'getByBarcode'])->middleware(HasGymAccessMiddleware::class);
 
     Route::post('/training', [TrainingController::class, 'create'])->middleware(HasGymAccessMiddleware::class);
+    Route::get('/training/{id}', [TrainingController::class, 'get']);
 });
