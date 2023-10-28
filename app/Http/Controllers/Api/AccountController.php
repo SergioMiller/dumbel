@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Account\AccountUpdateRequest;
-use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Library\Response;
 use App\Http\Transformers\Account\AccountTransformer;
 use Illuminate\Http\JsonResponse;
@@ -51,7 +50,8 @@ final class AccountController extends Controller
      *     )
      * )
      *
-     * @param LoginRequest $request
+     * @param Request $request
+     * @return JsonResponse
      */
     public function get(Request $request): JsonResponse
     {
