@@ -25,7 +25,7 @@ Route::get('/', static function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], static function () {
     Route::get('/swagger', [SwaggerController::class, 'index'])->name('swagger');
