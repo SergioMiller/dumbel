@@ -16,3 +16,4 @@ yarn-error.log
 /.vscode
 .DS_Store
 /public/openapi.yaml
+firebase.json

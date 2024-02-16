@@ -9,6 +9,7 @@ COPY app /var/www/app/
 COPY bootstrap /var/www/bootstrap/
 COPY config /var/www/config/
 COPY database /var/www/database/
+COPY lang /var/www/lang/
 COPY public /var/www/public/
 COPY resources /var/www/resources/
 COPY routes /var/www/routes/

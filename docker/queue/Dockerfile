@@ -13,6 +13,7 @@ FROM php:8.1-fpm-alpine
 #
 
 RUN apk update && apk add --no-cache \
+    supervisor \
     gcc \
     make \
     autoconf \
@@ -44,17 +45,12 @@ RUN docker-php-ext-install sockets
 
 RUN docker-php-ext-install pdo_pgsql pcntl posix zip
 
-RUN apk add --no-cache imagemagick-dev \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick
+#RUN apk add --no-cache imagemagick-dev \
+#    && pecl install imagick \
+#    && docker-php-ext-enable imagick
 
 RUN pecl install redis \
     && docker-php-ext-enable redis
-
-# php-cs-fixer
-RUN curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o php-cs-fixer \
-    && chmod a+x php-cs-fixer \
-    && mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 #
 #--------------------------------------------------------------------------
@@ -65,7 +61,7 @@ RUN curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o php-cs-fixer
 #    && pecl install mcrypt-1.0.1 \
 #    && docker-php-ext-enable mcrypt
 
-COPY docker/php/config/php.ini /usr/local/etc/php/php.ini
+COPY docker/queue/config/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /var/www
 
@@ -77,7 +73,7 @@ COPY lang /var/www/lang/
 COPY public /var/www/public/
 COPY resources /var/www/resources/
 COPY routes /var/www/routes/
-COPY storage /var/www/storage
+COPY storage /var/www/storage/
 COPY tests /var/www/tests/
 COPY .env /var/www/
 
@@ -97,10 +93,14 @@ RUN set -eux; \
     chmod -R 777 bootstrap/cache; \
     chmod -R 777 storage
 
+
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
-EXPOSE 9000
-
 ENTRYPOINT ["docker-entrypoint"]
-CMD ["php-fpm", "--nodaemonize"]
+
+COPY docker/queue/supervisord.conf /etc/supervisord.conf
+COPY docker/queue/supervisord.conf /etc/supervisor/supervisord.conf
+COPY docker/queue/default-job.conf /etc/supervisor/conf.d/default-job.conf
+
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
